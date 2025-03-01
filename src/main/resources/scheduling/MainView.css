@@ -1,0 +1,83 @@
+/* Apply a modern, clean style to the root container */
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-font-family: "Arial";
+}
+
+/* Style the TabPane */
+.tab-pane {
+    -fx-tab-min-width: 120px;
+    -fx-tab-min-height: 30px;
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+}
+
+.tab {
+    -fx-background-color: #e0e0e0;
+    -fx-border-radius: 10px 10px 0 0;
+}
+
+.tab:selected {
+    -fx-background-color: #0078D7;
+    -fx-text-fill: white;
+    -fx-border-radius: 10px 10px 0 0;
+}
+
+/* Style the TableView */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10px;
+    -fx-padding: 5px;
+}
+
+/* Style Table Columns */
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-font-size: 14px;
+}
+
+/* Style Table Rows */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-radius: 5px;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #d3e3fc;
+    -fx-border-radius: 5px;
+}
+
+/* Style VBox */
+.vbox {
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 10px;
+}
+
+/* Style Labels */
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Style Buttons */
+.button {
+    -fx-background-color: #0078D7;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 12px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+.button:hover {
+    -fx-background-color: #005a9e;
+}
+
+/* Style the HBox */
+.hbox {
+    -fx-spacing: 10px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-radius: 10px;
+}
