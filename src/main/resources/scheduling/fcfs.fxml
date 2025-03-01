@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -18,9 +21,16 @@
          <children>
             <HBox prefHeight="59.0" prefWidth="995.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="172.0" text="Button" />
-                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="207.0" text="Button" />
-                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="207.0" text="Button" />
+                  <ImageView fitHeight="49.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/time-will-tell.jpg" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="114.0" text="fcfs" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin></Button>
+                  <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="135.0" text="(preemptive) SJF" />
                   <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="207.0" text="Button" />
                   <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="207.0" text="Button" />
                </children>
@@ -35,11 +45,11 @@
                            </font>
                         </Label>
                         <Label prefHeight="33.0" prefWidth="233.0" text="Name" />
-                        <TextField prefHeight="42.0" prefWidth="236.0" />
+                        <TextField fx:id="processNames" prefHeight="42.0" prefWidth="236.0" promptText="Enter process names (e.g., p1 p2 p3)" />
                         <Label prefHeight="32.0" prefWidth="236.0" text="Arrival Time" />
-                        <TextField prefHeight="46.0" prefWidth="236.0" />
+                        <TextField fx:id="arrivalTimes" prefHeight="46.0" prefWidth="236.0" promptText="Enter arrival times (e.g., 2 1 4)" />
                         <Label prefHeight="32.0" prefWidth="236.0" text="Burst Time" />
-                        <TextField prefHeight="42.0" prefWidth="236.0" />
+                        <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 5 3 8)" />
                         <HBox spacing="10">
                            <children>
                               <TextField fx:id="filePath" editable="false" prefWidth="400" promptText="Choose a file..." />
@@ -49,6 +59,11 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </HBox>
+                        <Button fx:id="addProcess" prefHeight="39.0" prefWidth="130.0" text="Add Process">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
                         <HBox prefHeight="41.0" prefWidth="236.0">
                            <VBox.margin>
                               <Insets top="10.0" />
@@ -63,9 +78,16 @@
                         </HBox>
                      </children>
                   </VBox>
-                      <Separator orientation="VERTICAL" prefHeight="551.0" prefWidth="12.0" />
+                      <Separator orientation="VERTICAL" prefHeight="534.0" prefWidth="19.0" />
                       <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0" spacing="10">
-                          <Label text="First-Come First-Serve (FCFS)" />
+                          <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="First-Come First-Serve (FCFS)" textFill="RED">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets top="5.0" />
+                        </VBox.margin></Label>
+                     <Canvas fx:id="ganttChart" height="123.0" width="727.0" />
       
                           <TableView fx:id="fcfs" prefHeight="407.0" prefWidth="753.0">
                               <columns>

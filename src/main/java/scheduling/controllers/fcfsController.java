@@ -3,18 +3,21 @@ package scheduling.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import scheduling.models.Process;
+import scheduling.utilities.GanttChartDrawer;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class fcfsController {
 
@@ -28,12 +31,25 @@ public class fcfsController {
     private TableColumn<Process, Integer> fcfsArrivalTime, fcfsBurstTime, fcfsFinishTime, fcfsTurnaroundTime, fcfsWaitingTime;
 
     @FXML
+    private TextField processNames;
+
+    @FXML
+    private TextField arrivalTimes;
+
+    @FXML
+    private TextField burstTimes;
+
+    @FXML
     private TextField filePath;
 
     @FXML
     private Button uploadFile, startSimulation, addProcess;
 
-    private final ObservableList<Process> processList = FXCollections.observableArrayList();
+    @FXML
+    private Canvas ganttChart;
+
+    private final ObservableList<Process> processes = FXCollections.observableArrayList();
+    Set<String> uniqueProcessNames = new HashSet<>();
 
     @FXML
     public void initialize() {
@@ -44,13 +60,43 @@ public class fcfsController {
         fcfsTurnaroundTime.setCellValueFactory(new PropertyValueFactory<>("turnaroundTime"));
         fcfsWaitingTime.setCellValueFactory(new PropertyValueFactory<>("waitingTime"));
 
-
-        fcfs.setItems(processList);
+        fcfs.setItems(processes);
 
         // Button Actions
         uploadFile.setOnAction(event -> handleFileUpload());
         startSimulation.setOnAction(event -> runfcfsScheduling());
         addProcess.setOnAction(event -> addManualProcess());
+    }
+
+    private void parseManualInput() {
+        try {
+            // Split inputs into lists
+            List<String> names = Arrays.asList(processNames.getText().trim().split("\\s+"));
+            List<Integer> arrivals = Arrays.stream(arrivalTimes.getText().trim().split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            List<Integer> bursts = Arrays.stream(burstTimes.getText().trim().split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            // Validate input lengths
+            if (names.size() != arrivals.size() || names.size() != bursts.size()) {
+                System.out.println("Mismatch in input sizes. Ensure each process has arrival and burst times.");
+                return;
+            }
+
+            for (int i = 0; i < names.size(); i++) {
+                processes.add(new Process(names.get(i), arrivals.get(i), bursts.get(i)));
+            }
+
+            // Clear input fields
+            processNames.clear();
+            arrivalTimes.clear();
+            burstTimes.clear();
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter numbers for Arrival and Burst Time.");
+        }
     }
 
     private void handleFileUpload() {
@@ -66,16 +112,22 @@ public class fcfsController {
     }
 
     private void loadProcessesFromFile(File file) {
-        processList.clear();
+        processes.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",");
+                String[] parts = line.trim().split("[,\\s]+");
                 if (parts.length == 3) {  // Expected Format: ProcessName, ArrivalTime, BurstTime
                     String processName = parts[0].trim();
                     int arrivalTime = Integer.parseInt(parts[1].trim());
                     int burstTime = Integer.parseInt(parts[2].trim());
-                    processList.add(new Process(processName, arrivalTime, burstTime));
+
+                    if (uniqueProcessNames.contains(processName)) {
+                        System.out.println("Warning: Duplicate process name '" + processName + "' found. Skipping...");
+                        continue; // Skip this process
+                    }
+
+                    processes.add(new Process(processName, arrivalTime, burstTime));
                 }
             }
         } catch (IOException | NumberFormatException e) {
@@ -83,25 +135,41 @@ public class fcfsController {
         }
     }
 
-    private void runfcfsScheduling() {
-        if (processList.isEmpty()) {
+    private boolean validateInput() {
+        parseManualInput();
+
+        if (processes.isEmpty()) {
             showAlert("Error", "No processes found! Please upload a file or add processes manually.");
-            return;
+            return false;
         }
+        return true;
+    }
+
+    private void runfcfsScheduling() {
+        if (!validateInput()) return;
 
         int currentTime = 0;
-        for (Process process : processList) {
+        double startX = 20;
+
+        for (Process process : processes) {
             int startTime = Math.max(currentTime, process.getArrivalTime());
             int finishTime = startTime + process.getBurstTime();
             int turnaroundTime = finishTime - process.getArrivalTime();
             int waitingTime = turnaroundTime - process.getBurstTime();
+
+            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(), process.getName(),
+                    startX, startTime, process.getBurstTime());
 
             process.setFinishTime(finishTime);
             process.setTurnaroundTime(turnaroundTime);
             process.setWaitingTime(waitingTime);
 
             currentTime = finishTime;
+            startX += process.getBurstTime() * GanttChartDrawer.UNIT_WIDTH;
         }
+
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
+                GanttChartDrawer.POSITION_Y + 50);
 
         fcfs.refresh();
     }
@@ -120,7 +188,7 @@ public class fcfsController {
                     String processName = parts[0].trim();
                     int arrivalTime = Integer.parseInt(parts[1].trim());
                     int burstTime = Integer.parseInt(parts[2].trim());
-                    processList.add(new Process(processName, arrivalTime, burstTime));
+                    processes.add(new Process(processName, arrivalTime, burstTime));
                 } catch (NumberFormatException e) {
                     showAlert("Error", "Invalid input format. Use: ProcessName,ArrivalTime,BurstTime");
                 }
@@ -130,7 +198,8 @@ public class fcfsController {
         });
     }
 
-    private void showAlert(String title, String message) {
+
+    public void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
