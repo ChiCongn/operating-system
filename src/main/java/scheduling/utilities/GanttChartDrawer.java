@@ -33,6 +33,8 @@ public class GanttChartDrawer {
 
         // Display time markers below the block
         gc.fillText(String.valueOf(startTime), startX, POSITION_Y + 50);
+
+        System.out.println("draw process cell");
     }
 
     private static Color getColorForProcess(String processName) {
@@ -79,6 +81,11 @@ public class GanttChartDrawer {
 
         // Draw the final time marker
         gc.fillText(String.valueOf(currentTime), startX, positionY + 50);
+    }
+
+    public static void clearGanttChart(Canvas ganttChart) {
+        GraphicsContext gc = ganttChart.getGraphicsContext2D();
+        gc.clearRect(0, 0, ganttChart.getWidth(), ganttChart.getHeight()); // Clears the entire canvas
     }
 
 }

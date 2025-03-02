@@ -74,6 +74,11 @@
                                     <Insets />
                                  </HBox.margin>
                               </Button>
+                              <Button fx:id="refresh" prefHeight="39.0" prefWidth="78.0" text="Refresh">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Button>
                            </children>
                         </HBox>
                      </children>
