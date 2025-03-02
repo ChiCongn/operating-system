@@ -9,7 +9,7 @@ public class Process {
     int priority;
     int queueLevel;
     int startTime = -1;
-    int finishTime;
+    int completionTime;
     int turnaroundTime;
     int waitingTime;
     int responseTime;
@@ -60,7 +60,7 @@ public class Process {
                 ", priority=" + priority +
                 ", queueLevel=" + queueLevel +
                 ", startTime=" + startTime +
-                ", completionTime=" + finishTime +
+                ", completionTime=" + completionTime +
                 ", turnaroundTime=" + turnaroundTime +
                 ", waitingTime=" + waitingTime +
                 ", responseTime=" + responseTime +
@@ -134,12 +134,12 @@ public class Process {
         this.startTime = startTime;
     }
 
-    public int getFinishTime() {
-        return finishTime;
+    public int getCompletionTime() {
+        return completionTime;
     }
 
-    public void setFinishTime(int finishTime) {
-        this.finishTime = finishTime;
+    public void setCompletionTime(int completionTime) {
+        this.completionTime = completionTime;
     }
 
     public int getTurnaroundTime() {
@@ -174,4 +174,3 @@ public class Process {
         isCompleted = completed;
     }
 }
-

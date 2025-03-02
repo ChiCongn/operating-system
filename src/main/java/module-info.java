@@ -4,6 +4,12 @@ module edu.cpuscheduling {
 
     requires org.controlsfx.controls;
 
-    opens scheduling.cpuscheduling to javafx.fxml;
-    exports scheduling.cpuscheduling;
+    exports scheduling;
+    opens scheduling to javafx.fxml;
+
+    exports scheduling.controllers;
+    opens scheduling.controllers to javafx.fxml;
+
+    exports scheduling.models;
+    opens scheduling.models to javafx.fxml;
 }

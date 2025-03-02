@@ -17,7 +17,8 @@ public class Simulator extends Application {
         //SceneManager.setPrimaryStage(primaryStage);
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Simulator.class.getResource("/scheduling/fcfs.fxml"));
+            //loader.setLocation(Simulator.class.getResource("/scheduling/fcfs.fxml"));
+            loader.setLocation(Simulator.class.getResource("/scheduling/fxml/nonpreemptive-sjf.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
