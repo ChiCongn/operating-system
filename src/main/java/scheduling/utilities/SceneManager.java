@@ -13,12 +13,12 @@ public class SceneManager {
 
     public static final String FCFS_PATH = "/scheduling/fxml/fcfs.fxml";
     public static final String PREEMPTIVE_SJF = "/scheduling/fxml/preemptive-sjf.fxml";
-    public static final String NON_PREEMPTIVE_SJF = "/scheduling/fxml/nonpreemptive-sjf.fxml";
+    public static final String NON_PREEMPTIVE_SJF = "/scheduling/fxml/non-preemptive-sjf.fxml";
     public static final String ROUND_ROBIN = "/scheduling/fxml/round-robin.fxml";
-    public static final String PREEMPTIVE_PRIORITY = "";
-    public static final String NON_PREEMPTIVE_PRIORITY = "";
-    public static final String MULTILEVEL_QUEUE = "";
-    public static final String MULTILEVEL_FEEDBACK_QUEUE = "";
+    public static final String PREEMPTIVE_PRIORITY = "/scheduling/fxml/preemptive-priority.fxml";
+    public static final String NON_PREEMPTIVE_PRIORITY = "/scheduling/fxml/non-preemptive-priority.fxml";
+    public static final String MULTILEVEL_QUEUE = "/scheduling/fxml/multilevel-queue.fxml";
+    public static final String MULTILEVEL_FEEDBACK_QUEUE = "/scheduling/fxml/multilevel-feedback-queue.fxml";
     public static Stage primaryStage;
 
     public static void setPrimaryStage(Stage primaryStage) {

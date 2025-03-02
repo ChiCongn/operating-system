@@ -31,7 +31,8 @@ public class InputHandler {
 
             // Validate input lengths
             if (names.size() != arrivals.size() || names.size() != bursts.size()) {
-                System.out.println("Mismatch in input sizes. Ensure each process has arrival and burst times.");
+                Alert.showAlert("Invalid input","Mismatch in input sizes. " +
+                        "Ensure each process has arrival and burst times. Please refresh and retype!");
                 return;
             }
 
@@ -39,25 +40,61 @@ public class InputHandler {
                 processes.add(new Process(names.get(i), arrivals.get(i), bursts.get(i)));
             }
 
-            /*// Clear input fields
-            processNames.clear();
-            arrivalTimes.clear();
-            burstTimes.clear();*/
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter numbers for Arrival and Burst Time. Please refresh and retype!");
+        }
+    }
+
+    public static void parseManualPriorityInput(TextField processNames, TextField arrivalTimes,
+                                        TextField burstTimes, TextField priorities, ObservableList<Process> processes) {
+
+        parseManualInput(processNames, arrivalTimes, burstTimes, processes);
+        takeManualPriorities(priorities, processes);
+    }
+
+    public static void takeManualPriorities(TextField priorities, ObservableList<Process> processes) {
+        try {
+            List<Integer> priority = Arrays.stream(priorities.getText().trim().split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            if (processes.size() != priority.size()) {
+                Alert.showAlert("Invalid input",
+                        "Please enter numbers for Arrival and Burst Time and Priorities. Please refresh and retype!");
+                return;
+            }
+
+            for (int i = 0; i < priority.size(); i++) {
+                processes.get(i).setPriority(priority.get(i));
+            }
 
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input! Please enter numbers for Arrival and Burst Time.");
+            Alert.showAlert("Invalid input", "Please enter numbers for Arrival and Burst Time and Priorities. Please refresh and retype!");
         }
+
     }
 
     public static void handleFileUpload(TextField filePath, ObservableList<Process> processes) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select a CSV File");
+        fileChooser.setTitle("Select a CSV or TXT File");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt", "*.csv"));
 
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         if (selectedFile != null) {
             filePath.setText(selectedFile.getAbsolutePath());
             loadProcessesFromFile(selectedFile, processes);
+        }
+    }
+
+    public static void handleFileUploadPriorityProcess(TextField filePath, ObservableList<Process> processes) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select a CSV or TXT File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt", "*.csv"));
+
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if (selectedFile != null) {
+            filePath.setText(selectedFile.getAbsolutePath());
+            loadPriorityProcessesFromFile(selectedFile, processes);
         }
     }
 
@@ -69,7 +106,7 @@ public class InputHandler {
 
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(input -> {
-            String[] parts = input.split(",");
+            String[] parts = input.split("[,\\s]+");
             if (parts.length == 3) {
                 try {
                     String processName = parts[0].trim();
@@ -77,10 +114,10 @@ public class InputHandler {
                     int burstTime = Integer.parseInt(parts[2].trim());
                     processes.add(new Process(processName, arrivalTime, burstTime));
                 } catch (NumberFormatException e) {
-                    Alert.showAlert("Error", "Invalid input format. Use: ProcessName,ArrivalTime,BurstTime");
+                    Alert.showAlert("Error", "Invalid input format. Use: ProcessName ArrivalTime BurstTime. Please refresh and retype!");
                 }
             } else {
-                Alert.showAlert("Error", "Invalid input format. Use: ProcessName,ArrivalTime,BurstTime");
+                Alert.showAlert("Error", "Invalid input format. Use: ProcessName ArrivalTime BurstTime. Please refresh and retype!");
             }
         });
     }
@@ -107,8 +144,35 @@ public class InputHandler {
                 }
             }
         } catch (IOException | NumberFormatException e) {
-            //showAlert("Error", "Invalid file format. Expected: Process, ArrivalTime, BurstTime");
-            System.out.println("Error: Invalid file format. Expected: Process, ArrivalTime, BurstTime");
+            Alert.showAlert("Error", "Invalid file format. Expected: Process, ArrivalTime, BurstTime. Please refresh and retype!");
+            //System.out.println("Error: Invalid file format. Expected: Process, ArrivalTime, BurstTime");
+        }
+    }
+
+    private static void loadPriorityProcessesFromFile(File file, ObservableList<Process> processes) {
+        processes.clear();
+        Set<String> uniqueProcessNames = new HashSet<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.trim().split("[,\\s]+");
+                if (parts.length == 4) {  // Expected Format: ProcessName, ArrivalTime, BurstTime, Priority
+                    String processName = parts[0].trim();
+                    int arrivalTime = Integer.parseInt(parts[1].trim());
+                    int burstTime = Integer.parseInt(parts[2].trim());
+                    int priority = Integer.parseInt(parts[3].trim());
+
+                    if (uniqueProcessNames.contains(processName)) {
+                        System.out.println("Warning: Duplicate process name '" + processName + "' found. Skipping...");
+                        continue; // Skip this process
+                    }
+
+                    uniqueProcessNames.add(processName);
+                    processes.add(new Process(processName, arrivalTime, burstTime, priority));
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            Alert.showAlert("Error", "Invalid file format. Expected: Process, ArrivalTime, BurstTime. Please refresh and retype!");
         }
     }
 }

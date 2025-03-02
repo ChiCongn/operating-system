@@ -38,7 +38,7 @@ public class CommonController {
     TextField filePath;
 
     @FXML
-    Button uploadFile, startSimulation, addProcess, refresh;
+    Button uploadFile, startSimulation, refresh;
 
     @FXML
     Canvas ganttChart;
@@ -48,6 +48,10 @@ public class CommonController {
         InputHandler.handleFileUpload(filePath, processes);
     }
 
+    void handleFileUploadPriorityProcess() {
+        InputHandler.handleFileUploadPriorityProcess(filePath, processes);
+    }
+
     boolean validateInput() {
         if (processes.isEmpty()) {
             InputHandler.parseManualInput(processNames, arrivalTimes, burstTimes, processes);
@@ -55,6 +59,24 @@ public class CommonController {
 
         if (processes.isEmpty()) {
             handleFileUpload();
+        }
+
+        // Final check if no processes are found
+        if (processes.isEmpty()) {
+            Alert.showAlert("Error", "No processes found! Please upload a file or add processes manually.");
+            return false;
+        }
+
+        return true;
+    }
+
+    boolean validatePriorityInput(TextField addPriorities) {
+        if (processes.isEmpty()) {
+            InputHandler.parseManualPriorityInput(processNames, arrivalTimes, burstTimes, addPriorities, processes);
+        }
+
+        if (processes.isEmpty()) {
+            handleFileUploadPriorityProcess();
         }
 
         // Final check if no processes are found
@@ -92,7 +114,7 @@ public class CommonController {
     }
 
     public void switchToPreemptivePriority() {
-        //PreemptivePriorityController preemptivePriorityController = SceneManager.switchScene(SceneManager.PREEMPTIVE_PRIORITY);
+        PreemptivePriorityController preemptivePriorityController = SceneManager.switchScene(SceneManager.PREEMPTIVE_PRIORITY);
     }
 
     public void switchToNonPreemptivePriority() {

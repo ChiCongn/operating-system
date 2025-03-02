@@ -1,13 +1,8 @@
 package scheduling.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
-import scheduling.utilities.Alert;
 import scheduling.utilities.GanttChartDrawer;
 import scheduling.utilities.InputHandler;
 
@@ -15,6 +10,8 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class PreemptiveSJFController extends CommonController {
+
+    int completedProcess = 0;
 
     @FXML
     public void initialize() {
@@ -30,22 +27,18 @@ public class PreemptiveSJFController extends CommonController {
         // Button Actions
         uploadFile.setOnAction(event -> handleFileUpload());
         startSimulation.setOnAction(event -> runPreemptiveSJFScheduling());
-        addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
-        refresh.setOnAction(event -> refresh());
+        //addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
+        refresh.setOnAction(event -> refreshWithPreemptiveProcess());
     }
 
     private void runPreemptiveSJFScheduling() {
         if (!validateInput()) return;
+        System.out.println("run preemptive sjf");
 
         processes.sort(Comparator.comparingInt(Process::getArrivalTime));
 
-        int currentTime = 0, completed = 0;
+        int currentTime = 0;
         double startX = 20;
-        int[] remainingTime = new int[processes.size()];
-
-        for (int i = 0; i < processes.size(); i++) {
-            remainingTime[i] = processes.get(i).getBurstTime();
-        }
 
         PriorityQueue<Process> readyQueue = new PriorityQueue<>(
                 Comparator.comparingInt(Process::getRemainingTime)
@@ -55,7 +48,7 @@ public class PreemptiveSJFController extends CommonController {
         Process lastProcess = null; // to track Gantt chart segments
         int lastProcessStartTime = 0;
 
-        while (completed < processes.size()) {
+        while (completedProcess < processes.size()) {
             // Add newly arrived processes to the queue
             for (Process p : processes) {
                 if (p.getArrivalTime() == currentTime) {
@@ -84,7 +77,7 @@ public class PreemptiveSJFController extends CommonController {
                 // execute process for 1 time unit
                 currentProcess.setRemainingTime(currentProcess.getRemainingTime() - 1);
                 if (currentProcess.getRemainingTime() == 0) { // process finishes
-                    completed++;
+                    completedProcess++;
                     currentProcess.setCompletionTime(currentTime + 1);
                     currentProcess.setTurnaroundTime(currentProcess.getCompletionTime() - currentProcess.getArrivalTime());
                     currentProcess.setWaitingTime(currentProcess.getTurnaroundTime() - currentProcess.getBurstTime());
@@ -102,5 +95,10 @@ public class PreemptiveSJFController extends CommonController {
         }
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
                 GanttChartDrawer.POSITION_Y + 50);
+    }
+
+    void refreshWithPreemptiveProcess() {
+        refresh();
+        completedProcess = 0;
     }
 }

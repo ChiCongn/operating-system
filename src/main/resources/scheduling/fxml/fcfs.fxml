@@ -31,14 +31,14 @@
                             </HBox.margin>
                         </ImageView>
 
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="103.0" styleClass="button-switch" text="FCFS" onMouseClicked="#switchToFCFS" />
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="105.0" styleClass="button-switch" text="Pre SJF" onMouseClicked="#switchToPreemptiveSJF"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" styleClass="button-switch" text="Non-Pre SJF" onMouseClicked="#switchToNonPreemptiveSJF"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="114.0" styleClass="button-switch" text="Round Robin" onMouseClicked="#switchToRoundRobin"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="102.0" styleClass="button-switch" text="Pre Priority" onMouseClicked="#switchToPreemptivePriority"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="137.0" styleClass="button-switch" text="Non-Pre Priority" onMouseClicked="#switchToNonPreemptivePriority"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="140.0" styleClass="button-switch" text="Multilevel Queue" onMouseClicked="#switchToMultilevelQueue"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="162.0" styleClass="button-switch" text="Multilevel Feedback Queue" onMouseClicked="#switchToMultilevelFeedbackQueue"/>
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToFCFS" prefHeight="46.0" prefWidth="103.0" styleClass="button-switch" text="FCFS" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToPreemptiveSJF" prefHeight="46.0" prefWidth="105.0" styleClass="button-switch" text="Pre SJF" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToNonPreemptiveSJF" prefHeight="46.0" prefWidth="117.0" styleClass="button-switch" text="Non-Pre SJF" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToRoundRobin" prefHeight="46.0" prefWidth="114.0" styleClass="button-switch" text="Round Robin" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToPreemptivePriority" prefHeight="46.0" prefWidth="102.0" styleClass="button-switch" text="Pre Priority" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToNonPreemptivePriority" prefHeight="46.0" prefWidth="137.0" styleClass="button-switch" text="Non-Pre Priority" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToMultilevelQueue" prefHeight="46.0" prefWidth="140.0" styleClass="button-switch" text="Multilevel Queue" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToMultilevelFeedbackQueue" prefHeight="46.0" prefWidth="162.0" styleClass="button-switch" text="Multilevel Feedback Queue" />
                     </children>
                 </HBox>
                 <HBox prefHeight="547.0" prefWidth="1050.0">
@@ -55,20 +55,7 @@
                                 <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Arrival Time" />
                                 <TextField fx:id="arrivalTimes" prefHeight="46.0" prefWidth="236.0" promptText="Enter arrival times (e.g., 2 1 4)" />
                                 <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Burst Time" />
-                                <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 5 3 8)" />
-                                <HBox prefHeight="34.0" prefWidth="237.0">
-                                    <children>
-                                        <Label prefHeight="32.0" prefWidth="127.0" styleClass="label-feature" text="Time Quantum" />
-                                        <TextField fx:id="timeQuantumInput" prefHeight="34.0" prefWidth="88.0">
-                                            <HBox.margin>
-                                                <Insets left="50.0" />
-                                            </HBox.margin>
-                                        </TextField>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets top="10.0" />
-                                    </VBox.margin>
-                                </HBox>
+                                <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 6 7 8)" />
                                 <HBox spacing="10">
                                     <children>
                                         <TextField fx:id="filePath" editable="false" prefHeight="22.0" prefWidth="208.0" promptText="Choose a file..." />
@@ -78,11 +65,6 @@
                                         <Insets top="20.0" />
                                     </VBox.margin>
                                 </HBox>
-                                <Button fx:id="addProcess" prefHeight="39.0" prefWidth="130.0" styleClass="button-feature" text="Add Process">
-                                    <VBox.margin>
-                                        <Insets top="10.0" />
-                                    </VBox.margin>
-                                </Button>
                                 <HBox prefHeight="41.0" prefWidth="236.0">
                                     <VBox.margin>
                                         <Insets top="10.0" />
@@ -104,7 +86,7 @@
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="534.0" prefWidth="19.0" />
                         <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0" spacing="10">
-                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="Round Robin" textFill="RED">
+                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="First Come First Serve" textFill="RED">
                                 <font>
                                     <Font name="System Bold" size="25.0" />
                                 </font>

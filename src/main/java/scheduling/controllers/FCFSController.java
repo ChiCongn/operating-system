@@ -1,14 +1,9 @@
 package scheduling.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
 
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
-import scheduling.utilities.Alert;
 import scheduling.utilities.GanttChartDrawer;
 import scheduling.utilities.InputHandler;
 
@@ -29,13 +24,14 @@ public class FCFSController extends CommonController {
         // Button Actions
         uploadFile.setOnAction(event -> handleFileUpload());
         startSimulation.setOnAction(event -> runfcfsScheduling());
-        addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
+        //addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
         refresh.setOnAction(event -> refresh());
     }
 
     private void runfcfsScheduling() {
         if (!validateInput()) return;
 
+        System.out.println("run fcfs simulation");
         int currentTime = 0;
         double startX = 20;
 

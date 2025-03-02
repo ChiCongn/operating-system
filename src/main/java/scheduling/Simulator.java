@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import scheduling.utilities.SceneManager;
 
 import java.io.IOException;
 
@@ -14,13 +15,13 @@ public class Simulator extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        //SceneManager.setPrimaryStage(primaryStage);
+        SceneManager.setPrimaryStage(primaryStage);
         try {
             FXMLLoader loader = new FXMLLoader();
             //loader.setLocation(Simulator.class.getResource("/scheduling/fcfs.fxml"));
-            //loader.setLocation(Simulator.class.getResource("/scheduling/fxml/nonpreemptive-sjf.fxml"));
-            //loader.setLocation(Simulator.class.getResource("/scheduling/fxml/preemptive-sjf.fxml"));
-            loader.setLocation(Simulator.class.getResource("/scheduling/fxml/round-robin.fxml"));
+            //loader.setLocation(Simulator.class.getResource("/scheduling/fxml/non-preemptive-sjf.fxml"));
+            loader.setLocation(Simulator.class.getResource("/scheduling/fxml/preemptive-sjf.fxml"));
+            //loader.setLocation(Simulator.class.getResource("/scheduling/fxml/round-robin.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

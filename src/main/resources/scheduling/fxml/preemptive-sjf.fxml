@@ -15,66 +15,66 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="591.0" prefWidth="998.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.PreemptiveSJFController">
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.PreemptiveSJFController">
     <children>
-        <VBox layoutX="4.0" layoutY="1.0" prefHeight="586.0" prefWidth="995.0">
+        <VBox layoutX="4.0" layoutY="1.0" prefHeight="594.0" prefWidth="1050.0">
             <children>
-                <HBox prefHeight="59.0" prefWidth="995.0">
+                <HBox prefHeight="52.0" prefWidth="1032.0">
                     <children>
                         <ImageView fitHeight="49.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../images/time-will-tell.jpg" />
                             </image>
-                        </ImageView>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="114.0" text="fcfs" textAlignment="CENTER">
                             <HBox.margin>
-                                <Insets left="50.0" />
-                            </HBox.margin></Button>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="135.0" text="(preemptive) SJF" />
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="207.0" text="Button" />
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="207.0" text="Button" />
+                                <Insets right="20.0" />
+                            </HBox.margin>
+                        </ImageView>
+
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToFCFS" prefHeight="46.0" prefWidth="103.0" styleClass="button-switch" text="FCFS" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToPreemptiveSJF" prefHeight="46.0" prefWidth="105.0" styleClass="button-switch" text="Pre SJF" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToNonPreemptiveSJF" prefHeight="46.0" prefWidth="117.0" styleClass="button-switch" text="Non-Pre SJF" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToRoundRobin" prefHeight="46.0" prefWidth="114.0" styleClass="button-switch" text="Round Robin" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToPreemptivePriority" prefHeight="46.0" prefWidth="102.0" styleClass="button-switch" text="Pre Priority" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToNonPreemptivePriority" prefHeight="46.0" prefWidth="137.0" styleClass="button-switch" text="Non-Pre Priority" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToMultilevelQueue" prefHeight="46.0" prefWidth="140.0" styleClass="button-switch" text="Multilevel Queue" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToMultilevelFeedbackQueue" prefHeight="46.0" prefWidth="162.0" styleClass="button-switch" text="Multilevel Feedback Queue" />
                     </children>
                 </HBox>
-                <HBox prefHeight="541.0" prefWidth="1003.0">
+                <HBox prefHeight="547.0" prefWidth="1050.0">
                     <children>
                         <VBox prefHeight="483.0" prefWidth="263.0">
                             <children>
-                                <Label alignment="CENTER" prefHeight="59.0" prefWidth="235.0" text="Input" textAlignment="CENTER">
+                                <Label alignment="CENTER" prefHeight="49.0" prefWidth="235.0" text="Input" textAlignment="CENTER">
                                     <font>
-                                        <Font size="62.0" />
+                                        <Font name="Arial Bold Italic" size="36.0" />
                                     </font>
                                 </Label>
-                                <Label prefHeight="33.0" prefWidth="233.0" text="Name" />
+                                <Label prefHeight="33.0" prefWidth="233.0" styleClass="label-feature" text="Name" />
                                 <TextField fx:id="processNames" prefHeight="42.0" prefWidth="236.0" promptText="Enter process names (e.g., p1 p2 p3)" />
-                                <Label prefHeight="32.0" prefWidth="236.0" text="Arrival Time" />
+                                <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Arrival Time" />
                                 <TextField fx:id="arrivalTimes" prefHeight="46.0" prefWidth="236.0" promptText="Enter arrival times (e.g., 2 1 4)" />
-                                <Label prefHeight="32.0" prefWidth="236.0" text="Burst Time" />
-                                <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 5 3 8)" />
+                                <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Burst Time" />
+                                <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 6 7 8)" />
                                 <HBox spacing="10">
                                     <children>
-                                        <TextField fx:id="filePath" editable="false" prefWidth="400" promptText="Choose a file..." />
-                                        <Button fx:id="uploadFile" text="Upload File" />
+                                        <TextField fx:id="filePath" editable="false" prefHeight="22.0" prefWidth="208.0" promptText="Choose a file..." />
+                                        <Button fx:id="uploadFile" prefHeight="30.0" prefWidth="31.0" styleClass="button-feature" text="......" />
                                     </children>
                                     <VBox.margin>
                                         <Insets top="20.0" />
                                     </VBox.margin>
                                 </HBox>
-                                <Button fx:id="addProcess" prefHeight="39.0" prefWidth="130.0" text="Add Process">
-                                    <VBox.margin>
-                                        <Insets top="20.0" />
-                                    </VBox.margin>
-                                </Button>
                                 <HBox prefHeight="41.0" prefWidth="236.0">
                                     <VBox.margin>
                                         <Insets top="10.0" />
                                     </VBox.margin>
                                     <children>
-                                        <Button fx:id="startSimulation" prefHeight="39.0" prefWidth="130.0" text="Start Simulation">
+                                        <Button fx:id="startSimulation" prefHeight="39.0" prefWidth="130.0" styleClass="button-feature" text="Start Simulation">
                                             <HBox.margin>
                                                 <Insets />
                                             </HBox.margin>
                                         </Button>
-                                        <Button fx:id="refresh" prefHeight="39.0" prefWidth="78.0" text="Refresh">
+                                        <Button fx:id="refresh" prefHeight="39.0" prefWidth="78.0" styleClass="button-feature" text="Refresh">
                                             <HBox.margin>
                                                 <Insets left="20.0" />
                                             </HBox.margin>
@@ -87,14 +87,14 @@
                         <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0" spacing="10">
                             <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="Preemptive Shortest Job First" textFill="RED">
                                 <font>
-                                    <Font name="System Bold" size="18.0" />
+                                    <Font name="System Bold" size="25.0" />
                                 </font>
                                 <VBox.margin>
                                     <Insets top="5.0" />
                                 </VBox.margin></Label>
                             <Canvas fx:id="ganttChart" height="123.0" width="727.0" />
 
-                            <TableView fx:id="processTableView" prefHeight="407.0" prefWidth="753.0">
+                            <TableView fx:id="processTableView" prefHeight="360.0" prefWidth="758.0">
                                 <columns>
                                     <TableColumn fx:id="processName" prefWidth="100" text="Job" />
                                     <TableColumn fx:id="arrivalTime" prefWidth="120" text="Arrival Time" />
@@ -103,6 +103,9 @@
                                     <TableColumn fx:id="turnaroundTime" prefWidth="160" text="Turnaround Time" />
                                     <TableColumn fx:id="waitingTime" prefWidth="120" text="Waiting Time" />
                                 </columns>
+                                <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="10.0" />
+                                </VBox.margin>
                             </TableView>
                         </VBox>
                     </children>

@@ -1,7 +1,6 @@
 package scheduling.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
@@ -34,7 +33,7 @@ public class RoundRobinController extends CommonController {
         // Button Actions
         uploadFile.setOnAction(event -> handleFileUpload());
         startSimulation.setOnAction(event -> runRoundRobinScheduling());
-        addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
+        //addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
         refresh.setOnAction(event -> refresh());
     }
 
