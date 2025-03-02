@@ -29,6 +29,7 @@ public class Process {
         this.name = name;
         this.arrivalTime = arrivalTime;
         this.burstTime = burstTime;
+        this.remainingTime = burstTime;
     }
 
     // For priority number
@@ -37,6 +38,7 @@ public class Process {
         this.arrivalTime = arrivalTime;
         this.burstTime = burstTime;
         this.priority = priority;
+        this.remainingTime = burstTime;
     }
 
     // for multi-level (response) queue scheduling

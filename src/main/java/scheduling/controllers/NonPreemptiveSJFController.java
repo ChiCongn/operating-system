@@ -102,6 +102,9 @@ public class NonPreemptiveSJFController {
             currentTime += currentProcess.getBurstTime();
             startX += currentProcess.getBurstTime() * GanttChartDrawer.UNIT_WIDTH;
         }
+
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
+                GanttChartDrawer.POSITION_Y + 50);
     }
 
 
