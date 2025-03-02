@@ -118,7 +118,7 @@ public class CommonController {
     }
 
     public void switchToNonPreemptivePriority() {
-        //NonPreemptivePriorityController nonPreemptivePriorityController = SceneManager.switchScene(SceneManager.NON_PREEMPTIVE_PRIORITY);
+        NonPreemptivePriorityController nonPreemptivePriorityController = SceneManager.switchScene(SceneManager.NON_PREEMPTIVE_PRIORITY);
     }
 
     public void switchToMultilevelQueue() {
