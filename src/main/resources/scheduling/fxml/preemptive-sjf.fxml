@@ -94,7 +94,7 @@
                                 </VBox.margin></Label>
                             <Canvas fx:id="ganttChart" height="123.0" width="727.0" />
 
-                            <TableView fx:id="preemptivesjf" prefHeight="407.0" prefWidth="753.0">
+                            <TableView fx:id="processTableView" prefHeight="407.0" prefWidth="753.0">
                                 <columns>
                                     <TableColumn fx:id="processName" prefWidth="100" text="Job" />
                                     <TableColumn fx:id="arrivalTime" prefWidth="120" text="Arrival Time" />

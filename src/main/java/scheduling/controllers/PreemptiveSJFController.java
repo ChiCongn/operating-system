@@ -14,36 +14,7 @@ import scheduling.utilities.InputHandler;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class PreemptiveSJFController {
-    @FXML
-    private TableView<Process> preemptivesjf;
-
-    @FXML
-    private TableColumn<Process, String> processName;
-
-    @FXML
-    private TableColumn<Process, Integer> arrivalTime, burstTime,
-            completionTime, turnaroundTime, waitingTime;
-
-    @FXML
-    private TextField processNames;
-
-    @FXML
-    private TextField arrivalTimes;
-
-    @FXML
-    private TextField burstTimes;
-
-    @FXML
-    private TextField filePath;
-
-    @FXML
-    private Button uploadFile, startSimulation, addProcess, refresh;
-
-    @FXML
-    private Canvas ganttChart;
-
-    private final ObservableList<Process> processes = FXCollections.observableArrayList();
+public class PreemptiveSJFController extends CommonController {
 
     @FXML
     public void initialize() {
@@ -54,7 +25,7 @@ public class PreemptiveSJFController {
         turnaroundTime.setCellValueFactory(new PropertyValueFactory<>("turnaroundTime"));
         waitingTime.setCellValueFactory(new PropertyValueFactory<>("waitingTime"));
 
-        preemptivesjf.setItems(processes);
+        processTableView.setItems(processes);
 
         // Button Actions
         uploadFile.setOnAction(event -> handleFileUpload());
@@ -62,6 +33,7 @@ public class PreemptiveSJFController {
         addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
         refresh.setOnAction(event -> refresh());
     }
+
     private void runPreemptiveSJFScheduling() {
         if (!validateInput()) return;
 
@@ -131,37 +103,4 @@ public class PreemptiveSJFController {
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
                 GanttChartDrawer.POSITION_Y + 50);
     }
-
-    private void handleFileUpload() {
-        InputHandler.handleFileUpload(filePath, processes);
-    }
-
-
-    private boolean validateInput() {
-        if (processes.isEmpty()) {
-            InputHandler.parseManualInput(processNames, arrivalTimes, burstTimes, processes);
-        }
-
-        if (processes.isEmpty()) {
-            handleFileUpload();
-        }
-
-        // Final check if no processes are found
-        if (processes.isEmpty()) {
-            Alert.showAlert("Error", "No processes found! Please upload a file or add processes manually.");
-            return false;
-        }
-
-        return true;
-    }
-
-    private void refresh() {
-        processes.clear();
-        filePath.clear();
-        processNames.clear();
-        arrivalTimes.clear();
-        burstTimes.clear();
-        GanttChartDrawer.clearGanttChart(ganttChart);
-    }
-
 }
