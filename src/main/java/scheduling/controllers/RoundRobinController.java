@@ -6,11 +6,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
 import scheduling.utilities.Alert;
 import scheduling.utilities.GanttChartDrawer;
-import scheduling.utilities.InputHandler;
 
 import java.util.*;
 
-public class RoundRobinController extends CommonController {
+public class RoundRobinController extends NormalProcess {
 
     @FXML
     private TextField timeQuantumInput;
@@ -38,7 +37,7 @@ public class RoundRobinController extends CommonController {
     }
 
     public void runRoundRobinScheduling() {
-        if (!validateInput()) return;
+        if (validateInput()) return;
         takeTimeQuantumFromKeyboard();
 
         Queue<Process> readyQueue = new LinkedList<>();

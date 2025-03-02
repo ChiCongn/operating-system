@@ -74,6 +74,28 @@ public class InputHandler {
 
     }
 
+    public static void takeManualQueueLevel(TextField queues, ObservableList<Process> processes) {
+        try {
+            List<Integer> queueLevel = Arrays.stream(queues.getText().trim().split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            if (processes.size() != queueLevel.size()) {
+                Alert.showAlert("Invalid input",
+                        "Please enter numbers for Arrival and Burst Time and Priorities. Please refresh and retype!");
+                return;
+            }
+
+            for (int i = 0; i < queueLevel.size(); i++) {
+                processes.get(i).setQueueLevel(queueLevel.get(i));
+            }
+
+        } catch (NumberFormatException e) {
+            Alert.showAlert("Invalid input", "Please enter numbers for Arrival and Burst Time and Priorities. Please refresh and retype!");
+        }
+
+    }
+
     public static void handleFileUpload(TextField filePath, ObservableList<Process> processes) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select a CSV or TXT File");
@@ -95,6 +117,18 @@ public class InputHandler {
         if (selectedFile != null) {
             filePath.setText(selectedFile.getAbsolutePath());
             loadPriorityProcessesFromFile(selectedFile, processes);
+        }
+    }
+
+    public static void handleFileUploadMultilevelQueue(TextField filePath, ObservableList<Process> processes) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select a CSV or TXT File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt", "*.csv"));
+
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if (selectedFile != null) {
+            filePath.setText(selectedFile.getAbsolutePath());
+            loadQueueLevelProcessesFromFile(selectedFile, processes);
         }
     }
 
@@ -169,6 +203,33 @@ public class InputHandler {
 
                     uniqueProcessNames.add(processName);
                     processes.add(new Process(processName, arrivalTime, burstTime, priority));
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            Alert.showAlert("Error", "Invalid file format. Expected: Process, ArrivalTime, BurstTime. Please refresh and retype!");
+        }
+    }
+
+    private static void loadQueueLevelProcessesFromFile(File file, ObservableList<Process> processes) {
+        processes.clear();
+        Set<String> uniqueProcessNames = new HashSet<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.trim().split("[,\\s]+");
+                if (parts.length == 4) {  // Expected Format: ProcessName, ArrivalTime, BurstTime, Priority, QueueLevel
+                    String processName = parts[0].trim();
+                    int arrivalTime = Integer.parseInt(parts[1].trim());
+                    int burstTime = Integer.parseInt(parts[2].trim());
+                    int queueLevel = Integer.parseInt(parts[3].trim());
+
+                    if (uniqueProcessNames.contains(processName)) {
+                        System.out.println("Warning: Duplicate process name '" + processName + "' found. Skipping...");
+                        continue; // Skip this process
+                    }
+
+                    uniqueProcessNames.add(processName);
+                    processes.add(new Process(processName, arrivalTime, burstTime, 0, queueLevel));
                 }
             }
         } catch (IOException | NumberFormatException e) {

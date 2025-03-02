@@ -4,12 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
 import scheduling.utilities.GanttChartDrawer;
-import scheduling.utilities.InputHandler;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class PreemptiveSJFController extends CommonController {
+public class PreemptiveSJFController extends NormalProcess {
 
     int completedProcess = 0;
 
@@ -28,11 +27,11 @@ public class PreemptiveSJFController extends CommonController {
         uploadFile.setOnAction(event -> handleFileUpload());
         startSimulation.setOnAction(event -> runPreemptiveSJFScheduling());
         //addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
-        refresh.setOnAction(event -> refreshWithPreemptiveProcess());
+        refresh.setOnAction(event -> refresh());
     }
 
     private void runPreemptiveSJFScheduling() {
-        if (!validateInput()) return;
+        if (validateInput()) return;
         System.out.println("run preemptive sjf");
 
         processes.sort(Comparator.comparingInt(Process::getArrivalTime));
@@ -97,8 +96,8 @@ public class PreemptiveSJFController extends CommonController {
                 GanttChartDrawer.POSITION_Y + 50);
     }
 
-    void refreshWithPreemptiveProcess() {
-        refresh();
+    void refresh() {
+        super.refresh();
         completedProcess = 0;
     }
 }

@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
 import scheduling.utilities.GanttChartDrawer;
-import scheduling.utilities.InputHandler;
 
 import java.util.*;
 
@@ -29,7 +28,7 @@ public class NonPreemptiveSJFController extends CommonController {
     }
 
     private void runNonPreemptiveSJFScheduling() {
-        if (!validateInput()) return;
+        if (validateInput()) return;
 
         processes.sort(Comparator.comparingInt(Process::getArrivalTime));
 

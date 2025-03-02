@@ -5,10 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
 import scheduling.utilities.GanttChartDrawer;
-import scheduling.utilities.InputHandler;
 
 
-public class FCFSController extends CommonController {
+public class FCFSController extends NormalProcess {
     @FXML
     public void initialize() {
         processName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -29,7 +28,7 @@ public class FCFSController extends CommonController {
     }
 
     private void runfcfsScheduling() {
-        if (!validateInput()) return;
+        if (validateInput()) return;
 
         System.out.println("run fcfs simulation");
         int currentTime = 0;

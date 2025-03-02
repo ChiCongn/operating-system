@@ -14,7 +14,7 @@ import scheduling.utilities.GanttChartDrawer;
 import scheduling.utilities.InputHandler;
 import scheduling.utilities.SceneManager;
 
-public class CommonController {
+public abstract class CommonController {
     @FXML
     TableView<Process> processTableView;
 
@@ -44,49 +44,10 @@ public class CommonController {
     Canvas ganttChart;
 
     final ObservableList<Process> processes = FXCollections.observableArrayList();
-    void handleFileUpload() {
-        InputHandler.handleFileUpload(filePath, processes);
-    }
 
-    void handleFileUploadPriorityProcess() {
-        InputHandler.handleFileUploadPriorityProcess(filePath, processes);
-    }
+    abstract void handleFileUpload();
 
-    boolean validateInput() {
-        if (processes.isEmpty()) {
-            InputHandler.parseManualInput(processNames, arrivalTimes, burstTimes, processes);
-        }
-
-        if (processes.isEmpty()) {
-            handleFileUpload();
-        }
-
-        // Final check if no processes are found
-        if (processes.isEmpty()) {
-            Alert.showAlert("Error", "No processes found! Please upload a file or add processes manually.");
-            return false;
-        }
-
-        return true;
-    }
-
-    boolean validatePriorityInput(TextField addPriorities) {
-        if (processes.isEmpty()) {
-            InputHandler.parseManualPriorityInput(processNames, arrivalTimes, burstTimes, addPriorities, processes);
-        }
-
-        if (processes.isEmpty()) {
-            handleFileUploadPriorityProcess();
-        }
-
-        // Final check if no processes are found
-        if (processes.isEmpty()) {
-            Alert.showAlert("Error", "No processes found! Please upload a file or add processes manually.");
-            return false;
-        }
-
-        return true;
-    }
+    abstract  boolean validateInput();
 
     void refresh() {
         processes.clear();

@@ -9,10 +9,7 @@ import scheduling.utilities.GanttChartDrawer;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-public class NonPreemptivePriorityController extends CommonController {
-    @FXML
-    private TextField priorities;
-
+public class NonPreemptivePriorityController extends Priority {
 
     @FXML
     public void initialize() {
@@ -26,14 +23,14 @@ public class NonPreemptivePriorityController extends CommonController {
         processTableView.setItems(processes);
 
         // Button Actions
-        uploadFile.setOnAction(event -> handleFileUploadPriorityProcess());
+        uploadFile.setOnAction(event -> handleFileUpload());
         startSimulation.setOnAction(event -> runNonPreemptivePriorityScheduling());
         //addProcess.setOnAction(event -> InputHandler.addManualPriorityProcess(processes));
-        refresh.setOnAction(event -> refreshWithPriority());
+        refresh.setOnAction(event -> refresh());
     }
 
     private void runNonPreemptivePriorityScheduling() {
-        if (!validatePriorityInput(priorities)) return;
+        if (!validateInput()) return;
         System.out.println("run non preemptive priority");
 
         processes.sort(Comparator.comparingInt(Process::getArrivalTime));
@@ -76,10 +73,5 @@ public class NonPreemptivePriorityController extends CommonController {
 
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
                 GanttChartDrawer.POSITION_Y + 50);
-    }
-
-    private void refreshWithPriority() {
-        refresh();
-        priorities.clear();
     }
 }
