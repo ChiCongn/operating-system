@@ -16,45 +16,55 @@ public class RoundRobin {
 
         Queue<Process> readyQueue = new LinkedList<>();
         int totalProcesses = processes.size();
+        System.out.println(totalProcesses);
         double startX = 20;
 
         processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
         int index = 0;
 
-        // Add all processes that arrive at time 0
-        while (index < totalProcesses && processes.get(index).arrivalTime == 0) {
-            readyQueue.add(processes.get(index++));
-        }
+        // Add the first arriving process to the queue
+        readyQueue.add(processes.get(index++));
+
+        currentTime[0] = Math.max(processes.getFirst().arrivalTime, currentTime[0]);
 
         while (!readyQueue.isEmpty()) {
             Process currentProcess = readyQueue.poll();
+            if (currentProcess.responseTime == -1) {
+                currentProcess.responseTime = currentTime[0] - currentProcess.arrivalTime;
+            }
 
+
+            // Execute for either the time quantum or remaining time, whichever is smaller
             int executionTime = Math.min(timeQuantum, currentProcess.remainingTime);
             currentProcess.remainingTime -= executionTime;
             currentTime[0] += executionTime;
 
-            // Draw Gantt Chart Block
+            // Draw execution block in Gantt Chart
             GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
-                    currentProcess.name, startX, currentTime[0] - executionTime, executionTime);
+                    currentProcess.getName(), startX, currentTime[0] - executionTime, executionTime);
+
             startX += executionTime * GanttChartDrawer.UNIT_WIDTH;
 
-            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime[0]) {
-                readyQueue.add(processes.get(index++));
-            }
-
-            // If the process is complete, set times
+            // If process completes, update times
             if (currentProcess.remainingTime == 0) {
                 currentProcess.completionTime = currentTime[0];
                 currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
                 currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
-            } else {
-                // Re-add to queue if not finished
+            }
+
+            // Add new processes that have arrived
+            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime[0]) {
+                readyQueue.add(processes.get(index++));
+            }
+
+            // Re-add incomplete processes to the queue
+            if (currentProcess.remainingTime > 0) {
                 readyQueue.add(currentProcess);
             }
         }
 
-        // Draw final time marker on Gantt Chart
-        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime[0]), startX,
+        // Display total execution time on Gantt Chart
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
                 GanttChartDrawer.POSITION_Y + 50);
     }
 
@@ -64,45 +74,72 @@ public class RoundRobin {
 
         Queue<Process> readyQueue = new LinkedList<>();
         int totalProcesses = processes.size();
+        System.out.println("Total Processes: " + totalProcesses);
+
         double startX = 20;
+        //int previousTime = currentTime;  // Track the last execution time for gaps
 
         processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
         int index = 0;
 
-        // Add all processes that arrive at time 0
-        while (index < totalProcesses && processes.get(index).arrivalTime == 0) {
-            readyQueue.add(processes.get(index++));
-        }
+        // Add the first arriving process to the queue
+        readyQueue.add(processes.get(index++));
+        currentTime = Math.max(processes.getFirst().arrivalTime, currentTime);
 
-        while (!readyQueue.isEmpty()) {
+        while (index < totalProcesses || !readyQueue.isEmpty()) {
             Process currentProcess = readyQueue.poll();
 
-            int executionTime = Math.min(timeQuantum, currentProcess.remainingTime);
-            currentProcess.remainingTime -= executionTime;
-            currentTime += executionTime;
+            if (currentProcess == null) {
+                // If CPU is idle, draw an idle block
+                int nextArrival = processes.get(index).arrivalTime;
+                GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime, nextArrival - currentTime);
 
-            // Draw Gantt Chart Block
-            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
-                    currentProcess.name, startX, currentTime - executionTime, executionTime);
-            startX += executionTime * GanttChartDrawer.UNIT_WIDTH;
+                currentTime = nextArrival;
+                startX = currentTime * GanttChartDrawer.UNIT_WIDTH; // Move startX for next block
 
-            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
-                readyQueue.add(processes.get(index++));
+                // Add new processes that have arrived
+                while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                    readyQueue.add(processes.get(index++));
+                }
+                continue;
             }
 
-            // If the process is complete, set times
+            if (currentProcess.responseTime == -1) {
+                currentProcess.responseTime = currentTime - currentProcess.arrivalTime;
+            }
+
+            // Execute for either the time quantum or remaining time
+            int executionTime = Math.min(timeQuantum, currentProcess.remainingTime);
+            currentProcess.remainingTime -= executionTime;
+
+            // Draw execution block
+            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
+                    currentProcess.getName(), startX, currentTime, executionTime);
+            currentTime += executionTime;
+
+            startX += executionTime * GanttChartDrawer.UNIT_WIDTH;
+
+            // If process completes, update times
             if (currentProcess.remainingTime == 0) {
                 currentProcess.completionTime = currentTime;
                 currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
                 currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
-            } else {
-                // Re-add to queue if not finished
+            }
+
+            // Add new arriving processes
+            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                readyQueue.add(processes.get(index++));
+            }
+
+            // Re-add incomplete process
+            if (currentProcess.remainingTime > 0) {
                 readyQueue.add(currentProcess);
             }
         }
 
-        // Draw final time marker on Gantt Chart
+        // Display total execution time on Gantt Chart
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
                 GanttChartDrawer.POSITION_Y + 50);
     }
+
 }

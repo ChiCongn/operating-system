@@ -23,9 +23,9 @@ public class NormalProcess extends CommonController {
         // Final check if no processes are found
         if (processes.isEmpty()) {
             Alert.showAlert("Error", "No processes found! Please upload a file or add processes manually.");
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }

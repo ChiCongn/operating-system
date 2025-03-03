@@ -35,7 +35,7 @@ public class MultilevelQueueController extends MultilevelQueue {
         allocateQueue();
 
         int[] currentTime = new int[1];
-        System.out.println("set current time: done!");
+        //System.out.println("set current time: done!");
         RoundRobin.simulate(roundRobinQueue, ganttChart, currentTime, 2);
         completedProcess = PreemptiveSJF.simulate(preemptiveSJFQueue, preemptiveSJFGanttChart, completedProcess, currentTime);
         FCFS.simulate(fcfsQueue, fcfsGanttChart, currentTime);

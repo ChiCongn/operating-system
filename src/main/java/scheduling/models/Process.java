@@ -12,7 +12,7 @@ public class Process {
     int completionTime;
     int turnaroundTime;
     int waitingTime;
-    int responseTime;
+    int responseTime = -1;
     boolean isCompleted = false;
 
 
