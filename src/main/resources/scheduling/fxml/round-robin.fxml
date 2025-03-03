@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.RoundRobinController">
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.RoundRobinController">
     <children>
         <VBox layoutX="4.0" layoutY="1.0" prefHeight="594.0" prefWidth="1050.0">
             <children>
@@ -31,14 +30,14 @@
                          </HBox.margin>
                         </ImageView>
 
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="103.0" styleClass="button-switch" text="FCFS" onMouseClicked="#switchToFCFS" />
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="105.0" styleClass="button-switch" text="Pre SJF" onMouseClicked="#switchToPreemptiveSJF"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="117.0" styleClass="button-switch" text="Non-Pre SJF" onMouseClicked="#switchToNonPreemptiveSJF"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="114.0" styleClass="button-switch" text="Round Robin" onMouseClicked="#switchToRoundRobin"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="102.0" styleClass="button-switch" text="Pre Priority" onMouseClicked="#switchToPreemptivePriority"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="137.0" styleClass="button-switch" text="Non-Pre Priority" onMouseClicked="#switchToNonPreemptivePriority"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="140.0" styleClass="button-switch" text="Multilevel Queue" onMouseClicked="#switchToMultilevelQueue"/>
-                        <Button mnemonicParsing="false" prefHeight="46.0" prefWidth="162.0" styleClass="button-switch" text="Multilevel Feedback Queue" onMouseClicked="#switchToMultilevelFeedbackQueue"/>
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToFCFS" prefHeight="46.0" prefWidth="103.0" styleClass="button-switch" text="FCFS" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToPreemptiveSJF" prefHeight="46.0" prefWidth="105.0" styleClass="button-switch" text="Pre SJF" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToNonPreemptiveSJF" prefHeight="46.0" prefWidth="117.0" styleClass="button-switch" text="Non-Pre SJF" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToRoundRobin" prefHeight="46.0" prefWidth="114.0" styleClass="button-switch" text="Round Robin" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToPreemptivePriority" prefHeight="46.0" prefWidth="102.0" styleClass="button-switch" text="Pre Priority" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToNonPreemptivePriority" prefHeight="46.0" prefWidth="137.0" styleClass="button-switch" text="Non-Pre Priority" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToMultilevelQueue" prefHeight="46.0" prefWidth="140.0" styleClass="button-switch" text="Multilevel Queue" />
+                        <Button mnemonicParsing="false" onMouseClicked="#switchToMultilevelFeedbackQueue" prefHeight="46.0" prefWidth="162.0" styleClass="button-switch" text="Multilevel Feedback Queue" />
                     </children>
                 </HBox>
                 <HBox prefHeight="547.0" prefWidth="1050.0">
@@ -117,19 +116,44 @@
                             </Label>
                             <Canvas fx:id="ganttChart" height="123.0" width="727.0" />
 
-                            <TableView fx:id="processTableView" prefHeight="360.0" prefWidth="758.0">
+                            <TableView fx:id="processTableView" prefHeight="333.0" prefWidth="761.0">
                                 <columns>
-                                    <TableColumn fx:id="processName" prefWidth="100" text="Job" />
-                                    <TableColumn fx:id="arrivalTime" prefWidth="120" text="Arrival Time" />
-                                    <TableColumn fx:id="burstTime" prefWidth="120" text="Burst Time" />
-                                    <TableColumn fx:id="completionTime" prefWidth="120" text="Finish Time" />
-                                    <TableColumn fx:id="turnaroundTime" prefWidth="160" text="Turnaround Time" />
-                                    <TableColumn fx:id="waitingTime" prefWidth="120" text="Waiting Time" />
+                                    <TableColumn fx:id="processName" prefWidth="60.0" text="Job" />
+                                    <TableColumn fx:id="arrivalTime" prefWidth="110.0" text="Arrival Time" />
+                                    <TableColumn fx:id="burstTime" prefWidth="100.0" text="Burst Time" />
+                                    <TableColumn fx:id="completionTime" prefWidth="100.0" text="Finish Time" />
+                                    <TableColumn fx:id="responseTime" prefWidth="128.0" text="Response Time" />
+                                    <TableColumn fx:id="turnaroundTime" prefWidth="140.0" text="Turnaround Time" />
+                                    <TableColumn fx:id="waitingTime" prefWidth="110.0" text="Waiting Time" />
                                 </columns>
-                        <VBox.margin>
-                           <Insets bottom="5.0" left="5.0" right="10.0" />
-                        </VBox.margin>
+                                <VBox.margin>
+                                    <Insets left="5.0" right="10.0" />
+                                </VBox.margin>
                             </TableView>
+                            <HBox prefHeight="77.0" prefWidth="776.0">
+                                <children>
+                                    <Label prefHeight="32.0" prefWidth="371.0" text="                            Average:">
+                                        <font>
+                                            <Font name="System Bold Italic" size="20.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="averageResponseTime" alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="128.0">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="averageTurnaroundTime" alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="140.0">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="averageWaitingTime" alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="110.0">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                            </HBox>
                         </VBox>
                     </children>
                 </HBox>

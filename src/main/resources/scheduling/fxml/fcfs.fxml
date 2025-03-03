@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.FCFSController">
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.FCFSController">
     <children>
         <VBox layoutX="4.0" layoutY="1.0" prefHeight="594.0" prefWidth="1050.0">
             <children>
@@ -85,7 +84,7 @@
                             </children>
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="534.0" prefWidth="19.0" />
-                        <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0" spacing="10">
+                        <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0" spacing="10.0">
                             <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="First Come First Serve" textFill="RED">
                                 <font>
                                     <Font name="System Bold" size="25.0" />
@@ -104,19 +103,45 @@
                             </Label>
                             <Canvas fx:id="ganttChart" height="123.0" width="727.0" />
 
-                            <TableView fx:id="processTableView" prefHeight="360.0" prefWidth="758.0">
+                            <TableView fx:id="processTableView" prefHeight="333.0" prefWidth="761.0">
                                 <columns>
-                                    <TableColumn fx:id="processName" prefWidth="100" text="Job" />
-                                    <TableColumn fx:id="arrivalTime" prefWidth="120" text="Arrival Time" />
-                                    <TableColumn fx:id="burstTime" prefWidth="120" text="Burst Time" />
-                                    <TableColumn fx:id="completionTime" prefWidth="120" text="Finish Time" />
-                                    <TableColumn fx:id="turnaroundTime" prefWidth="160" text="Turnaround Time" />
-                                    <TableColumn fx:id="waitingTime" prefWidth="120" text="Waiting Time" />
+                                    <TableColumn fx:id="processName" prefWidth="60.0" text="Job" />
+                                    <TableColumn fx:id="arrivalTime" prefWidth="110.0" text="Arrival Time" />
+                                    <TableColumn fx:id="burstTime" prefWidth="100.0" text="Burst Time" />
+                                    <TableColumn fx:id="completionTime" prefWidth="100.0" text="Finish Time" />
+                                    <TableColumn fx:id="responseTime" prefWidth="128.0" text="Response Time" />
+                                    <TableColumn fx:id="turnaroundTime" prefWidth="140.0" text="Turnaround Time" />
+                                    <TableColumn fx:id="waitingTime" prefWidth="110.0" text="Waiting Time" />
                                 </columns>
                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="10.0" />
+                                    <Insets left="5.0" right="10.0" />
                                 </VBox.margin>
                             </TableView>
+                            <HBox prefHeight="77.0" prefWidth="776.0">
+                                <children>
+                                    <Label prefHeight="32.0" prefWidth="371.0" text="                            Average:">
+                                        <font>
+                                            <Font name="System Bold Italic" size="20.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="averageResponseTime" alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="128.0">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="averageTurnaroundTime" alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="140.0">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="averageWaitingTime" alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="110.0">
+                                        <font>
+                                            <Font name="System Bold" size="16.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                            </HBox>
+
                         </VBox>
                     </children>
                 </HBox>
