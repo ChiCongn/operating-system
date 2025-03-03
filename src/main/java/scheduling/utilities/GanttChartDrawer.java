@@ -55,6 +55,22 @@ public class GanttChartDrawer {
 
     }
 
+    public static void drawIdleBlock(GraphicsContext gc, double startX, int idleStart, int idleDuration) {
+        double width = idleDuration * UNIT_WIDTH;
+
+        gc.setFill(Color.LIGHTGRAY);
+        gc.fillRect(startX, POSITION_Y, width, BLOCK_HEIGHT);
+
+        gc.setStroke(Color.BLACK);
+        gc.strokeRect(startX, POSITION_Y, width, BLOCK_HEIGHT);
+
+        // Label the idle block
+        gc.setFill(Color.BLACK);
+        //gc.fillText("IDLE", startX + width / 3, POSITION_Y + 25);
+
+        gc.fillText(String.valueOf(idleStart), startX, POSITION_Y + 50);
+    }
+
     public static void draw(Canvas ganttChartCanvas, List<Process> processes) {
         GraphicsContext gc = ganttChartCanvas.getGraphicsContext2D();
         gc.clearRect(0, 0, ganttChartCanvas.getWidth(), ganttChartCanvas.getHeight()); // Clear previous drawing

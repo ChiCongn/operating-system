@@ -225,6 +225,7 @@ public class InputHandler {
         Set<String> uniqueProcessNames = new HashSet<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
+            //br.readLine();  // Skip the first line (header)
             while ((line = br.readLine()) != null) {
                 String[] parts = line.trim().split("[,\\s]+");
                 if (parts.length == 4) {  // Expected Format: ProcessName, ArrivalTime, BurstTime, Priority, QueueLevel
