@@ -74,7 +74,7 @@ public class RoundRobin {
 
         Queue<Process> readyQueue = new LinkedList<>();
         int totalProcesses = processes.size();
-        System.out.println("Total Processes: " + totalProcesses);
+        //System.out.println("Total Processes: " + totalProcesses);
 
         double startX = 20;
         //int previousTime = currentTime;  // Track the last execution time for gaps
@@ -115,7 +115,14 @@ public class RoundRobin {
             // Draw execution block
             GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
                     currentProcess.getName(), startX, currentTime, executionTime);
-            currentTime += executionTime;
+            //currentTime += executionTime;
+            for (int i = 0; i < executionTime; i++) {
+                currentTime++;
+                // Add new arriving processes
+                while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                    readyQueue.add(processes.get(index++));
+                }
+            }
 
             startX += executionTime * GanttChartDrawer.UNIT_WIDTH;
 
@@ -124,15 +131,7 @@ public class RoundRobin {
                 currentProcess.completionTime = currentTime;
                 currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
                 currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
-            }
-
-            // Add new arriving processes
-            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
-                readyQueue.add(processes.get(index++));
-            }
-
-            // Re-add incomplete process
-            if (currentProcess.remainingTime > 0) {
+            } else {
                 readyQueue.add(currentProcess);
             }
         }
