@@ -14,7 +14,7 @@ import scheduling.models.Process;
 public class GanttChartDrawer {
     public static final int UNIT_WIDTH = 25;
     public static final int BLOCK_HEIGHT = 30;
-    public static final int POSITION_Y = 40;
+    public static final int POSITION_Y = 10;
     private static final Map<String, Color> processColors = new HashMap<>();
     private static int colorIndex = 0;
 
@@ -37,17 +37,22 @@ public class GanttChartDrawer {
         System.out.println("draw process cell");
     }
 
-    private static Color getColorForProcess(String processName) {
-        if (!processColors.containsKey(processName)) {
-            processColors.put(processName, generateNewColor());
-        }
-        return processColors.get(processName);
-    }
+    public static void drawColumn(GraphicsContext gc, String processName, double startX, double positionY, int startTime, int duration) {
+        System.out.println("draw process cell");
 
-    private static Color generateNewColor() {
-        double hue = (colorIndex * 137) % 360; // Generates distinct hues
-        colorIndex++;
-        return Color.hsb(hue, 0.7, 0.9);
+        gc.setFill(getColorForProcess(processName));
+        gc.fillRect(startX, positionY, duration * UNIT_WIDTH, BLOCK_HEIGHT);
+        gc.setStroke(Color.BLACK);
+        gc.strokeRect(startX, positionY, duration * UNIT_WIDTH, BLOCK_HEIGHT);
+
+        // Display process name inside the block
+        gc.setFill(Color.BLACK);
+        gc.setFont(Font.font(16));
+        gc.fillText(processName, startX + (duration * UNIT_WIDTH) / 2 - 10, POSITION_Y + 15);
+
+        // Display time markers below the block
+        gc.fillText(String.valueOf(startTime), startX, positionY + 45);
+
     }
 
     public static void draw(Canvas ganttChartCanvas, List<Process> processes) {
@@ -86,6 +91,19 @@ public class GanttChartDrawer {
     public static void clearGanttChart(Canvas ganttChart) {
         GraphicsContext gc = ganttChart.getGraphicsContext2D();
         gc.clearRect(0, 0, ganttChart.getWidth(), ganttChart.getHeight()); // Clears the entire canvas
+    }
+
+    private static Color getColorForProcess(String processName) {
+        if (!processColors.containsKey(processName)) {
+            processColors.put(processName, generateNewColor());
+        }
+        return processColors.get(processName);
+    }
+
+    private static Color generateNewColor() {
+        double hue = (colorIndex * 137) % 360; // Generates distinct hues
+        colorIndex++;
+        return Color.hsb(hue, 0.7, 0.9);
     }
 
 }

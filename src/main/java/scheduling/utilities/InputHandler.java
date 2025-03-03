@@ -52,6 +52,35 @@ public class InputHandler {
         takeManualPriorities(priorities, processes);
     }
 
+    public static void parseManualMultilevelQueueInput(TextField processNames, TextField arrivalTimes,
+                                                TextField burstTimes, TextField queues, ObservableList<Process> processes) {
+
+        parseManualInput(processNames, arrivalTimes, burstTimes, processes);
+        takeManualMultilevelQueue(queues, processes);
+    }
+
+    public static void takeManualMultilevelQueue(TextField queues, ObservableList<Process> processes) {
+        try {
+            List<Integer> queue = Arrays.stream(queues.getText().trim().split("\\s+"))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            if (processes.size() != queue.size()) {
+                Alert.showAlert("Invalid input",
+                        "Please enter numbers for Arrival and Burst Time and Queues. Please refresh and retype!");
+                return;
+            }
+
+            for (int i = 0; i < queue.size(); i++) {
+                processes.get(i).setQueueLevel(queue.get(i));
+            }
+
+        } catch (NumberFormatException e) {
+            Alert.showAlert("Invalid input", "Please enter numbers for Arrival and Burst Time and Queues. Please refresh and retype!");
+        }
+
+    }
+
     public static void takeManualPriorities(TextField priorities, ObservableList<Process> processes) {
         try {
             List<Integer> priority = Arrays.stream(priorities.getText().trim().split("\\s+"))
@@ -66,28 +95,6 @@ public class InputHandler {
 
             for (int i = 0; i < priority.size(); i++) {
                 processes.get(i).setPriority(priority.get(i));
-            }
-
-        } catch (NumberFormatException e) {
-            Alert.showAlert("Invalid input", "Please enter numbers for Arrival and Burst Time and Priorities. Please refresh and retype!");
-        }
-
-    }
-
-    public static void takeManualQueueLevel(TextField queues, ObservableList<Process> processes) {
-        try {
-            List<Integer> queueLevel = Arrays.stream(queues.getText().trim().split("\\s+"))
-                    .map(Integer::parseInt)
-                    .collect(Collectors.toList());
-
-            if (processes.size() != queueLevel.size()) {
-                Alert.showAlert("Invalid input",
-                        "Please enter numbers for Arrival and Burst Time and Priorities. Please refresh and retype!");
-                return;
-            }
-
-            for (int i = 0; i < queueLevel.size(); i++) {
-                processes.get(i).setQueueLevel(queueLevel.get(i));
             }
 
         } catch (NumberFormatException e) {
@@ -175,6 +182,9 @@ public class InputHandler {
 
                     uniqueProcessNames.add(processName);
                     processes.add(new Process(processName, arrivalTime, burstTime));
+                } else {
+                    Alert.showAlert("Error", "Invalid file format. Expected: Process, ArrivalTime, BurstTime. Please refresh and retype!");
+                    return;
                 }
             }
         } catch (IOException | NumberFormatException e) {
@@ -226,6 +236,12 @@ public class InputHandler {
                     if (uniqueProcessNames.contains(processName)) {
                         System.out.println("Warning: Duplicate process name '" + processName + "' found. Skipping...");
                         continue; // Skip this process
+                    }
+
+                    if (queueLevel > 3 || queueLevel < 0) {
+                        Alert.showAlert("Invalid input",
+                                "The default queue level is set to 3. If you prefer a different level, please refresh and re-enter your choice!");
+                        queueLevel = 3;
                     }
 
                     uniqueProcessNames.add(processName);
