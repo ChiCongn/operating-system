@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.NonPreemptivePriorityController">
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.NonPreemptivePriorityController">
     <children>
         <VBox layoutX="4.0" layoutY="1.0" prefHeight="594.0" prefWidth="1050.0">
             <children>
@@ -88,14 +87,23 @@
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="534.0" prefWidth="19.0" />
                         <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0" spacing="10">
-                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="Preemptive Shortest Job First" textFill="RED">
+                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="Non Preemptive Priority" textFill="RED">
                                 <font>
                                     <Font name="System Bold" size="25.0" />
                                 </font>
                                 <VBox.margin>
                                     <Insets top="5.0" />
-                                </VBox.margin></Label>
-                            <Canvas fx:id="ganttChart" height="123.0" width="727.0" />
+                                </VBox.margin>
+                            </Label>
+                            <Label prefHeight="20.0" prefWidth="782.0" text="Gantt Chart">
+                                <font>
+                                    <Font name="System Bold" size="14.0" />
+                                </font>
+                                <VBox.margin>
+                                    <Insets left="20.0" />
+                                </VBox.margin>
+                            </Label>
+                            <Canvas fx:id="ganttChart" height="123.0" width="772.0" />
 
                             <TableView fx:id="processTableView" prefHeight="360.0" prefWidth="758.0">
                                 <columns>

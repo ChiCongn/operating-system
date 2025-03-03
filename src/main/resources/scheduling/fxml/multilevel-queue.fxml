@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.FCFSController">
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.MultilevelQueueController">
     <children>
         <VBox layoutX="4.0" layoutY="1.0" prefHeight="594.0" prefWidth="1050.0">
             <children>
@@ -45,27 +44,34 @@
                     <children>
                         <VBox prefHeight="483.0" prefWidth="263.0">
                             <children>
-                                <Label alignment="CENTER" prefHeight="49.0" prefWidth="235.0" text="Input" textAlignment="CENTER">
+                                <Label alignment="CENTER" prefHeight="22.0" prefWidth="258.0" text="Input" textAlignment="CENTER">
                                     <font>
                                         <Font name="Arial Bold Italic" size="36.0" />
                                     </font>
                                 </Label>
-                                <Label prefHeight="33.0" prefWidth="233.0" styleClass="label-feature" text="Name" />
+                        <Label prefHeight="122.0" prefWidth="259.0" text="CPU sẽ ưu tiên xử lý theo thứ tự sau: Queue 1 &gt; Queue 2 &gt; Queue 3. Lưu ý: Hàng đợi sau chỉ được xử lý khi các hàng đợi trước đã hoàn thành hoặc không còn tiến trình nào chờ. Chỉ có 3 hàng đợi!" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                                <Label prefHeight="14.0" prefWidth="234.0" styleClass="label-feature" text="Name" />
                                 <TextField fx:id="processNames" prefHeight="42.0" prefWidth="236.0" promptText="Enter process names (e.g., p1 p2 p3)" />
-                                <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Arrival Time" />
-                                <TextField fx:id="arrivalTimes" prefHeight="46.0" prefWidth="236.0" promptText="Enter arrival times (e.g., 2 1 4)" />
-                                <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Burst Time" />
-                                <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 6 7 8)" />
+                                <Label prefHeight="21.0" prefWidth="236.0" styleClass="label-feature" text="Arrival Time" />
+                                <TextField fx:id="arrivalTimes" prefHeight="42.0" prefWidth="259.0" promptText="Enter arrival times (e.g., 2 1 4)" />
+                                <Label prefHeight="26.0" prefWidth="265.0" styleClass="label-feature" text="Burst Time" />
+                                <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="259.0" promptText="Enter burst times (e.g., 6 7 8)" />
+                                <Label prefHeight="0.0" prefWidth="236.0" styleClass="label-feature" text="Queue" />
+                                <TextField fx:id="queues" prefHeight="42.0" prefWidth="236.0" promptText="Enter queue (e.g., 1 2 3)" />
                                 <HBox spacing="10">
                                     <children>
                                         <TextField fx:id="filePath" editable="false" prefHeight="22.0" prefWidth="208.0" promptText="Choose a file..." />
                                         <Button fx:id="uploadFile" prefHeight="30.0" prefWidth="31.0" styleClass="button-feature" text="......" />
                                     </children>
                                     <VBox.margin>
-                                        <Insets top="20.0" />
+                                        <Insets top="10.0" />
                                     </VBox.margin>
                                 </HBox>
-                                <HBox prefHeight="41.0" prefWidth="236.0">
+                                <HBox prefHeight="42.0" prefWidth="259.0">
                                     <VBox.margin>
                                         <Insets top="10.0" />
                                     </VBox.margin>
@@ -85,25 +91,18 @@
                             </children>
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="534.0" prefWidth="19.0" />
-                        <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0" spacing="10">
-                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="First Come First Serve" textFill="RED">
+                        <VBox alignment="CENTER" prefHeight="550.0" prefWidth="779.0">
+                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="372.0" text="Multilevel Queue" textFill="RED">
                                 <font>
                                     <Font name="System Bold" size="25.0" />
                                 </font>
                                 <VBox.margin>
-                                    <Insets top="5.0" />
+                                    <Insets />
                                 </VBox.margin>
                             </Label>
-                            <Label prefHeight="20.0" prefWidth="782.0" text="Gantt Chart">
-                                <font>
-                                    <Font name="System Bold" size="14.0" />
-                                </font>
-                                <VBox.margin>
-                                    <Insets left="20.0" />
-                                </VBox.margin>
-                            </Label>
-                            <Canvas fx:id="ganttChart" height="123.0" width="727.0" />
-
+                            <Canvas fx:id="ganttChart" height="80.0" width="727.0" />
+                            <Canvas fx:id="preemptiveSJFGanttChart" height="80.0" width="727.0" />
+                            <Canvas fx:id="fcfsGanttChart" height="80.0" width="727.0" />
                             <TableView fx:id="processTableView" prefHeight="360.0" prefWidth="758.0">
                                 <columns>
                                     <TableColumn fx:id="processName" prefWidth="100" text="Job" />
