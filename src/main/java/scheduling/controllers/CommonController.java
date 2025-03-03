@@ -83,7 +83,7 @@ public abstract class CommonController {
     }
 
     public void switchToMultilevelQueue() {
-        //MultilevelQueueController multilevelQueueController = SceneManager.switchScene(SceneManager.MULTILEVEL_QUEUE);
+        MultilevelQueueController multilevelQueueController = SceneManager.switchScene(SceneManager.MULTILEVEL_QUEUE);
     }
 
     public void switchToMultilevelFeedbackQueue() {

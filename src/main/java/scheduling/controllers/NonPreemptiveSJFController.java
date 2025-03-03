@@ -8,7 +8,7 @@ import scheduling.utilities.GanttChartDrawer;
 
 import java.util.*;
 
-public class NonPreemptiveSJFController extends CommonController {
+public class NonPreemptiveSJFController extends NormalProcess {
     @FXML
     public void initialize() {
         processName.setCellValueFactory(new PropertyValueFactory<>("name"));

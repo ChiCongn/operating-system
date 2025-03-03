@@ -3,6 +3,7 @@ package scheduling.controllers;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.cell.PropertyValueFactory;
+import scheduling.models.FCFS;
 import scheduling.models.Process;
 import scheduling.utilities.GanttChartDrawer;
 
@@ -25,6 +26,12 @@ public class FCFSController extends NormalProcess {
         startSimulation.setOnAction(event -> runfcfsScheduling());
         //addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
         refresh.setOnAction(event -> refresh());
+    }
+
+    private void simulate() {
+        if (validateInput()) return;
+
+        FCFS.simulate(processes, ganttChart, 0);
     }
 
     private void runfcfsScheduling() {

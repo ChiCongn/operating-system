@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.Process;
+import scheduling.models.RoundRobin;
 import scheduling.utilities.Alert;
 import scheduling.utilities.GanttChartDrawer;
 
@@ -31,9 +32,16 @@ public class RoundRobinController extends NormalProcess {
 
         // Button Actions
         uploadFile.setOnAction(event -> handleFileUpload());
-        startSimulation.setOnAction(event -> runRoundRobinScheduling());
+        //startSimulation.setOnAction(event -> runRoundRobinScheduling());
+        startSimulation.setOnAction(event -> simulate());
         //addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
         refresh.setOnAction(event -> refresh());
+    }
+
+    private void simulate() {
+        if (validateInput()) return;
+        takeTimeQuantumFromKeyboard();
+        RoundRobin.simulate(processes, ganttChart, 0, timeQuantum);
     }
 
     public void runRoundRobinScheduling() {

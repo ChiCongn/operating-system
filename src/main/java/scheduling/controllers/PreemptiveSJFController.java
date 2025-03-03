@@ -2,6 +2,7 @@ package scheduling.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
+import scheduling.models.PreemptiveSJF;
 import scheduling.models.Process;
 import scheduling.utilities.GanttChartDrawer;
 
@@ -25,9 +26,17 @@ public class PreemptiveSJFController extends NormalProcess {
 
         // Button Actions
         uploadFile.setOnAction(event -> handleFileUpload());
-        startSimulation.setOnAction(event -> runPreemptiveSJFScheduling());
+        //startSimulation.setOnAction(event -> runPreemptiveSJFScheduling());
+        startSimulation.setOnAction(event -> simulate());
         //addProcess.setOnAction(event -> InputHandler.addManualProcess(processes));
         refresh.setOnAction(event -> refresh());
+    }
+
+    private void simulate() {
+        if (validateInput()) return;
+        System.out.println("run preemptive sjf");
+        completedProcess = PreemptiveSJF.simulate(processes, ganttChart, completedProcess, 0);
+        System.out.println("done! simulated preemptive sjf");
     }
 
     private void runPreemptiveSJFScheduling() {
