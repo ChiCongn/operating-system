@@ -56,6 +56,7 @@ public class GanttChartDrawer {
     }
 
     public static void drawIdleBlock(GraphicsContext gc, double startX, int idleStart, int idleDuration) {
+        System.out.println("draw idle block");
         double width = idleDuration * UNIT_WIDTH;
 
         gc.setFill(Color.LIGHTGRAY);
