@@ -26,7 +26,7 @@ public class NonPreemptivePriorityController extends Priority {
     private void simulate() {
         if (!validateInput()) return;
 
-        NonPreemptivePriority.simulate(processes, ganttChart);
+        NonPreemptivePriority.simulate(processes, ganttChart, 0);
         calculateAverageTime();
         displayProcessInfo();
     }

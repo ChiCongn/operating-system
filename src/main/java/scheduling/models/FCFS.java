@@ -8,28 +8,42 @@ import java.util.Comparator;
 
 public class FCFS {
     public static void simulate(ObservableList<Process> processes, Canvas ganttChart, int[] currentTime) {
-        System.out.println("simulating fcfs scheduling");
+        System.out.println("Simulating FCFS Scheduling");
+
+        // Sort processes by arrival time
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
         double startX = 20;
 
-        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
-
         for (Process process : processes) {
-            int startTime = Math.max(currentTime[0], process.arrivalTime);
+            // If there's a gap (CPU idle time), draw an idle block
+            if (currentTime[0] < process.arrivalTime) {
+                int idleStart = currentTime[0];
+                int idleDuration = process.arrivalTime - currentTime[0];
+                GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, idleStart, idleDuration);
+
+                startX += idleDuration * GanttChartDrawer.UNIT_WIDTH;
+                currentTime[0] = process.arrivalTime;
+            }
+
+            int startTime = currentTime[0];
             int finishTime = startTime + process.burstTime;
             int turnaroundTime = finishTime - process.arrivalTime;
             int waitingTime = turnaroundTime - process.burstTime;
 
             GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(), process.name, startX, startTime, process.burstTime);
 
+            // Update process
             process.completionTime = finishTime;
             process.turnaroundTime = turnaroundTime;
             process.waitingTime = waitingTime;
+            process.responseTime = startTime - process.arrivalTime;
 
+            // Update time tracking
             currentTime[0] = finishTime;
             startX += process.burstTime * GanttChartDrawer.UNIT_WIDTH;
         }
 
-        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime[0]), startX, GanttChartDrawer.POSITION_Y + 50);
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX, GanttChartDrawer.POSITION_Y + 50);
     }
 
     public static void simulate(ObservableList<Process> processes, Canvas ganttChart, int currentTime) {
@@ -70,6 +84,5 @@ public class FCFS {
 
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX, GanttChartDrawer.POSITION_Y + 50);
     }
-
 
 }

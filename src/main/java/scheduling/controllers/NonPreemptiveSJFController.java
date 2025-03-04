@@ -24,7 +24,7 @@ public class NonPreemptiveSJFController extends NormalProcess {
     private void simulate() {
         if (!validateInput()) return;
 
-        NonPreemptiveSJF.simulate(processes, ganttChart);
+        NonPreemptiveSJF.simulate(processes, ganttChart, 0);
         calculateAverageTime();
         displayProcessInfo();
     }

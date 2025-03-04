@@ -16,32 +16,52 @@ public class RoundRobin {
 
         Queue<Process> readyQueue = new LinkedList<>();
         int totalProcesses = processes.size();
-        System.out.println(totalProcesses);
+        //System.out.println("Total Processes: " + totalProcesses);
+
         double startX = 20;
+        //int previousTime = currentTime;  // Track the last execution time for gaps
 
         processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
         int index = 0;
 
         // Add the first arriving process to the queue
         readyQueue.add(processes.get(index++));
-
         currentTime[0] = Math.max(processes.getFirst().arrivalTime, currentTime[0]);
 
-        while (!readyQueue.isEmpty()) {
+        while (index < totalProcesses || !readyQueue.isEmpty()) {
             Process currentProcess = readyQueue.poll();
+
+            if (currentProcess == null) {
+                // If CPU is idle, draw an idle block
+                int nextArrival = processes.get(index).arrivalTime;
+                GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime[0], nextArrival - currentTime[0]);
+
+                currentTime[0] = nextArrival;
+                startX = currentTime[0] * GanttChartDrawer.UNIT_WIDTH; // Move startX for next block
+
+                // Add new processes that have arrived
+                while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime[0]) {
+                    readyQueue.add(processes.get(index++));
+                }
+                continue;
+            }
+
             if (currentProcess.responseTime == -1) {
                 currentProcess.responseTime = currentTime[0] - currentProcess.arrivalTime;
             }
 
-
-            // Execute for either the time quantum or remaining time, whichever is smaller
+            // Execute for either the time quantum or remaining time
             int executionTime = Math.min(timeQuantum, currentProcess.remainingTime);
             currentProcess.remainingTime -= executionTime;
+
+            // Draw execution block
+            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
+                    currentProcess.getName(), startX, currentTime[0], executionTime);
             currentTime[0] += executionTime;
 
-            // Draw execution block in Gantt Chart
-            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
-                    currentProcess.getName(), startX, currentTime[0] - executionTime, executionTime);
+            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime[0]) {
+                readyQueue.add(processes.get(index++));
+            }
 
             startX += executionTime * GanttChartDrawer.UNIT_WIDTH;
 
@@ -50,21 +70,13 @@ public class RoundRobin {
                 currentProcess.completionTime = currentTime[0];
                 currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
                 currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
-            }
-
-            // Add new processes that have arrived
-            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime[0]) {
-                readyQueue.add(processes.get(index++));
-            }
-
-            // Re-add incomplete processes to the queue
-            if (currentProcess.remainingTime > 0) {
+            } else {
                 readyQueue.add(currentProcess);
             }
         }
 
         // Display total execution time on Gantt Chart
-        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime[0]), startX,
                 GanttChartDrawer.POSITION_Y + 50);
     }
 

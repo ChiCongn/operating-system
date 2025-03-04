@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.PreemptivePriorityController">
+<AnchorPane prefHeight="600.0" prefWidth="1050.0" stylesheets="@../MainView.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.PreemptivePriorityController">
     <children>
         <VBox layoutX="4.0" layoutY="1.0" prefHeight="594.0" prefWidth="1050.0">
             <children>
@@ -56,7 +55,7 @@
                                 <TextField fx:id="arrivalTimes" prefHeight="46.0" prefWidth="236.0" promptText="Enter arrival times (e.g., 2 1 4)" />
                                 <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Burst Time" />
                                 <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 6 7 8)" />
-                        <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Priorities" />
+                        <Label prefHeight="32.0" prefWidth="252.0" styleClass="label-feature" text="Priorities(smallest priority first)" />
                         <TextField fx:id="priorities" prefHeight="42.0" prefWidth="236.0" promptText="Enter Priorities (e.g., 6 8 9)" />
                                 <HBox spacing="10">
                                     <children>

@@ -8,12 +8,11 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class NonPreemptiveSJF {
-    public static void simulate(ObservableList<Process> processes, Canvas ganttChart) {
+    public static void simulate(ObservableList<Process> processes, Canvas ganttChart, int currentTime) {
         System.out.println("Simulating Non-Preemptive Shortest Job First (SJF) Scheduling");
 
         processes.sort(Comparator.comparingInt(Process::getArrivalTime));
 
-        int currentTime = 0;
         double startX = 20;
         int index = 0;
 
@@ -58,53 +57,55 @@ public class NonPreemptiveSJF {
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX, GanttChartDrawer.POSITION_Y + 50);
     }
 
-
-    /*public static void simulate(ObservableList<Process> processes, Canvas ganttChart) {
-        System.out.println("simulating non preemptive scheduling");
+    public static void simulate(ObservableList<Process> processes, Canvas ganttChart, int[] currentTime) {
+        System.out.println("Simulating Non-Preemptive Shortest Job First (SJF) Scheduling");
 
         processes.sort(Comparator.comparingInt(Process::getArrivalTime));
 
-        int currentTime = 0;
         double startX = 20;
+        int index = 0;
 
-        int index = 0; // Track position in processes list
-        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getBurstTime));
+        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getRemainingTime));
 
         while (index < processes.size() || !readyQueue.isEmpty()) {
-            // Add all processes that have arrived at or before current time
-            while (index < processes.size() && processes.get(index).getArrivalTime() <= currentTime) {
-                readyQueue.add(processes.get(index));
-                index++;
+            while (index < processes.size() && processes.get(index).getArrivalTime() <= currentTime[0]) {
+                readyQueue.add(processes.get(index++));
             }
 
-
+            // Handle CPU idle time
             if (readyQueue.isEmpty()) {
-                // No process is ready, move forward in time
-                currentTime++;
+                if (index < processes.size()) {
+                    int nextArrival = processes.get(index).getArrivalTime();
+                    GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime[0],
+                            nextArrival - currentTime[0]);
+                    currentTime[0] = nextArrival;
+                    startX = currentTime[0] * GanttChartDrawer.UNIT_WIDTH;
+                }
                 continue;
             }
 
-            // Select the process with the shortest burst time
             Process currentProcess = readyQueue.poll();
             if (currentProcess.responseTime == -1) {
-                currentProcess.responseTime = currentTime - currentProcess.arrivalTime;
+                currentProcess.responseTime = currentTime[0] - currentProcess.getArrivalTime();
             }
 
-            // Execute the process
-            currentProcess.setCompletionTime(currentTime + currentProcess.getBurstTime());
-            currentProcess.setTurnaroundTime(currentProcess.getCompletionTime() - currentProcess.getArrivalTime());
-            currentProcess.setWaitingTime(currentProcess.getTurnaroundTime() - currentProcess.getBurstTime());
+            // Process execution calculations
+            currentProcess.completionTime = currentTime[0] + currentProcess.burstTime;
+            currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
+            currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
 
-            startX = Math.max(startX, currentTime * GanttChartDrawer.UNIT_WIDTH);
-            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(), currentProcess.getName(),
-                    startX, currentTime, currentProcess.getBurstTime());
+            // Draw process execution in the Gantt Chart
+            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
+                    currentProcess.name, startX, currentTime[0], currentProcess.burstTime);
 
-            currentTime += currentProcess.getBurstTime();
-            startX += currentProcess.getBurstTime() * GanttChartDrawer.UNIT_WIDTH;
+            // Update time tracking variables
+            currentTime[0] += currentProcess.burstTime;
+            startX += currentProcess.burstTime * GanttChartDrawer.UNIT_WIDTH;
         }
 
-        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX,
+        // Display total execution time
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime[0]), startX,
                 GanttChartDrawer.POSITION_Y + 50);
+    }
 
-    }*/
 }
