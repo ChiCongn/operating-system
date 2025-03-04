@@ -85,72 +85,73 @@ public class PreemptiveSJF {
     }
 
 
-    public static int simulate(ObservableList<Process> processes, Canvas ganttChart, int completedProcess, int currentTime) {
+    /*public static int simulate(ObservableList<Process> processes, Canvas ganttChart, int completedProcess, int currentTime) {
         System.out.println("Simulating Preemptive Shortest Job First (SJF)");
 
         processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
         currentTime = Math.max(processes.getFirst().arrivalTime, currentTime);
 
         double startX = 20;
-        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(p -> p.remainingTime));
+        int totalProcesses = processes.size();
 
-        Process currentProcess = null;
         Process lastProcess = null;
         int lastProcessStartTime = currentTime;
-        int processIndex = 0; // Track next process to enter the queue
+        int index = 0;
 
-        while (completedProcess < processes.size()) {
-            while (processIndex < processes.size() && processes.get(processIndex).arrivalTime == currentTime) {
-                readyQueue.add(processes.get(processIndex));
-                processIndex++;
-            }
+        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(p -> p.remainingTime));
+        readyQueue.add(processes.get(index++));
 
-            // If no process is ready, move time forward and draw an idle block
-            if (readyQueue.isEmpty()) {
-                int nextArrival = (processIndex < processes.size()) ? processes.get(processIndex).arrivalTime : currentTime;
-                if (currentTime < nextArrival) {
-                    int idleDuration = nextArrival - currentTime;
-                    GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime, idleDuration);
-                    startX += idleDuration * GanttChartDrawer.UNIT_WIDTH;
-                    currentTime = nextArrival;
+        while (index < totalProcesses || !readyQueue.isEmpty()) {
+            Process currentProcess = readyQueue.poll();
+            if (currentProcess == null) {
+                // If CPU is idle, draw an idle block
+                int nextArrival = processes.get(index).arrivalTime;
+                GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime, nextArrival - currentTime);
+
+                currentTime = nextArrival;
+                startX = currentTime * GanttChartDrawer.UNIT_WIDTH; // Move startX for next block
+
+                // Add new processes that have arrived
+                while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                    readyQueue.add(processes.get(index++));
                 }
                 continue;
             }
 
-            // If a process is running and not finished, re-add it to the queue
-            if (currentProcess != null && currentProcess.remainingTime > 0) {
-                readyQueue.add(currentProcess);
-            }
-
-            currentProcess = readyQueue.poll();
             if (currentProcess.responseTime == -1) {
                 currentProcess.responseTime = currentTime - currentProcess.arrivalTime;
             }
 
-            // If process changes, update the Gantt Chart
+            // Preempt if necessary
             if (lastProcess != null && lastProcess != currentProcess) {
                 GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
                         lastProcess.name, startX, lastProcessStartTime, currentTime - lastProcessStartTime);
                 startX += (currentTime - lastProcessStartTime) * GanttChartDrawer.UNIT_WIDTH;
                 lastProcessStartTime = currentTime;
             }
+
             lastProcess = currentProcess;
 
             // Execute process for 1 time unit
             currentProcess.remainingTime--;
 
-            // If the process is completed
+            // If process completes, update metrics
             if (currentProcess.remainingTime == 0) {
                 completedProcess++;
                 currentProcess.completionTime = currentTime + 1;
                 currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
                 currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
+            } else {
+                // Re-add to queue if not finished
+                readyQueue.add(currentProcess);
             }
 
-            currentTime++;
+            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                readyQueue.add(processes.get(index++));
+            }
         }
 
-        // Draw the last segment in the Gantt Chart
+        // Draw final segment
         if (lastProcess != null) {
             GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
                     lastProcess.name, startX, lastProcessStartTime, currentTime - lastProcessStartTime);
@@ -159,6 +160,113 @@ public class PreemptiveSJF {
 
         // Display total execution time
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX, GanttChartDrawer.POSITION_Y + 50);
+        return completedProcess;
+    }*/
+
+    public static int simulate(ObservableList<Process> processes, Canvas ganttChart, int completedProcess, int currentTime) {
+        System.out.println("Simulating Preemptive Shortest Job First (SJF)");
+
+        processes.sort(Comparator.comparingInt(p -> p.arrivalTime));
+        currentTime = Math.max(processes.getFirst().arrivalTime, currentTime);
+
+        int index = 0, totalProcesses = processes.size();
+        double startX = 20;
+
+        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(p -> p.remainingTime));
+        readyQueue.add(processes.get(index++));
+
+        Process lastProcess = readyQueue.peek();
+        int lastProcessStartTime = currentTime;
+
+        while (completedProcess < totalProcesses) {
+            if (readyQueue.isEmpty()) {
+                if (lastProcess != null) {
+                    GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
+                            lastProcess.name, startX, lastProcessStartTime, currentTime - lastProcessStartTime
+                    );
+                    startX += (currentTime - lastProcessStartTime) * GanttChartDrawer.UNIT_WIDTH;
+                }
+                lastProcessStartTime = currentTime;
+                lastProcess = null;
+                // If CPU is idle, draw an idle block
+                int nextArrival = processes.get(index).arrivalTime;
+                System.out.println("next arrival time " + nextArrival);
+                GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime, nextArrival - currentTime);
+
+                System.out.println("current time " + currentTime);
+                System.out.println("startX " + startX);
+                //startX += (nextArrival - currentTime) * GanttChartDrawer.UNIT_WIDTH; // Move startX for next block
+                currentTime = nextArrival;
+                startX = currentTime * GanttChartDrawer.UNIT_WIDTH; // Move startX for next block
+
+                // Add new processes that have arrived
+                while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                    readyQueue.add(processes.get(index++));
+                }
+                continue;
+            }
+
+            Process currentProcess = readyQueue.poll();
+            if (currentProcess.responseTime == -1) {
+                currentProcess.responseTime = currentTime - currentProcess.arrivalTime;
+            }
+
+            // If process changes, update Gantt chart
+            if (currentProcess != lastProcess) {
+                if (lastProcess != null) {
+                    GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
+                            lastProcess.name, startX, lastProcessStartTime, currentTime - lastProcessStartTime
+                    );
+                    startX += (currentTime - lastProcessStartTime) * GanttChartDrawer.UNIT_WIDTH;
+                }
+                lastProcessStartTime = currentTime;
+                lastProcess = currentProcess;
+            }
+
+            // Execute process for 1 time unit quantum
+            currentTime++;
+            currentProcess.remainingTime--;
+
+
+            /*// Execute for the time quantum = 1
+            int executionTime = 1;
+            currentProcess.remainingTime -= executionTime;
+
+            // Draw execution block
+            GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
+                    currentProcess.getName(), startX, currentTime, executionTime);
+            currentTime += executionTime;
+
+            startX += executionTime * GanttChartDrawer.UNIT_WIDTH;*/
+
+
+            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                readyQueue.add(processes.get(index++));
+            }
+
+            // If process finishes execution
+            if (currentProcess.remainingTime == 0) {
+                completedProcess++;
+                currentProcess.completionTime = currentTime;
+                currentProcess.turnaroundTime = currentProcess.completionTime - currentProcess.arrivalTime;
+                currentProcess.waitingTime = currentProcess.turnaroundTime - currentProcess.burstTime;
+            } else {
+                readyQueue.add(currentProcess); // Re-add the process if it's not finished
+            }
+        }
+
+        // Draw the last segment of the Gantt chart
+        if (lastProcess != null) {
+            GanttChartDrawer.drawColumn(
+                    ganttChart.getGraphicsContext2D(),
+                    lastProcess.name, startX, lastProcessStartTime, currentTime - lastProcessStartTime
+            );
+            startX += (currentTime - lastProcessStartTime) * GanttChartDrawer.UNIT_WIDTH;
+        }
+
+        // Display total execution time
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX, GanttChartDrawer.POSITION_Y + 50);
+
         return completedProcess;
     }
 

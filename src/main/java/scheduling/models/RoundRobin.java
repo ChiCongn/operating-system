@@ -115,13 +115,10 @@ public class RoundRobin {
             // Draw execution block
             GanttChartDrawer.drawColumn(ganttChart.getGraphicsContext2D(),
                     currentProcess.getName(), startX, currentTime, executionTime);
-            //currentTime += executionTime;
-            for (int i = 0; i < executionTime; i++) {
-                currentTime++;
-                // Add new arriving processes
-                while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
-                    readyQueue.add(processes.get(index++));
-                }
+            currentTime += executionTime;
+
+            while (index < totalProcesses && processes.get(index).arrivalTime <= currentTime) {
+                readyQueue.add(processes.get(index++));
             }
 
             startX += executionTime * GanttChartDrawer.UNIT_WIDTH;
