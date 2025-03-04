@@ -29,7 +29,7 @@ public class PreemptivePriorityController extends Priority {
 
     private void simulate() {
         if (!validateInput()) return;
-        PreemptivePriority.simulate(processes, ganttChart, 0);
+        completedProcess = PreemptivePriority.simulate(processes, ganttChart, completedProcess, 0);
         calculateAverageTime();
         displayProcessInfo();
     }

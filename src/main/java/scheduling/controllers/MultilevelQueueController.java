@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import scheduling.models.FCFS;
 import scheduling.models.PreemptiveSJF;
+import scheduling.models.Process;
 import scheduling.models.RoundRobin;
 
 public class MultilevelQueueController extends MultilevelQueue {
@@ -39,5 +40,22 @@ public class MultilevelQueueController extends MultilevelQueue {
         RoundRobin.simulate(roundRobinQueue, ganttChart, currentTime, 2);
         completedProcess = PreemptiveSJF.simulate(preemptiveSJFQueue, preemptiveSJFGanttChart, completedProcess, currentTime);
         FCFS.simulate(fcfsQueue, fcfsGanttChart, currentTime);
+        calculateAverageTime();
+        displayProcessInfo();
+    }
+
+    void displayProcessInfo() {
+        super.displayProcessInfo();
+
+        if (!processes.isEmpty()) {
+            StringBuilder queue = new StringBuilder();
+            for (Process p : processes) {
+                queue.append(p.getQueueLevel()).append(" ");
+            }
+
+            queues.setText(queue.toString());
+        } else {
+            queues.setText("No processes available");
+        }
     }
 }
