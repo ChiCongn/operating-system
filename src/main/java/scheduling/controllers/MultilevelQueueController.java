@@ -40,6 +40,7 @@ public class MultilevelQueueController extends MultilevelQueue {
         RoundRobin.simulate(roundRobinQueue, ganttChart, currentTime, 2);
         completedProcess = PreemptiveSJF.simulate(preemptiveSJFQueue, preemptiveSJFGanttChart, completedProcess, currentTime);
         FCFS.simulate(fcfsQueue, fcfsGanttChart, currentTime);
+
         calculateAverageTime();
         displayProcessInfo();
     }

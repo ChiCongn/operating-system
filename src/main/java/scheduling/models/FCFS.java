@@ -43,7 +43,7 @@ public class FCFS {
             startX += process.burstTime * GanttChartDrawer.UNIT_WIDTH;
         }
 
-        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime), startX, GanttChartDrawer.POSITION_Y + 50);
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime[0]), startX, GanttChartDrawer.POSITION_Y + 50);
     }
 
     public static void simulate(ObservableList<Process> processes, Canvas ganttChart, int currentTime) {

@@ -168,6 +168,7 @@ public class InputHandler {
         Set<String> uniqueProcessNames = new HashSet<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
+            //br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] parts = line.trim().split("[,\\s]+");
                 if (parts.length == 3) {  // Expected Format: ProcessName, ArrivalTime, BurstTime
