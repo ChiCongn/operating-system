@@ -2,12 +2,18 @@ package edu.bankeranddeadlockdetector.banker;
 
 import edu.bankeranddeadlockdetector.models.Process;
 import edu.bankeranddeadlockdetector.utilities.Format;
+import edu.bankeranddeadlockdetector.utilities.Validation;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class BankerController {
 
@@ -108,10 +114,19 @@ public class BankerController {
         });
         max.setCellFactory(TextFieldTableCell.forTableColumn());
         max.setOnEditCommit(event -> {
-            event.getRowValue().setAllocation(Format.parseArray(event.getNewValue()));
+            event.getRowValue().setMax(Format.parseArray(event.getNewValue()));
         });
 
-        //processResource.setItems(processes);
+        processName.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getProcessName()));
+        allocation.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getAllocationAsString()));
+        max.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getMaxAsString()));
+        need.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getNeedAsString()));
+
+        processResource.setItems(processes);
 
         resources = new HBox[]{resourceA, resourceB, resourceC, resourceD, resourceE};
         instanceResources = new TextField[]{instanceResourceA, instanceResourceB, instanceResourceC, instanceResourceD, instanceResourceE};
@@ -162,25 +177,48 @@ public class BankerController {
     }
 
     void getInput() {
-        processes.clear(); // Clear the existing list before adding new data
+        List<Process> newProcesses = new ArrayList<>();
 
         for (Process rowData : processResource.getItems()) {
             if (rowData.getProcessName() != null && !rowData.getProcessName().isEmpty()) {
-                Process newProcess = new Process(
-                        rowData.getProcessName(),
-                        Format.parseArray(rowData.getAllocationAsString()),
-                        Format.parseArray(rowData.getMaxAsString())
-                );
-                System.out.println("process name: " + rowData.getProcessName());
-                processes.add(newProcess);
+                int[] allocation = rowData.getAllocation();
+                int[] max = rowData.getMax();
+
+                if (allocation != null && max != null) {
+                    Process newProcess = new Process(
+                            rowData.getProcessName(),
+                            allocation,
+                            max
+                    );
+                    newProcesses.add(newProcess);
+                } else {
+                    System.out.println("Skipping process: " + rowData.getProcessName() + " due to missing data.");
+                }
             }
         }
+
+        processes.setAll(newProcesses); // Efficient way to update the list without clearing it
         System.out.println("All processes added. Total: " + processes.size());
     }
 
+
     void getInstanceOfResources() {
         for (int i = 0; i < numOfResources; i++) {
+            String inputText = instanceResourceA.getText();
 
+            // Validate if the input is an integer
+            if (!Validation.isInteger(inputText)) {
+                System.out.println("Invalid input: " + inputText);
+                continue;
+            }
+
+            int value = Integer.parseInt(inputText);
+
+            if (Validation.isNaturalNumber(value)) {
+                totalInstanceResource[i] = value;
+            } else {
+                System.out.println("Input must be a natural number: " + inputText);
+            }
         }
     }
 
@@ -189,7 +227,7 @@ public class BankerController {
     }
 
     void addBlankRow() {
-        Process blankProcess = new Process("", new int[]{0, 0, 0}, new int[]{0, 0, 0});
+        Process blankProcess = new Process("---", new int[]{0, 0, 0}, new int[]{0, 0, 0});
         processResource.getItems().add(blankProcess);
     }
 
