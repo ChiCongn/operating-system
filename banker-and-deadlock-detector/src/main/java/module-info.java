@@ -6,4 +6,10 @@ module edu.bankeranddeadlockdetector {
 
     opens edu.bankeranddeadlockdetector to javafx.fxml;
     exports edu.bankeranddeadlockdetector;
+
+    opens edu.bankeranddeadlockdetector.banker to javafx.fxml;
+    exports edu.bankeranddeadlockdetector.banker;
+
+    opens edu.bankeranddeadlockdetector.models to javafx.fxml;
+    exports edu.bankeranddeadlockdetector.models;
 }
