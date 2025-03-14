@@ -1,5 +1,7 @@
 package edu.bankeranddeadlockdetector.models;
 
+import edu.bankeranddeadlockdetector.utilities.Format;
+
 public class Process {
     String processName;
     int[] allocation;
@@ -49,6 +51,30 @@ public class Process {
 
     public int[] getMax() {
         return max;
+    }
+
+    public String getAllocationAsString() {
+        return Format.formatArray(allocation); // Convert int[] → String
+    }
+
+    public void setAllocationFromString(String input) {
+        this.allocation = Format.parseArray(input); // Convert String → int[]
+    }
+
+    public String getMaxAsString() {
+        return Format.formatArray(max);
+    }
+
+    public void setMaxFromString(String input) {
+        this.max = Format.parseArray(input);
+    }
+
+    public String getNeedAsString() {
+        return Format.formatArray(need);
+    }
+
+    public void setNeedFromString(String input) {
+        this.need = Format.parseArray(input);
     }
 
     public void setMax(int[] max) {
