@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="scheduling.controllers.MainController"
+            stylesheets="@MainView.css">
+    <children>
+        <TabPane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="780.0">
+            <tabs>
+                <!-- First-Come First-Serve (FCFS) -->
+                <Tab text="FCFS">
+                    <content>
+                        <VBox spacing="10" alignment="CENTER">
+                            <Label text="First-Come First-Serve (FCFS)"/>
+                            <TableView fx:id="fcfs">
+                                <columns>
+                                    <TableColumn fx:id="fcfsJob" text="Job" prefWidth="120"/>
+                                    <TableColumn fx:id="fcfsArrivalTime" text="Arrival Time" prefWidth="120"/>
+                                    <TableColumn fx:id="fcfsBurstTime" text="Burst Time" prefWidth="120"/>
+                                    <TableColumn fx:id="fcfsFinishTime" text="Finish Time" prefWidth="120"/>
+                                    <TableColumn fx:id="fcfsTurnaroundTime" text="Turnaround Time" prefWidth="160"/>
+                                    <TableColumn fx:id="fcfsWaitingTime" text="Waiting Time" prefWidth="120"/>
+                                </columns>
+                            </TableView>
+                            <HBox spacing="10">
+                                <Button fx:id="addProcess" text="Add Process"/>
+                                <Button fx:id="startSimulation" text="Start Simulation"/>
+                            </HBox>
+                            <Label fx:id="resultLabel" text="Results will be displayed here"/>
+                        </VBox>
+                    </content>
+                </Tab>
+
+                <!-- Shortest Job First (Preemptive) -->
+                <Tab text="SJF (Preemptive)">
+                    <content>
+                        <VBox spacing="10" alignment="CENTER">
+                            <Label text="Shortest Job First (Preemptive)"/>
+                            <TableView fx:id="sjf">
+                                <columns>
+                                    <TableColumn fx:id="sjfJob" text="Job" prefWidth="120"/>
+                                    <TableColumn fx:id="sjfArrivalTime" text="Arrival Time" prefWidth="120"/>
+                                    <TableColumn fx:id="sjfBurstTime" text="Burst Time" prefWidth="120"/>
+                                    <TableColumn fx:id="sjfFinishTime" text="Finish Time" prefWidth="120"/>
+                                    <TableColumn fx:id="sjfTurnaroundTime" text="Turnaround Time" prefWidth="160"/>
+                                    <TableColumn fx:id="sjfWaitingTime" text="Waiting Time" prefWidth="120"/>
+                                </columns>
+                            </TableView>
+                            <Button fx:id="sjfStartSimulation" text="Start Simulation"/>
+                        </VBox>
+                    </content>
+                </Tab>
+
+                <!-- Round Robin -->
+                <Tab text="Round Robin">
+                    <content>
+                        <VBox spacing="10" alignment="CENTER">
+                            <Label text="Round Robin Scheduling"/>
+                            <TableView fx:id="rr">
+                                <columns>
+                                    <TableColumn fx:id="rrJob" text="Job" prefWidth="120"/>
+                                    <TableColumn fx:id="rrArrivalTime" text="Arrival Time" prefWidth="120"/>
+                                    <TableColumn fx:id="rrBurstTime" text="Burst Time" prefWidth="120"/>
+                                    <TableColumn fx:id="rrFinishTime" text="Finish Time" prefWidth="120"/>
+                                    <TableColumn fx:id="rrTurnaroundTime" text="Turnaround Time" prefWidth="160"/>
+                                    <TableColumn fx:id="rrWaitingTime" text="Waiting Time" prefWidth="120"/>
+                                </columns>
+                            </TableView>
+                            <HBox spacing="10">
+                                <Label text="Time Quantum:"/>
+                                <TextField fx:id="quantumTime"/>
+                            </HBox>
+                            <Button fx:id="rrStartSimulation" text="Start Simulation"/>
+                        </VBox>
+                    </content>
+                </Tab>
+
+                <!-- Multi-Level Feedback Queue (MLFQ) -->
+                <Tab text="MLFQ">
+                    <content>
+                        <VBox spacing="10" alignment="CENTER">
+                            <Label text="Multi-Level Feedback Queue (MLFQ)"/>
+                            <TableView fx:id="mlfq">
+                                <columns>
+                                    <TableColumn fx:id="mlfqJob" text="Job" prefWidth="120"/>
+                                    <TableColumn fx:id="mlfqArrivalTime" text="Arrival Time" prefWidth="120"/>
+                                    <TableColumn fx:id="mlfqBurstTime" text="Burst Time" prefWidth="120"/>
+                                    <TableColumn fx:id="mlfqFinishTime" text="Finish Time" prefWidth="120"/>
+                                    <TableColumn fx:id="mlfqTurnaroundTime" text="Turnaround Time" prefWidth="160"/>
+                                    <TableColumn fx:id="mlfqWaitingTime" text="Waiting Time" prefWidth="120"/>
+                                </columns>
+                            </TableView>
+                            <Button fx:id="mlfqStartSimulation" text="Start Simulation"/>
+                        </VBox>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

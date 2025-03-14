@@ -1,0 +1,146 @@
+/* Apply styles to the entire TableView */
+.table-view {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 10px;
+    -fx-padding: 5px;
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial";
+}
+
+/* Style the column headers */
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to bottom, #2196F3, #1976D2);
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-border-color: white;
+}
+
+/* Style alternating row colors */
+.table-row-cell:odd {
+    -fx-background-color: #e3f2fd;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #ffffff;
+}
+
+/* Hover effect on rows */
+.table-row-cell:hover {
+    -fx-background-color: #bbdefb;
+    -fx-text-fill: black;
+}
+
+/* Style the selected row */
+.table-row-cell:selected {
+    -fx-background-color: #64b5f6;
+    -fx-text-fill: white;
+}
+
+/* Style table cells */
+.table-cell {
+    -fx-padding: 5px;
+    -fx-font-size: 18px;
+    -fx-alignment: CENTER;
+}
+
+/* Add a border to the table */
+.table-view .virtual-flow {
+    -fx-background-radius: 10px;
+}
+
+/* Style VBox */
+.vbox {
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
+    -fx-border-radius: 10px;
+}
+
+/* Style Labels */
+.label-feature {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Style Buttons */
+.button-feature {
+    -fx-background-color: #0078D7;
+    -fx-border-width: 2px;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-family: sans-serif;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-translate-z: -20;
+    -fx-effect: dropshadow(gaussian, black, 1, 0.5, 2 ,2);
+}
+
+.button:hover {
+    -fx-cursor: hand;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+.button:pressed {
+    -fx-effect: none;
+}
+
+.button-switch {
+    -fx-background-color: #FF5056;
+    -fx-border-width: 2px;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: sans-serif;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-border-width: 2px;
+}
+
+.button-switch:hover {
+    -fx-cursor: hand;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+.text-field {
+    -fx-font-size: 14px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #ccc;
+    -fx-background-color: white;
+    -fx-text-fill: #333;
+    -fx-transition: all 0.3s ease-in-out;
+}
+
+/* 🔥 Hover effect */
+.text-field:hover {
+    -fx-border-color: #4CAF50;
+    -fx-background-color: #f9f9f9;
+}
+
+/* ✨ Focus effect (when clicked) */
+.text-field:focused {
+    -fx-border-color: #4CAF50;
+    -fx-background-color: white;
+}
+
+/* 🚀 Placeholder styling */
+.text-field:prompt-text-visible {
+    -fx-text-fill: #888;
+}
+
+/* ⚡ Disabled state */
+.text-field:disabled {
+    -fx-opacity: 0.5;
+    -fx-background-color: #e0e0e0;
+}
+
+
+/* Style the HBox */
+.hbox {
+    -fx-spacing: 10px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-radius: 10px;
+}
