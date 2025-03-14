@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bankeranddeadlockdetector.banker.BankerController">
+    <children>
+        <HBox prefHeight="600.0" prefWidth="1000.0">
+            <children>
+                <VBox prefHeight="600.0" prefWidth="80.0" />
+                <VBox prefHeight="600.0" prefWidth="920.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="900.0" text="Banker's Algorithm Simulation">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="5.0" />
+                            </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="30.0" prefWidth="200.0">
+                            <children>
+                                <Label prefHeight="30.0" prefWidth="238.0" text="Total Instances of all resources:">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <HBox fx:id="resourceA" prefHeight="30.0" prefWidth="100.0">
+                                    <children>
+                                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="A" textFill="#634949">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="instanceResourceA" prefHeight="30.0" prefWidth="60.0" />
+                                    </children>
+                                </HBox>
+                                <HBox fx:id="resourceB" prefHeight="30.0" prefWidth="100.0">
+                                    <children>
+                                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="B" textFill="#634949">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="instanceResourceB" prefHeight="30.0" prefWidth="60.0" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </HBox>
+                                <HBox fx:id="resourceC" prefHeight="30.0" prefWidth="100.0">
+                                    <children>
+                                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="C" textFill="#634949">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="instanceResourceC" prefHeight="30.0" prefWidth="60.0" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </HBox>
+                                <HBox fx:id="resourceD" prefHeight="30.0" prefWidth="100.0">
+                                    <children>
+                                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="D" textFill="#634949">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="instanceResourceD" prefHeight="30.0" prefWidth="60.0" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </HBox>
+                                <HBox fx:id="resourceE" prefHeight="30.0" prefWidth="100.0">
+                                    <children>
+                                        <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="E" textFill="#634949">
+                                            <font>
+                                                <Font name="System Bold" size="18.0" />
+                                            </font>
+                                        </Label>
+                                        <TextField fx:id="instanceResourceE" prefHeight="30.0" prefWidth="60.0" />
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </HBox>
+
+                                <Button fx:id="decreaseResource" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="30.0" text="-">
+                                    <HBox.margin>
+                                        <Insets left="40.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font name="System Bold" size="14.0" />
+                                    </font>
+                                </Button>
+                                <Button fx:id="increaseResource" mnemonicParsing="false" prefHeight="40.0" prefWidth="30.0" text="+">
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="30.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <Label prefHeight="20.0" prefWidth="920.0" text="                                                                     Matrix                                                                                                            Available">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <HBox prefHeight="270.0" prefWidth="920.0">
+                            <children>
+                                <TableView fx:id="processResource" prefHeight="244.0" prefWidth="572.0">
+                                    <columns>
+                                        <TableColumn fx:id="processName" prefWidth="120.0" text="Process Name" />
+                                        <TableColumn fx:id="allocation" prefWidth="150.0" text="Allocation" />
+                                        <TableColumn fx:id="max" prefWidth="150.0" text="Max" />
+                                        <TableColumn fx:id="need" prefWidth="150.0" text="Need" />
+                                    </columns>
+                                    <HBox.margin>
+                                        <Insets left="10.0" />
+                                    </HBox.margin>
+                                </TableView>
+                                <VBox prefHeight="320.0" prefWidth="300.0">
+                                    <children>
+                                        <TableView fx:id="available" prefHeight="102.0" prefWidth="300.0">
+                                            <columns>
+                                                <TableColumn prefWidth="60.0" text="A" />
+                                                <TableColumn prefWidth="60.0" text="B" />
+                                                <TableColumn prefWidth="60.0" text="C" />
+                                                <TableColumn prefWidth="60.0" text="D" />
+                                                <TableColumn prefWidth="60.0" text="E" />
+                                            </columns>
+                                        </TableView>
+                                        <HBox prefHeight="30.0" prefWidth="300.0">
+                                            <children>
+                                                <Button fx:id="simulate" mnemonicParsing="false" prefHeight="30.0" prefWidth="102.0" text="Simulate">
+                                                    <HBox.margin>
+                                                        <Insets left="20.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                                <Button fx:id="reset" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Reset">
+                                                    <HBox.margin>
+                                                        <Insets left="100.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="40.0" />
+                                            </VBox.margin></HBox>
+                                        <HBox prefHeight="30.0" prefWidth="200.0">
+                                            <children>
+                                                <Button fx:id="addProcess" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="+ Add process">
+                                                    <HBox.margin>
+                                                        <Insets left="20.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                                <Button fx:id="addRequest" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="+ Add request">
+                                                    <HBox.margin>
+                                                        <Insets left="80.0" />
+                                                    </HBox.margin>
+                                                </Button>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="20.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="25.0" />
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </HBox>
+                        <Label fx:id="safetyProcessSequence" alignment="CENTER" prefHeight="30.0" prefWidth="920.0" text="Progress">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="10.0" top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextArea fx:id="detailCalculationInfo" prefHeight="200.0" prefWidth="200.0" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
