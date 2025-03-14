@@ -1,6 +1,6 @@
-package edu.bankeranddeadlockdector;
+package edu.bankeranddeadlockdetector;
 
-import edu.bankeranddeadlockdector.utilities.SceneManager;
+import edu.bankeranddeadlockdetector.utilities.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
