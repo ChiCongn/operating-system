@@ -178,6 +178,12 @@ public class BankerController {
         System.out.println("All processes added. Total: " + processes.size());
     }
 
+    void getInstanceOfResources() {
+        for (int i = 0; i < numOfResources; i++) {
+
+        }
+    }
+
     boolean validateInput() {
         return false;
     }

@@ -37,7 +37,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                 </Label>
-                                <HBox fx:id="resourceA" prefHeight="30.0" prefWidth="100.0">
+                                <HBox fx:id="resourceA" prefHeight="30.0" prefWidth="100.0" visible="false">
                                     <children>
                                         <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="A" textFill="#634949">
                                             <font>
@@ -47,7 +47,7 @@
                                         <TextField fx:id="instanceResourceA" prefHeight="30.0" prefWidth="60.0" />
                                     </children>
                                 </HBox>
-                                <HBox fx:id="resourceB" prefHeight="30.0" prefWidth="100.0">
+                                <HBox fx:id="resourceB" prefHeight="30.0" prefWidth="100.0" visible="false">
                                     <children>
                                         <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="B" textFill="#634949">
                                             <font>
@@ -60,7 +60,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                 </HBox>
-                                <HBox fx:id="resourceC" prefHeight="30.0" prefWidth="100.0">
+                                <HBox fx:id="resourceC" prefHeight="30.0" prefWidth="100.0" visible="false">
                                     <children>
                                         <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="C" textFill="#634949">
                                             <font>
@@ -73,7 +73,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                 </HBox>
-                                <HBox fx:id="resourceD" prefHeight="30.0" prefWidth="100.0">
+                                <HBox fx:id="resourceD" prefHeight="30.0" prefWidth="100.0" visible="false">
                                     <children>
                                         <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="D" textFill="#634949">
                                             <font>
@@ -86,7 +86,7 @@
                                         <Insets left="10.0" />
                                     </HBox.margin>
                                 </HBox>
-                                <HBox fx:id="resourceE" prefHeight="30.0" prefWidth="100.0">
+                                <HBox fx:id="resourceE" prefHeight="30.0" prefWidth="100.0" visible="false">
                                     <children>
                                         <Label alignment="CENTER" prefHeight="50.0" prefWidth="40.0" text="E" textFill="#634949">
                                             <font>
