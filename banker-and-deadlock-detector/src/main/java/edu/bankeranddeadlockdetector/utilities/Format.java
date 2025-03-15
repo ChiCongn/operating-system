@@ -1,5 +1,7 @@
 package edu.bankeranddeadlockdetector.utilities;
 
+import edu.bankeranddeadlockdetector.models.Alert;
+
 import java.util.Arrays;
 
 public class Format {
@@ -26,7 +28,7 @@ public class Format {
                     .mapToInt(Integer::parseInt)
                     .toArray();
         } catch (NumberFormatException e) {
-            System.out.println("Invalid input format. Please enter numbers separated by spaces.");
+            Alert.showNotification("Invalid input format. Please enter numbers separated by spaces.");
             return new int[0];
         }
     }
