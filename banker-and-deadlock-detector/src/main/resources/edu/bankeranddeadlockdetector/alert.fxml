@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="125.0" prefWidth="290.0" stylesheets="@dialog.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.bankeranddeadlockdetector.AlertController">
+    <children>
+        <Button fx:id="cancelButton" layoutX="170.0" layoutY="80.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-font-weight: bold;" styleClass="white-button" text="Cancel">
+            <font>
+                <Font name="System Bold" size="16.0" />
+            </font>
+        </Button>
+        <Button fx:id="confirmButton" layoutX="20.0" layoutY="80.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" styleClass="brown_button" text="Ok">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+        <Label fx:id="alertMessage" alignment="CENTER" contentDisplay="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="80.0" prefWidth="290.0" styleClass="black-text-Cabin-bold" text="Message" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

@@ -1,0 +1,57 @@
+/* Apply a soft shadow and rounded corners to the dialog */
+AnchorPane {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #d1d1d1;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 2);
+}
+
+/* Styling for the alert message text */
+.label {
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Brown button styling */
+.brown_button {
+    -fx-background-color: #795548; /* Brown */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 4, 0.5, 0, 2);
+}
+
+.brown_button:hover {
+    -fx-background-color: #6d4c41;
+}
+
+.brown_button:pressed {
+    -fx-background-color: #5d4037;
+}
+
+.white-button {
+    -fx-background-color: white;
+    -fx-text-fill: #d32f2f; /* Red text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-color: #d32f2f; /* Red border */
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+    -fx-transition: 0.3s;
+}
+
+.white-button:hover {
+    -fx-background-color: #ffebee; /* Light red background */
+}
+
+.white-button:pressed {
+    -fx-background-color: #ffcdd2; /* Slightly darker red */
+}
+
