@@ -1,5 +1,6 @@
 package edu.bankeranddeadlockdetector.banker;
 
+import edu.bankeranddeadlockdetector.models.Alert;
 import edu.bankeranddeadlockdetector.models.Process;
 import edu.bankeranddeadlockdetector.utilities.Format;
 import edu.bankeranddeadlockdetector.utilities.Validation;
@@ -12,7 +13,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BankerController {
@@ -42,7 +42,7 @@ public class BankerController {
     private TextField instanceResourceE;
 
     @FXML
-    private TableView<Process> available;
+    private TableView<Process> availableResource;
 
     @FXML
     private TableView<Process> processResource;
@@ -88,14 +88,16 @@ public class BankerController {
 
     HBox[] resources;
     TextField[] instanceResources;
+    int[] available;
 
     @FXML
     private Label safetyProcessSequence;
 
     private static final int MAX_RESOURCES = 5;
 
-    private int numOfResources = 0;
+    private int numOfResources = 1;
     int[] totalInstanceResource;
+    boolean valid;
 
     ObservableList<Process> processes = FXCollections.observableArrayList();
 
@@ -139,12 +141,14 @@ public class BankerController {
     }
 
     void simulate() {
+        valid = false;
+        getInstanceOfResources();
         getInput();
     }
 
     void increaseResource() {
         if (numOfResources >= MAX_RESOURCES) {
-            System.out.println("Cannot increase: Maximum resource limit reached.");
+            Alert.showNotification("Cannot increase: Maximum resource limit reached.");
             return;
         }
         numOfResources++;
@@ -154,7 +158,7 @@ public class BankerController {
 
     void decreaseResource() {
         if (numOfResources <= 0) {
-            System.out.println("Cannot decrease: No resources available.");
+            Alert.showNotification("Cannot decrease: No resources available.");
             return;
         }
         numOfResources--;
@@ -181,19 +185,19 @@ public class BankerController {
 
         for (Process rowData : processResource.getItems()) {
             if (rowData.getProcessName() != null && !rowData.getProcessName().isEmpty()) {
+                String name = rowData.getProcessName();
                 int[] allocation = rowData.getAllocation();
                 int[] max = rowData.getMax();
 
-                if (allocation != null && max != null) {
-                    Process newProcess = new Process(
-                            rowData.getProcessName(),
-                            allocation,
-                            max
-                    );
-                    newProcesses.add(newProcess);
-                } else {
-                    System.out.println("Skipping process: " + rowData.getProcessName() + " due to missing data.");
+                if (!Validation.isNaturalNumberArray(allocation)) {
+                    Alert.showNotification("allocation must be natural array");
+                    return;
                 }
+                if (!Validation.isNaturalNumberArray(max)) {
+                    Alert.showNotification("max must be natural array");
+                    return;
+                }
+                if (!validateThenCreateProcess(name, allocation, max, newProcesses)) return;
             }
         }
 
@@ -201,29 +205,52 @@ public class BankerController {
         System.out.println("All processes added. Total: " + processes.size());
     }
 
+    boolean validateThenCreateProcess(String name, int[] allocation, int[] max, List<Process> newProcesses) {
+        if (allocation != null && max != null) {
+            if (allocation.length != max.length || allocation.length != numOfResources) {
+                Alert.showNotification("Error: Mismatched allocation/max sizes or incorrect number of resources.");
+                return false;
+            }
+            if (!Validation.isValidAllocation(allocation, max)) {
+                Alert.showNotification("Error: Allocation must not exceed the maximum allowed resources!");
+                return false;
+            }
+
+            Process newProcess = new Process(name, allocation, max);
+            newProcesses.add(newProcess);
+        } else {
+            System.out.println("Skipping process: " + name + " due to missing data.");
+        }
+        return true;
+    }
+
 
     void getInstanceOfResources() {
         for (int i = 0; i < numOfResources; i++) {
-            String inputText = instanceResourceA.getText();
+            String inputText = instanceResources[i].getText();
 
             // Validate if the input is an integer
             if (!Validation.isInteger(inputText)) {
-                System.out.println("Invalid input: " + inputText);
-                continue;
+                Alert.showNotification("Invalid instance of resource " + (char) ('A' + i) + inputText);
+                return;
             }
 
             int value = Integer.parseInt(inputText);
 
             if (Validation.isNaturalNumber(value)) {
                 totalInstanceResource[i] = value;
+                System.out.println("instance of resource[" + i + "]: " + value);
             } else {
                 System.out.println("Input must be a natural number: " + inputText);
             }
         }
     }
 
-    boolean validateInput() {
-        return false;
+    void validateInput() {
+
+        if (!Validation.isValidTotalAllocation(processes, totalInstanceResource)) {
+            Alert.showNotification("Error: The total allocated resources must not exceed the available instances.");
+        }
     }
 
     void addBlankRow() {
