@@ -42,20 +42,19 @@ public class Validation {
     }
 
     // Check if total allocation for each resource is within available instances
-    public static boolean isValidTotalAllocation(ObservableList<Process> processes, int[] totalInstances) {
-        int numResources = totalInstances.length;
-        int[] totalAllocation = new int[numResources];
+    public static boolean isValidTotalAllocation(ObservableList<Process> processes, int[] totalInstances, int numOfResources) {
+        int[] totalAllocation = new int[numOfResources];
 
         // Sum allocations for each resource
         for (Process process : processes) {
             int[] allocation = process.getAllocation();
-            for (int i = 0; i < numResources; i++) {
+            for (int i = 0; i < numOfResources; i++) {
                 totalAllocation[i] += allocation[i];
             }
         }
 
         // Check if allocation exceeds available instances
-        for (int i = 0; i < numResources; i++) {
+        for (int i = 0; i < numOfResources; i++) {
             if (totalAllocation[i] > totalInstances[i]) {
                 return false;
             }
