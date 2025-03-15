@@ -32,8 +32,8 @@ public class Validation {
     }
 
     // Validate an array of resource instances (all must be natural numbers)
-    public static boolean isValidResourceArray(int[] resources) {
-        for (int resource : resources) {
+    public static boolean isNaturalNumberArray(int[] array) {
+        for (int resource : array) {
             if (resource < 0) {
                 return false;
             }
