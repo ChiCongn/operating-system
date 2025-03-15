@@ -23,16 +23,16 @@
 }
 
 /* Reset Button Style */
-#reset {
+#delete {
     -fx-background-color: #F44336; /* Red */
     -fx-border-color: #D32F2F;
 }
 
-#reset:hover {
+#delete:hover {
     -fx-background-color: #E53935;
 }
 
-#reset:pressed {
+#delete:pressed {
     -fx-background-color: #D32F2F;
 }
 
@@ -89,4 +89,19 @@
 
 #increaseResource:pressed {
     -fx-background-color: #1B5E20;
+}
+
+
+/* Text Fields */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-border-color: #8B5A2B;
+    -fx-border-width: 2px;
 }

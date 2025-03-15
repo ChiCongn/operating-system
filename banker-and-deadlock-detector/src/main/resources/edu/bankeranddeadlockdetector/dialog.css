@@ -55,3 +55,16 @@ AnchorPane {
     -fx-background-color: #ffcdd2; /* Slightly darker red */
 }
 
+/* Text Fields */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-border-color: #8B5A2B;
+    -fx-border-width: 2px;
+}
