@@ -1,6 +1,8 @@
 package edu.bankeranddeadlockdetector.banker;
 
+import edu.bankeranddeadlockdetector.models.AddRequest;
 import edu.bankeranddeadlockdetector.models.Alert;
+import edu.bankeranddeadlockdetector.models.Banker;
 import edu.bankeranddeadlockdetector.models.Process;
 import edu.bankeranddeadlockdetector.utilities.Format;
 import edu.bankeranddeadlockdetector.utilities.Validation;
@@ -11,8 +13,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BankerController {
@@ -42,9 +46,6 @@ public class BankerController {
     private TextField instanceResourceE;
 
     @FXML
-    private TableView<Process> availableResource;
-
-    @FXML
     private TableView<Process> processResource;
 
     @FXML
@@ -60,7 +61,7 @@ public class BankerController {
     private TableColumn<Process, String> processName;
 
     @FXML
-    private Button reset;
+    private Button delete;
 
     @FXML
     private Button addProcess;
@@ -86,17 +87,52 @@ public class BankerController {
     @FXML
     private HBox resourceE;
 
-    HBox[] resources;
-    TextField[] instanceResources;
-    int[] available;
+    @FXML
+    private VBox availableResourcesA;
 
     @FXML
-    private Label safetyProcessSequence;
+    private VBox availableResourcesB;
+
+    @FXML
+    private VBox availableResourcesC;
+
+    @FXML
+    private VBox availableResourcesD;
+
+    @FXML
+    private VBox availableResourcesE;
+
+    @FXML
+    private Label availableResourceALabel;
+
+    @FXML
+    private Label availableResourceBLabel;
+
+    @FXML
+    private Label availableResourceCLabel;
+
+    @FXML
+    private Label availableResourceDLabel;
+
+    @FXML
+    private Label availableResourceELabel;
+
+    HBox[] resources;
+    TextField[] instanceResources;
+    int[] totalInstanceResource;
+
+    VBox[] availableResourcesVbox;
+    Label[] availableResourcesLabel;
+    int[] availableResources;
+
+
+    @FXML
+    private Label safeProcessSequence;
 
     private static final int MAX_RESOURCES = 5;
 
     private int numOfResources = 1;
-    int[] totalInstanceResource;
+
     boolean valid;
 
     ObservableList<Process> processes = FXCollections.observableArrayList();
@@ -134,16 +170,33 @@ public class BankerController {
         instanceResources = new TextField[]{instanceResourceA, instanceResourceB, instanceResourceC, instanceResourceD, instanceResourceE};
         totalInstanceResource = new int[MAX_RESOURCES];
 
+        availableResourcesVbox = new VBox[]{availableResourcesA, availableResourcesB, availableResourcesC, availableResourcesD, availableResourcesE};
+        availableResourcesLabel = new Label[]{availableResourceALabel, availableResourceBLabel, availableResourceCLabel, availableResourceDLabel, availableResourceELabel};
+
         increaseResource.setOnAction(event -> increaseResource());
         decreaseResource.setOnAction(event -> decreaseResource());
         simulate.setOnAction(event -> simulate());
+        delete.setOnAction(event -> deleteSelectedRow());
         addProcess.setOnAction((event -> addBlankRow()));
+        addRequest.setOnAction(event -> addRequest());
     }
 
     void simulate() {
-        valid = false;
+        detailCalculationInfo.setText("----");
+        safeProcessSequence.setText("--------");
+        valid = true;
         getInstanceOfResources();
         getInput();
+        validateInput();
+        if (!valid) return;
+
+        StringBuilder executionDetail = new StringBuilder();
+        StringBuilder safeProgress = new StringBuilder();
+        Banker.simulateBanker(processes, availableResources, executionDetail, safeProgress);
+        setTextForAvailableResourcesLabel();
+        detailCalculationInfo.setText(executionDetail.toString());
+        safeProcessSequence.setText(safeProgress.toString());
+
     }
 
     void increaseResource() {
@@ -172,12 +225,15 @@ public class BankerController {
             if (resources[i] != null) {
                 resources[i].setVisible(i < numOfResources);
             }
+            availableResourcesLabel[i].setVisible(i < numOfResources);
+            availableResourcesVbox[i].setVisible(i < numOfResources);
         }
     }
 
-    void reset() {
-        processes.clear();
-        safetyProcessSequence.setText("...");
+    void setTextForAvailableResourcesLabel() {
+        for (int i = 0; i < numOfResources; i++) {
+            availableResourcesLabel[i].setText(Integer.toString(availableResources[i]));
+        }
     }
 
     void getInput() {
@@ -191,16 +247,18 @@ public class BankerController {
 
                 if (!Validation.isNaturalNumberArray(allocation)) {
                     Alert.showNotification("allocation must be natural array");
+                    valid = false;
                     return;
                 }
                 if (!Validation.isNaturalNumberArray(max)) {
                     Alert.showNotification("max must be natural array");
+                    valid = false;
                     return;
                 }
                 if (!validateThenCreateProcess(name, allocation, max, newProcesses)) return;
             }
         }
-
+        valid = true;
         processes.setAll(newProcesses); // Efficient way to update the list without clearing it
         System.out.println("All processes added. Total: " + processes.size());
     }
@@ -232,6 +290,7 @@ public class BankerController {
             // Validate if the input is an integer
             if (!Validation.isInteger(inputText)) {
                 Alert.showNotification("Invalid instance of resource " + (char) ('A' + i) + inputText);
+                valid = false;
                 return;
             }
 
@@ -244,18 +303,67 @@ public class BankerController {
                 System.out.println("Input must be a natural number: " + inputText);
             }
         }
+        valid = true;
     }
 
     void validateInput() {
-
-        if (!Validation.isValidTotalAllocation(processes, totalInstanceResource)) {
+        availableResources = Banker.calculateAvailableResources(processes, totalInstanceResource, numOfResources);
+        if (!Validation.isValidTotalAllocation(processes, totalInstanceResource, numOfResources)) {
             Alert.showNotification("Error: The total allocated resources must not exceed the available instances.");
+            valid = false;
+            return;
         }
+        valid = true;
     }
 
     void addBlankRow() {
         Process blankProcess = new Process("---", new int[]{0, 0, 0}, new int[]{0, 0, 0});
         processResource.getItems().add(blankProcess);
+    }
+
+    void deleteSelectedRow() {
+        Process selectedBook = processResource.getSelectionModel().getSelectedItem();
+        if (selectedBook != null) {
+            processResource.getItems().remove(selectedBook);
+        } else {
+            Alert.showNotification("No row selected!");
+        }
+    }
+
+    void addRequest() {
+        String[] requestData = AddRequest.showRequestDialogAndGetRequest();
+
+        System.out.println("add request");
+        if (requestData == null || requestData.length < 2) {
+            Alert.showNotification("No valid request received.");
+            valid = false;
+            return;
+        }
+
+        String processName = requestData[0];
+        int[] requestResource = Format.parseArray(requestData[1]); // Convert to int array
+        if (!Validation.isValidAllocation(requestResource, availableResources)) {
+            valid = false;
+            Alert.showNotification("Error: The total request resources must not exceed the available instances.");
+            return;
+        }
+
+        for (Process process : processes) {
+            if (process.getProcessName().equals(processName)) {
+                int[] newAllocation = process.getAllocation();
+
+                // Add requestData to allocation element-wise
+                for (int i = 0; i < newAllocation.length; i++) {
+                    newAllocation[i] += requestResource[i];
+                }
+
+                process.setAllocation(newAllocation);
+                processResource.refresh();
+                break;
+            }
+        }
+        valid = true;
+
     }
 
 }
