@@ -36,3 +36,29 @@
 .table-row-cell:hover {
     -fx-background-color: #E8E8E8;
 }
+
+/* Style for VBox container */
+.vbox-container {
+    -fx-alignment: center;
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+/* Label styling */
+.vbox-label {
+    -fx-font-size: 24px;
+    -fx-border-width: 0 0 1 0px;
+    -fx-border-color: #ccc;
+    -fx-font-weight: bold;
+    -fx-text-fill: #634949;
+    -fx-alignment: center;
+}
+
+/* VBox hover effect */
+.vbox-container:hover {
+    -fx-background-color: #e9ecef;
+    -fx-border-color: #b0b0b0;
+}

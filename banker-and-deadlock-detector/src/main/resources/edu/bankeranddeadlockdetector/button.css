@@ -1,0 +1,92 @@
+
+/* Base Button Style */
+.button {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+}
+
+/* Simulate Button Style */
+#simulate {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-border-color: #388E3C;
+}
+
+#simulate:hover {
+    -fx-background-color: #45a049;
+}
+
+#simulate:pressed {
+    -fx-background-color: #388E3C;
+}
+
+/* Reset Button Style */
+#reset {
+    -fx-background-color: #F44336; /* Red */
+    -fx-border-color: #D32F2F;
+}
+
+#reset:hover {
+    -fx-background-color: #E53935;
+}
+
+#reset:pressed {
+    -fx-background-color: #D32F2F;
+}
+
+#addProcess {
+    -fx-background-color: #1E88E5; /* Default Blue */
+    -fx-border-color: #1565C0;
+}
+
+#addProcess:hover {
+    -fx-background-color: #1565C0;
+}
+
+#addProcess:pressed {
+    -fx-background-color: #0D47A1;
+}
+
+/* Add Request Button - Orange */
+#addRequest {
+    -fx-background-color: #FF9800; /* Orange */
+    -fx-border-color: #F57C00;
+}
+
+#addRequest:hover {
+    -fx-background-color: #F57C00;
+}
+
+#addRequest:pressed {
+    -fx-background-color: #E65100;
+}
+
+/* Decrease Button (-) - Red */
+#decreaseResource {
+    -fx-background-color: #E53935; /* Red */
+    -fx-border-color: #C62828;
+}
+
+#decreaseResource:hover {
+    -fx-background-color: #C62828;
+}
+
+#decreaseResource:pressed {
+    -fx-background-color: #B71C1C;
+}
+
+/* Increase Button (+) - Green */
+#increaseResource {
+    -fx-background-color: #43A047; /* Green */
+    -fx-border-color: #2E7D32;
+}
+
+#increaseResource:hover {
+    -fx-background-color: #2E7D32;
+}
+
+#increaseResource:pressed {
+    -fx-background-color: #1B5E20;
+}
