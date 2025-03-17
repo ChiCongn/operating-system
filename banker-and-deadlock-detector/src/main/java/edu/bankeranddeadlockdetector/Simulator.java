@@ -18,7 +18,8 @@ public class Simulator extends Application {
         SceneManager.setPrimaryStage(primaryStage);
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Simulator.class.getResource(SceneManager.BANKER_VIEW_PATH));
+            //loader.setLocation(Simulator.class.getResource(SceneManager.BANKER_VIEW_PATH));
+            loader.setLocation(Simulator.class.getResource(SceneManager.DEADLOCK_DETECTOR_VIEW_PATH));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);

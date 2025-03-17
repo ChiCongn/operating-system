@@ -12,6 +12,7 @@ import java.io.IOException;
 public class SceneManager {
 
     public static final String BANKER_VIEW_PATH = "/edu/bankeranddeadlockdetector/banker.fxml";
+    public static final String DEADLOCK_DETECTOR_VIEW_PATH = "/edu/bankeranddeadlockdetector/deadlock-detector.fxml";
     public static Stage primaryStage;
 
     public static void setPrimaryStage(Stage primaryStage) {

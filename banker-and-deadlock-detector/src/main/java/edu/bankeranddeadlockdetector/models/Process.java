@@ -19,8 +19,8 @@ public class Process {
 
     public Process(String processName, int[] allocation, int[] request, boolean isDeadlockDetection) {
         this.processName = processName;
-        this.allocation = allocation.clone();
-        this.request = request.clone();
+        this.allocation = allocation;
+        this.request = request;
         this.max = null;   // Not needed in deadlock detection
         this.need = null;  // Not needed in deadlock detection
     }
@@ -91,6 +91,10 @@ public class Process {
 
     public int[] getRequest() {
         return request;
+    }
+
+    public String getRequestAsString() {
+        return Format.formatArray(request);
     }
 
     public void setRequest(int[] request) {
