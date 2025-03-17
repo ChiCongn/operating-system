@@ -91,6 +91,33 @@
     -fx-background-color: #1B5E20;
 }
 
+#banker {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-border-color: #388E3C;
+}
+
+#banker:hover {
+    -fx-background-color: #388E3C;
+}
+
+#banker:pressed {
+    -fx-background-color: #2E7D32;
+}
+
+#deadlock {
+    -fx-background-color: #E53935; /* Red */
+    -fx-border-color: #C62828;
+}
+
+#deadlock:hover {
+    -fx-background-color: #C62828;
+}
+
+#deadlock:pressed {
+    -fx-background-color: #B71C1C;
+}
+
+
 
 /* Text Fields */
 .text-field {

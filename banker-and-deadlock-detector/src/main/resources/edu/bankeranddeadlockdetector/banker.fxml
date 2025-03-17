@@ -18,7 +18,15 @@
     <children>
         <HBox prefHeight="600.0" prefWidth="1000.0">
             <children>
-                <VBox prefHeight="600.0" prefWidth="80.0" />
+                <VBox prefHeight="600.0" prefWidth="80.0">
+               <children>
+                  <Button fx:id="banker" mnemonicParsing="false" prefHeight="38.0" prefWidth="81.0" text="Banker">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin></Button>
+                  <Button fx:id="deadlock" mnemonicParsing="false" prefHeight="38.0" prefWidth="81.0" text="Deadlock" />
+               </children>
+                </VBox>
                 <VBox prefHeight="600.0" prefWidth="920.0">
                     <children>
                         <Label alignment="CENTER" prefHeight="30.0" prefWidth="900.0" text="Banker's Algorithm Simulation">
