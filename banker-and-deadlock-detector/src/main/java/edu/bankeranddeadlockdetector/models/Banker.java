@@ -29,17 +29,18 @@ public class Banker {
 
                     if (canAllocate) {
                         // Process i can finish, release resources
-                        executionDetail.append("🔹 Checking Process P1: Need ")
+                        executionDetail.append("🔹 Checking Process ").append(process.getProcessName()).append(": Need ")
                                 .append(Arrays.toString(need))
                                 .append(" <= Available ")
-                                .append(Arrays.toString(work))
-                                .append("\n✅ Need is satisfied. Process P1 can execute.\n");
+                                .append(Arrays.toString(work)).append("\n✅ Need is satisfied. Process ")
+                                .append(process.getProcessName()).append(" can execute.\n");
 
                         for (int j = 0; j < numResources; j++) {
                             work[j] += allocation[j];
                         }
 
-                        executionDetail.append("🔄 Process P1 finishes. New Available Resources: ")
+                        executionDetail.append("🔄 Process ").append(process.getProcessName())
+                                .append(" finishes. New Available Resources: ")
                                 .append(Arrays.toString(work))
                                 .append("\n---------------------------------\n");
 
