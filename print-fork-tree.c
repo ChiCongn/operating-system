@@ -5,6 +5,30 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
+
+/*
+ * Filename: print_processes_tree.c
+ * Author: Nguyễn Chí Công
+ * Description: This program creates a process tree using recursive fork().
+ *              It writes the process hierarchy to a file named
+ *              "print-processes-tree.txt".
+ *
+ * Compilation:
+ *   gcc print_processes_tree.c -o print_processes_tree
+ *
+ * Usage:
+ *   ./print_processes_tree
+ *
+ * Output:
+ *   The process tree will be stored in "print-processes-tree.txt"
+ *
+ * Notes:
+ *   - The program recursively creates child processes up to a predefined limit (N).
+ *   - Each process writes its PID and its parent's PID to the output file.
+ *   - Uses wait() to ensure proper synchronization.
+ */
+
+
 #define N 10 // Số lần tạo tiến trình con
 
 // In khoảng trắng
