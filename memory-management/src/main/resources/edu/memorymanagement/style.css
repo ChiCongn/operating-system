@@ -1,0 +1,142 @@
+
+/* 📦 VBox chứa các nút điều hướng */
+.nav-vbox {
+    -fx-background-color: #2C3E50; /* Xanh đậm */
+    -fx-alignment: center; /* Căn giữa nội dung */
+    -fx-border-color: #1F2A36; /* Viền nhẹ */
+    -fx-opacity: 0.95; /* Độ mờ nhẹ */
+}
+
+/* 🎯 Nút điều hướng */
+.nav-label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.9;
+}
+
+/* 🎭 Hình ảnh trong nút */
+.nav-vbox .image-view {
+    -fx-opacity: 0.8;
+}
+
+/* ✨ Hover: Màu tối hơn khi di chuột vào */
+.nav-vbox:hover {
+    -fx-background-color: #2C3E50;
+}
+
+/* 🔥 Click: Màu tối hơn khi nhấn */
+.nav-vbox:pressed {
+    -fx-background-color: #1F2A36;
+}
+
+/* Nút đang active (được chọn) */
+.nav-button.active {
+    -fx-background-color: #2980B9; /* Màu xanh nổi bật */
+    -fx-text-fill: white;
+}
+
+.nav-button.active .image-view {
+    -fx-opacity: 1;
+}
+
+
+/* Nút thực thi */
+.execute-button {
+    -fx-background-color: #28A745;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 120px;
+    -fx-padding: 10px;
+    -fx-background-radius: 5px;
+}
+
+.execute-button:hover {
+    -fx-background-color: #218838; /* Xanh lá đậm hơn */
+}
+
+/* 🌟 Style mặc định cho Label */
+.tab-label {
+    -fx-background-color: #E0E0E0; /* Màu nền xám nhạt */
+    -fx-text-fill: #333; /* Màu chữ tối */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-border-radius: 5px 5px 0 0; /* Bo góc chỉ trên */
+    -fx-border-color: #B0B0B0; /* Viền xám */
+    -fx-border-width: 1px;
+}
+
+/* 🎨 Hover - Khi di chuột vào tab */
+.tab-label:hover {
+    -fx-background-color: #D0D0D0; /* Màu đậm hơn 1 chút */
+    -fx-cursor: hand;
+}
+
+/* 🔥 Active - Khi tab đang được chọn */
+.tab-label.active {
+    -fx-background-color: #1976D2; /* Màu xanh dương nổi bật */
+    -fx-text-fill: white; /* Chữ trắng */
+    -fx-border-color: #1565C0; /* Viền xanh đậm hơn */
+}
+
+/* 🌟 Title Label */
+.title-label {
+    -fx-font-size: 22px;  /* Chữ lớn */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: linear-gradient(to right, #0099F7, #0052D4);
+    -fx-background-radius: 10px; /* Bo góc */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 0, 3); /* Đổ bóng */
+}
+
+/* 🎨 Title Label có gạch dưới */
+.title-label.underline {
+    -fx-border-color: #FFD700; /* Màu vàng gold */
+    -fx-border-width: 0 0 3px 0; /* Gạch dưới */
+    -fx-background-color: linear-gradient(to right, #6A11CB, #2575FC); /* Gradient tím - xanh */
+}
+
+/* 📢 Label Thông Báo Thông Số */
+.info-label {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-padding: 5px 10px; /* Tạo khoảng cách xung quanh */
+    -fx-background-color: #f0f8ff;
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+/* 🔢 Label Thông Số Tính Toán */
+.calculated-value {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: #004080; /* Chữ xanh đậm hơn để nổi bật */
+    -fx-padding: 8px 12px; /* Khoảng cách xung quanh */
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-alignment: center-right; /* Căn phải */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+.input-textfield {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: #004080; /* Chữ xanh đậm hơn để nổi bật */
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-alignment: center-right; /* Căn phải */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+/* Khi di chuột vào */
+.input-textfield:hover {
+    -fx-background-color: #cce0ff; /* Xanh đậm hơn khi di chuột vào */
+}
+
+/* Khi được focus */
+.input-textfield:focused {
+    -fx-border-color: #6699ff; /* Viền sáng hơn khi focus */
+    -fx-background-color: #b3d9ff; /* Nền hơi đậm hơn */
+}
+
+

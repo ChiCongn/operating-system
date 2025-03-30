@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.memorymanagement.controller.CacheController">
+   <children>
+      <HBox prefHeight="600.0" prefWidth="1200.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="80.0">
+               <children>
+                  <ImageView fitHeight="67.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="80.0" styleClass="nav-vbox">
+                     <children>
+                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="41.0" prefWidth="94.0" styleClass="nav-label" text="Scheduler" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="600.0" prefWidth="10.0" />
+            <VBox prefHeight="200.0" prefWidth="1110.0">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="1110.0">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" styleClass="tab-label" text="Bài tập cache">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="220.0" styleClass="tab-label" text="Chuyển đổi đ/c ảo -&gt; vật lý">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="tab-label" text="Bảng phân trang">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="950.0" styleClass="title-label" text="Bài tập cache" textFill="#1b1b1b">
+                     <font>
+                        <Font name="System Bold Italic" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="100.0" right="100.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="368.0" prefWidth="758.0">
+                     <VBox.margin>
+                        <Insets left="150.0" right="100.0" top="50.0" />
+                     </VBox.margin>
+                     <children>
+                        <VBox prefHeight="368.0" prefWidth="280.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="280.0" styleClass="info-label" text="Thời gian truy cập cache (ns)">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="280.0" styleClass="info-label" text="Thời gian truy cập bộ nhớ (RAM) (ns)">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="280.0" styleClass="info-label" text="Tỷ lệ trúng cache (TLB) ">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="280.0" styleClass="info-label" text="Thời gian truy cập bộ nhớ trung bình">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="81.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="280.0" styleClass="info-label" text="Thời gian truy cập bộ nhớ hiệu quả">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="368.0" prefWidth="327.0">
+                           <children>
+                              <TextField fx:id="cacheAccessTimeField" prefHeight="40.0" styleClass="input-textfield" />
+                              <TextField fx:id="memoryAccessTimeField" prefHeight="40.0" styleClass="input-textfield" />
+                              <TextField fx:id="cacheHitRateField" prefHeight="40.0" styleClass="input-textfield" />
+                              <Button fx:id="run" alignment="CENTER" maxWidth="160.0" mnemonicParsing="false" prefHeight="40.0" styleClass="execute-button" text=":v">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Button>
+                              <Label fx:id="avgMemoryAccessTimeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="400.0" styleClass="calculated-value">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label fx:id="effectiveMemoryAccessTimeLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="400.0" styleClass="calculated-value">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
