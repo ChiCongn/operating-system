@@ -42,7 +42,7 @@
                 </HBox>
                 <HBox prefHeight="547.0" prefWidth="1050.0">
                     <children>
-                        <VBox prefHeight="483.0" prefWidth="263.0">
+                        <VBox prefHeight="483.0" prefWidth="260.0">
                             <children>
                                 <Label alignment="CENTER" prefHeight="49.0" prefWidth="235.0" text="Input" textAlignment="CENTER">
                                     <font>
@@ -50,16 +50,14 @@
                                     </font>
                                 </Label>
                                 <Label prefHeight="33.0" prefWidth="233.0" styleClass="label-feature" text="Name" />
-                                <TextField fx:id="processNames" prefHeight="42.0" prefWidth="236.0" promptText="Enter process names (e.g., p1 p2 p3)" />
+                                <TextField fx:id="processNames" prefHeight="35.0" prefWidth="260.0" promptText="Enter process names (e.g., p1 p2 p3)" />
                                 <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Arrival Time" />
-                                <TextField fx:id="arrivalTimes" prefHeight="46.0" prefWidth="236.0" promptText="Enter arrival times (e.g., 2 1 4)" />
+                                <TextField fx:id="arrivalTimes" prefHeight="35.0" prefWidth="260.0" promptText="Enter arrival times (e.g., 2 1 4)" />
                                 <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Burst Time" />
-                                <TextField fx:id="burstTimes" prefHeight="42.0" prefWidth="236.0" promptText="Enter burst times (e.g., 6 7 8)" />
+                                <TextField fx:id="burstTimes" prefHeight="35.0" prefWidth="260.0" promptText="Enter burst times (e.g., 6 7 8)" />
+                        <Label prefHeight="32.0" prefWidth="236.0" styleClass="label-feature" text="Priority" />
+                        <TextField fx:id="burstTimes1" prefHeight="35.0" prefWidth="260.0" promptText="Enter priority (e.g., 1 4 2)" />
                                 <HBox spacing="10">
-                                    <children>
-                                        <TextField fx:id="filePath" editable="false" prefHeight="22.0" prefWidth="208.0" promptText="Choose a file..." />
-                                        <Button fx:id="uploadFile" prefHeight="30.0" prefWidth="31.0" styleClass="button-feature" text="......" />
-                                    </children>
                                     <VBox.margin>
                                         <Insets top="20.0" />
                                     </VBox.margin>
@@ -76,7 +74,7 @@
                                         </Button>
                                         <Button fx:id="refresh" prefHeight="39.0" prefWidth="78.0" styleClass="button-feature" text="Refresh">
                                             <HBox.margin>
-                                                <Insets left="20.0" />
+                                                <Insets left="40.0" />
                                             </HBox.margin>
                                         </Button>
                                     </children>
