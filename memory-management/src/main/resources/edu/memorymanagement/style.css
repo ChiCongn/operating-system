@@ -100,7 +100,6 @@
 .info-label {
     -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
     -fx-font-weight: bold; /* Chữ in đậm */
-    -fx-padding: 5px 10px; /* Tạo khoảng cách xung quanh */
     -fx-background-color: #f0f8ff;
     -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
     -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
@@ -111,7 +110,6 @@
     -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
     -fx-font-weight: bold; /* Chữ in đậm */
     -fx-text-fill: #004080; /* Chữ xanh đậm hơn để nổi bật */
-    -fx-padding: 8px 12px; /* Khoảng cách xung quanh */
     -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
     -fx-alignment: center-right; /* Căn phải */
     -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
@@ -139,4 +137,38 @@
     -fx-background-color: #b3d9ff; /* Nền hơi đậm hơn */
 }
 
+.multi-choice-box {
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền */
+    -fx-font-size: 14px;
+    -fx-text-fill: #004080; /* Màu chữ xanh đậm */
+}
 
+/* Khi di chuột vào */
+.multi-choice-box:hover {
+    -fx-background-color: #d0e5ff;
+}
+
+/* Khi nhấn vào */
+.multi-choice-box:pressed {
+    -fx-background-color: #99c2ff;
+}
+
+/* Dropdown menu */
+.multi-choice-box .context-menu {
+    -fx-background-color: white;
+    -fx-border-color: #99c2ff;
+    -fx-border-radius: 5px;
+}
+
+/* Items bên trong */
+.multi-choice-box .menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #004080;
+}
+
+/* Khi hover vào item */
+.multi-choice-box .menu-item:hover {
+    -fx-background-color: #b3d1ff;
+}
