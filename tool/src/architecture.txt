@@ -1,0 +1,42 @@
+tool/
+│── src/
+│   ├── main/
+│   │   ├── tool/
+│   │   │   ├── App.java
+│   │   │   ├── controllers/
+│   │   │   │   ├── HomeController.java
+│   │   │   │   ├── SchedulingController.java
+│   │   │   │   ├── MemoryController.java
+│   │   │   │   ├── DeadlockController.java
+│   │   │   ├── algorithms/  # 🚀 Thuật toán chung
+│   │   │   │   ├── scheduling/
+│   │   │   │   │   ├── Scheduler.java
+│   │   │   │   │   ├── FCFS.java
+│   │   │   │   │   ├── SJF.java
+│   │   │   │   │   ├── RoundRobin.java
+│   │   │   │   │   ├── PriorityScheduling.java
+│   │   │   │   ├── memory/
+│   │   │   │   │   ├── PagingSolver.java
+│   │   │   │   │   ├── SegmentationSolver.java
+│   │   │   │   ├── deadlock/
+│   │   │   │   │   ├── DeadlockDetection.java
+│   │   │   │   │   ├── DeadlockPrevention.java
+│   │   │   │   ├── file_system/
+│   │   │   │   │   ├── FileAllocationAlgorithm.java
+│   │   │   │   │   ├── InodeAlgorithm.java
+│   │   │   ├── utils/
+│   │   │   │   ├── Converter.java
+│   │   │   │   ├── Constants.java
+│   │   │   │   ├── Logger.java
+│   │   │   ├── models/
+│   │   │   │   ├── PageTable.java
+│   │   │   │   ├── Process.java
+│   │   │   │   ├── Frame.java
+│   │   ├── resources/
+│   │   │   ├── fxml/
+│   │   │   ├── css/
+│   │   │   ├── images/
+│── test/
+│── docs/
+│── pom.xml / build.gradle
+│── README.md
