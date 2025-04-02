@@ -47,8 +47,6 @@
     -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-pref-width: 120px;
-    -fx-padding: 10px;
     -fx-background-radius: 5px;
 }
 
@@ -126,6 +124,46 @@
     -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
 }
 
+.input-textfield-center {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: #004080; /* Chữ xanh đậm hơn để nổi bật */
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-alignment: center; /* Căn giữa nội dung */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+.signature-label {
+    -fx-font-size: 12px;  /* Kích thước chữ vừa phải */
+    -fx-font-style: italic; /* Chữ nghiêng tạo cảm giác chữ ký */
+    -fx-text-fill: #555555; /* Màu xám nhẹ, không quá đậm */
+    -fx-alignment: center-right; /* Căn phải */
+}
+
+/* Kiểu chung cho label dạng ghi chú */
+.note-label {
+    -fx-background-color: #fff3cd; /* Màu nền vàng nhạt */
+    -fx-text-fill: #856404; /* Màu chữ nâu */
+    -fx-border-color: #ffeeba; /* Viền vàng nhạt */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Kiểu hover khi di chuột vào */
+.note-label:hover {
+    -fx-background-color: #ffecb5;
+    -fx-cursor: hand;
+}
+
+/* Kiểu khi Label bị disable */
+.note-label:disabled {
+    -fx-opacity: 0.6;
+}
+
 /* Khi di chuột vào */
 .input-textfield:hover {
     -fx-background-color: #cce0ff; /* Xanh đậm hơn khi di chuột vào */
@@ -172,3 +210,62 @@
 .multi-choice-box .menu-item:hover {
     -fx-background-color: #b3d1ff;
 }
+
+.table-view {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #d1d1d1;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #007ACC;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: #005A9E;
+    -fx-border-width: 0 0 0 1px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f4f4f4;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #d0e8ff;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #007ACC;
+    -fx-text-fill: white;
+}
+
+.table-cell {
+    -fx-padding: 8px;
+    -fx-font-size: 13px;
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Tùy chỉnh toàn bộ TabPane */
+.tab-pane {
+    -fx-background-color: #f0f0f0; /* Màu nền của TabPane */
+    -fx-border-color: #ccc;
+    -fx-border-width: 2px;
+}
+

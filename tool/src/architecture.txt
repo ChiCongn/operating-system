@@ -1,16 +1,15 @@
 tool/
 │── src/
 │   ├── main/
-│   │   ├── tool/
-│   │   │   ├── App.java
-│   │   │   ├── controllers/
-│   │   │   │   ├── HomeController.java
-│   │   │   │   ├── SchedulingController.java
-│   │   │   │   ├── MemoryController.java
-│   │   │   │   ├── DeadlockController.java
-│   │   │   ├── algorithms/  # 🚀 Thuật toán chung
+│   │   ├── tool/         # Package chính của ứng dụng
+│   │   │   ├── App.java    # Điểm khởi chạy của ứng dụng
+│   │   │   ├── controllers/ # 🟢 Controller cho giao diện JavaFX
+│   │   │   │   ├── HomeController.java   # Controller màn hình chính
+│   │   │   │   ├── SchedulingController.java  # Controller lập lịch CPU
+│   │   │   │   ├── MemoryController.java  # Controller quản lý bộ nhớ
+│   │   │   │   ├── DeadlockController.java # Controller kiểm tra bế tắc
+│   │   │   ├── algorithms/    # 🟢 Tất cả thuật toán tập trung vào đây
 │   │   │   │   ├── scheduling/
-│   │   │   │   │   ├── Scheduler.java
 │   │   │   │   │   ├── FCFS.java
 │   │   │   │   │   ├── SJF.java
 │   │   │   │   │   ├── RoundRobin.java
@@ -24,19 +23,27 @@ tool/
 │   │   │   │   ├── file_system/
 │   │   │   │   │   ├── FileAllocationAlgorithm.java
 │   │   │   │   │   ├── InodeAlgorithm.java
-│   │   │   ├── utils/
+│   │   │   ├── utils/       # ⚙️ Các class tiện ích
 │   │   │   │   ├── Converter.java
 │   │   │   │   ├── Constants.java
 │   │   │   │   ├── Logger.java
-│   │   │   ├── models/
+│   │   │   ├── models/      # 📦 Mô hình dữ liệu
 │   │   │   │   ├── PageTable.java
 │   │   │   │   ├── Process.java
 │   │   │   │   ├── Frame.java
-│   │   ├── resources/
-│   │   │   ├── fxml/
-│   │   │   ├── css/
-│   │   │   ├── images/
-│── test/
-│── docs/
-│── pom.xml / build.gradle
-│── README.md
+│   │   ├── resources/      # 📂 File cấu hình, dữ liệu mẫu
+│   │   │   ├── fxml/       # 🎨 File giao diện JavaFX
+│   │   │   │   ├── home.fxml          # Giao diện màn hình chính
+│   │   │   │   ├── scheduling.fxml     # Giao diện lập lịch CPU
+│   │   │   │   ├── memory.fxml         # Giao diện quản lý bộ nhớ
+│   │   │   │   ├── deadlock.fxml       # Giao diện kiểm tra bế tắc
+│   │   │   ├── css/        # 🎨 File CSS cho giao diện
+│   │   │   │   ├── style.css           # CSS chính
+│   │   │   │   ├── dark-theme.css      # Giao diện tối
+│   │   │   ├── images/      # 📸 Hình ảnh, icons cho UI
+│   │   │   │   ├── logo.png
+│   │   │   │   ├── bg.jpg
+│── test/                   # ✅ Test các module
+│── docs/                   # 📜 Tài liệu hướng dẫn sử dụng
+│── pom.xml (hoặc build.gradle) # Quản lý dependencies
+│── README.md               # 📄 Hướng dẫn sử dụng tool

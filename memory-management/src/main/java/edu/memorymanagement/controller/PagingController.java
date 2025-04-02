@@ -217,8 +217,8 @@ public class PagingController {
         double pageTableSizeMB = pageTableSizeKB / 1024;
 
         pageTableSizeBitsLabel.setText(String.format("%.0f", pageTableSizeBits));
-        pageTableSizeBytesLabel.setText(String.format("%.0f", pageTableSizeBytes));
-        pageTableSizeKBLabel.setText(String.format("%.0f", pageTableSizeKB));
+        pageTableSizeBytesLabel.setText(String.format("%.4f", pageTableSizeBytes));
+        pageTableSizeKBLabel.setText(String.format("%.4f", pageTableSizeKB));
         pageTableSizeMBLabel.setText(String.format("%.4f", pageTableSizeMB));
     }
 
@@ -228,8 +228,8 @@ public class PagingController {
         double invertedPageTableSizeMB = invertedPageTableSizeKB / 1024;
 
         invertedPageTableSizeBitsLabel.setText(String.format("%.0f", invertedPageTableSizeBits));
-        invertedPageTableSizeBytesLabel.setText(String.format("%.0f", invertedPageTableSizeBytes));
-        invertedPageTableSizeKBLabel.setText(String.format("%.0f", invertedPageTableSizeKB));
+        invertedPageTableSizeBytesLabel.setText(String.format("%.4f", invertedPageTableSizeBytes));
+        invertedPageTableSizeKBLabel.setText(String.format("%.4f", invertedPageTableSizeKB));
         invertedPageTableSizeMBLabel.setText(String.format("%.4f", invertedPageTableSizeMB));
     }
 }
