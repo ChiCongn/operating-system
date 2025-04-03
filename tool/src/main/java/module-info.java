@@ -6,4 +6,7 @@ module edu.tool {
 
     opens edu.tool to javafx.fxml;
     exports edu.tool;
+
+    opens edu.tool.controllers to javafx.fxml;
+    exports edu.tool.controllers;
 }

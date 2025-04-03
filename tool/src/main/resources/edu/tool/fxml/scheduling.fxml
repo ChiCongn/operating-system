@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.memorymanagement.controller.PagingController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.tool.controllers.SchedulingController">
     <children>
         <HBox prefHeight="600.0" prefWidth="1200.0">
             <children>
@@ -44,19 +44,19 @@
                     </children>
                 </VBox>
                 <Separator orientation="VERTICAL" prefHeight="600.0" prefWidth="10.0" />
-                <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="220.0">
+                <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="222.0">
                     <children>
                   <HBox prefHeight="35.0" prefWidth="200.0">
                      <VBox.margin>
                         <Insets top="50.0" />
                      </VBox.margin>
                      <children>
-                        <Label prefHeight="35.0" prefWidth="85.0" styleClass="info-label" text="Algorithm">
+                        <Label prefHeight="35.0" prefWidth="80.0" styleClass="info-label" text="Algorithm">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox prefHeight="35.0" prefWidth="150.0" styleClass="multi-choice-box" />
+                        <ChoiceBox fx:id="schedulingAlgorithmChoiceBox" prefHeight="35.0" prefWidth="150.0" styleClass="multi-choice-box" />
                      </children>
                   </HBox>
                         <Label prefHeight="25.0" prefWidth="200.0" text="Process Name">
@@ -120,7 +120,7 @@
                         </Button>
                     </children></VBox>
                 <Separator orientation="VERTICAL" prefHeight="200.0" prefWidth="10.0" />
-                <VBox prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css">
+                <VBox prefHeight="600.0" prefWidth="850.0" stylesheets="@../css/style.css">
                     <children>
                         <Label fx:id="schedulingAlgorithm" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="950.0" styleClass="title-label" textFill="#1b1b1b">
                             <font>
@@ -151,18 +151,18 @@
                                 <Insets left="25.0" />
                             </VBox.margin>
                         </Label>
-                        <TableView prefHeight="300.0" prefWidth="835.0">
+                        <TableView fx:id="infoTable" prefHeight="300.0" prefWidth="780.0">
                             <columns>
                                 <TableColumn fx:id="processName" prefWidth="100.0" text="Name" />
                                 <TableColumn fx:id="arrivalTime" prefWidth="100.0" text="Arrival Time" />
                                 <TableColumn fx:id="burstTime" prefWidth="100.0" text="Burst Time" />
                                 <TableColumn fx:id="finishTime" prefWidth="100.0" text="Finish Time" />
-                                <TableColumn fx:id="turnaroundTime" prefWidth="150.0" text="Turnarround Time" />
+                                <TableColumn fx:id="turnaroundTime" prefWidth="150.0" text="Turnaround Time" />
                                 <TableColumn fx:id="responseTime" prefWidth="120.0" text="Response Time" />
-                                <TableColumn fx:id="waitingTime" prefWidth="120.0" text="Waitting Time" />
+                                <TableColumn fx:id="waitingTime" prefWidth="120.0" text="Waiting Time" />
                             </columns>
                             <VBox.margin>
-                                <Insets left="30.0" right="65.0" />
+                                <Insets left="30.0" right="20.0" />
                             </VBox.margin>
                         </TableView>
                         <HBox prefHeight="35.0" prefWidth="200.0">
