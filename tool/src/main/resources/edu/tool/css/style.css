@@ -1,0 +1,388 @@
+
+/* 📦 VBox chứa các nút điều hướng */
+.nav-vbox {
+    -fx-background-color: #2C3E50; /* Xanh đậm */
+    -fx-alignment: center; /* Căn giữa nội dung */
+    -fx-border-color: #1F2A36; /* Viền nhẹ */
+    -fx-opacity: 0.95; /* Độ mờ nhẹ */
+}
+
+/* 🎯 Nút điều hướng */
+.nav-label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.9;
+}
+
+/* 🎭 Hình ảnh trong nút */
+.nav-vbox .image-view {
+    -fx-opacity: 0.8;
+}
+
+/* ✨ Hover: Màu tối hơn khi di chuột vào */
+.nav-vbox:hover {
+    -fx-background-color: #2C3E50;
+}
+
+/* 🔥 Click: Màu tối hơn khi nhấn */
+.nav-vbox:pressed {
+    -fx-background-color: #1F2A36;
+}
+
+/* Nút đang active (được chọn) */
+.nav-button.active {
+    -fx-background-color: #2980B9; /* Màu xanh nổi bật */
+    -fx-text-fill: white;
+}
+
+.nav-button.active .image-view {
+    -fx-opacity: 1;
+}
+
+
+/* Nút thực thi */
+.execute-button {
+    -fx-background-color: #28A745;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+}
+
+.execute-button:hover {
+    -fx-background-color: #218838; /* Xanh lá đậm hơn */
+}
+
+/* 🌟 Style mặc định cho Label */
+.tab-label {
+    -fx-background-color: #E0E0E0; /* Màu nền xám nhạt */
+    -fx-text-fill: #333; /* Màu chữ tối */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-border-radius: 5px 5px 0 0; /* Bo góc chỉ trên */
+    -fx-border-color: #B0B0B0; /* Viền xám */
+    -fx-border-width: 1px;
+}
+
+/* 🎨 Hover - Khi di chuột vào tab */
+.tab-label:hover {
+    -fx-background-color: #D0D0D0; /* Màu đậm hơn 1 chút */
+    -fx-cursor: hand;
+}
+
+/* 🔥 Active - Khi tab đang được chọn */
+.tab-label.active {
+    -fx-background-color: #1976D2; /* Màu xanh dương nổi bật */
+    -fx-text-fill: white; /* Chữ trắng */
+    -fx-border-color: #1565C0; /* Viền xanh đậm hơn */
+}
+
+/* 🌟 Title Label */
+.title-label {
+    -fx-font-size: 22px;  /* Chữ lớn */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: linear-gradient(to right, #0099F7, #0052D4);
+    -fx-background-radius: 10px; /* Bo góc */
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 8, 0, 0, 3); /* Đổ bóng */
+}
+
+/* 🎨 Title Label có gạch dưới */
+.title-label.underline {
+    -fx-border-color: #FFD700; /* Màu vàng gold */
+    -fx-border-width: 0 0 3px 0; /* Gạch dưới */
+    -fx-background-color: linear-gradient(to right, #6A11CB, #2575FC); /* Gradient tím - xanh */
+}
+
+/* 📢 Label Thông Báo Thông Số */
+.info-label {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-background-color: #f0f8ff;
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+.centered-label {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-background-color: #f0f8ff;
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+    -fx-alignment: center; /* Căn giữa nội dung */
+    -fx-text-alignment: center; /* Căn giữa chữ */
+    -fx-padding: 5px; /* Thêm khoảng cách */
+}
+
+/* 🔢 Label Thông Số Tính Toán */
+.calculated-value {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: #004080; /* Chữ xanh đậm hơn để nổi bật */
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-alignment: center-right; /* Căn phải */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+.input-textfield {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: #004080; /* Chữ xanh đậm hơn để nổi bật */
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-alignment: center-right; /* Căn phải */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+.input-textfield-center {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-text-fill: #004080; /* Chữ xanh đậm hơn để nổi bật */
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-alignment: center; /* Căn giữa nội dung */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+}
+
+.signature-label {
+    -fx-font-size: 12px;  /* Kích thước chữ vừa phải */
+    -fx-font-style: italic; /* Chữ nghiêng tạo cảm giác chữ ký */
+    -fx-text-fill: #555555; /* Màu xám nhẹ, không quá đậm */
+    -fx-alignment: center-right; /* Căn phải */
+}
+
+/* Kiểu chung cho label dạng ghi chú */
+.note-label {
+    -fx-background-color: #fff3cd; /* Màu nền vàng nhạt */
+    -fx-text-fill: #856404; /* Màu chữ nâu */
+    -fx-border-color: #ffeeba; /* Viền vàng nhạt */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Kiểu hover khi di chuột vào */
+.note-label:hover {
+    -fx-background-color: #ffecb5;
+    -fx-cursor: hand;
+}
+
+/* Kiểu khi Label bị disable */
+.note-label:disabled {
+    -fx-opacity: 0.6;
+}
+
+/* Khi di chuột vào */
+.input-textfield:hover {
+    -fx-background-color: #cce0ff; /* Xanh đậm hơn khi di chuột vào */
+}
+
+/* Khi được focus */
+.input-textfield:focused {
+    -fx-border-color: #6699ff; /* Viền sáng hơn khi focus */
+    -fx-background-color: #b3d9ff; /* Nền hơi đậm hơn */
+}
+
+.multi-choice-box {
+    -fx-background-color: #e6f2ff; /* Nền xanh nhạt */
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền */
+    -fx-font-size: 14px;
+    -fx-text-fill: #004080; /* Màu chữ xanh đậm */
+}
+
+/* Khi di chuột vào */
+.multi-choice-box:hover {
+    -fx-background-color: #d0e5ff;
+}
+
+/* Khi nhấn vào */
+.multi-choice-box:pressed {
+    -fx-background-color: #99c2ff;
+}
+
+/* Dropdown menu */
+.multi-choice-box .context-menu {
+    -fx-background-color: white;
+    -fx-border-color: #99c2ff;
+    -fx-border-radius: 5px;
+}
+
+/* Items bên trong */
+.multi-choice-box .menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #004080;
+}
+
+/* Khi hover vào item */
+.multi-choice-box .menu-item:hover {
+    -fx-background-color: #b3d1ff;
+}
+
+.table-view {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #d1d1d1;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #007ACC;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: #005A9E;
+    -fx-border-width: 0 0 0 1px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f4f4f4;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #d0e8ff;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #007ACC;
+    -fx-text-fill: white;
+}
+
+.table-cell {
+    -fx-padding: 8px;
+    -fx-font-size: 13px;
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Tùy chỉnh toàn bộ TabPane */
+.tab-pane {
+    -fx-background-color: #f0f0f0; /* Màu nền của TabPane */
+    -fx-border-color: #ccc;
+    -fx-border-width: 2px;
+}
+
+/* General styling for all cells */
+.cell {
+    -fx-border-width: 0.5px;
+    -fx-border-color: black;
+    -fx-alignment: center;
+    -fx-font-size: 14px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+}
+
+/* Styling for a page fault (red background) */
+.page-fault {
+    -fx-background-color: red;
+    -fx-text-fill: white;  /* Optional: change text color to white for better visibility */
+}
+
+/* Styling for a page already in the frame (green background) */
+.page-in-frame {
+    -fx-background-color: lightgreen;
+    -fx-text-fill: black;
+}
+
+/* Styling for an empty cell (gray background) */
+.empty-cell {
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
+}
+
+/* 🔼 Increase Button */
+.btn-increase {
+    -fx-background-color: #4CAF50;  /* Green */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.btn-increase:hover {
+    -fx-background-color: #45a049;
+}
+
+/* 🔽 Decrease Button */
+.btn-decrease {
+    -fx-background-color: #F44336;  /* Red */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.btn-decrease:hover {
+    -fx-background-color: #d32f2f;
+}
+
+/* General styles for the alert pane */
+.anchor-pane-dialog {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Title styling */
+.label-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-alignment: center;
+}
+
+/* Message styling */
+.label-message {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555555;
+    -fx-alignment: center;
+}
+
+/* Confirm button styling */
+.button-confirm {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.2) , 5, 0, 0 , 1 );
+}
+
+.button-confirm:hover {
+    -fx-background-color: #45a049;
+}
+
+/* Cancel button styling */
+.button-cancel {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    -fx-effect: innershadow( gaussian , rgba(0,0,0,0.2) , 5, 0, 0 , 1 );
+}
+
+.button-cancel:hover {
+    -fx-background-color: #e53935;
+}
+
