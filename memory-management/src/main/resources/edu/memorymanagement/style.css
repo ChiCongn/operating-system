@@ -103,6 +103,17 @@
     -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
 }
 
+.centered-label {
+    -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
+    -fx-font-weight: bold; /* Chữ in đậm */
+    -fx-background-color: #f0f8ff;
+    -fx-border-color: #99c2ff; /* Viền xanh nhẹ */
+    -fx-border-width: 0.5px; /* Độ dày viền nhẹ */
+    -fx-alignment: center; /* Căn giữa nội dung */
+    -fx-text-alignment: center; /* Căn giữa chữ */
+    -fx-padding: 5px; /* Thêm khoảng cách */
+}
+
 /* 🔢 Label Thông Số Tính Toán */
 .calculated-value {
     -fx-font-size: 14px;  /* Kích thước chữ vừa phải */
@@ -267,5 +278,33 @@
     -fx-background-color: #f0f0f0; /* Màu nền của TabPane */
     -fx-border-color: #ccc;
     -fx-border-width: 2px;
+}
+
+/* General styling for all cells */
+.cell {
+    -fx-border-width: 0.5px;
+    -fx-border-color: black;
+    -fx-alignment: center;
+    -fx-font-size: 14px;
+    -fx-min-width: 50px;
+    -fx-min-height: 50px;
+}
+
+/* Styling for a page fault (red background) */
+.page-fault {
+    -fx-background-color: red;
+    -fx-text-fill: white;  /* Optional: change text color to white for better visibility */
+}
+
+/* Styling for a page already in the frame (green background) */
+.page-in-frame {
+    -fx-background-color: lightgreen;
+    -fx-text-fill: black;
+}
+
+/* Styling for an empty cell (gray background) */
+.empty-cell {
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
 }
 

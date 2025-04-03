@@ -24,6 +24,7 @@ tool/
 │   │   │   │   │   ├── FileAllocationAlgorithm.java
 │   │   │   │   │   ├── InodeAlgorithm.java
 │   │   │   ├── utils/       # ⚙️ Các class tiện ích
+│   │   │   │   ├── Validator.java          # This class can contain the validation logic
 │   │   │   │   ├── Converter.java
 │   │   │   │   ├── Constants.java
 │   │   │   │   ├── Logger.java

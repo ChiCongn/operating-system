@@ -17,7 +17,8 @@ public class App extends Application {
         //SceneManager.setPrimaryStage(primaryStage);
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/edu/memorymanagement/paging.fxml"));
+            //loader.setLocation(App.class.getResource("/edu/memorymanagement/paging.fxml"));
+            loader.setLocation(App.class.getResource("/edu/memorymanagement/page-replacement.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
