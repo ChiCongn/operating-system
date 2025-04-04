@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Alert {
-    private static final String ALERT_FXML_PATH = "";
+    private static final String ALERT_FXML_PATH = "/edu/tool/fxml/alert.fxml";
 
     /**
      * Displays a confirmation alert and waits for user interaction.
@@ -60,6 +60,7 @@ public class Alert {
             // Return confirmation status if applicable
             return isConfirm && alertController.isUserConfirmed();
         } catch (IOException e) {
+            System.out.println("Failed to load Alert FXML");
             throw new RuntimeException("Failed to load Alert FXML", e);
         }
     }

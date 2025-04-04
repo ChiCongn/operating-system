@@ -9,7 +9,7 @@ public class ScheduledProcess {
     int priority;
     int queueLevel;
     int startTime = -1;
-    int completionTime;
+    int finishTime;
     int turnaroundTime;
     int waitingTime;
     int responseTime = -1;
@@ -51,7 +51,7 @@ public class ScheduledProcess {
                 ", priority=" + priority +
                 ", queueLevel=" + queueLevel +
                 ", startTime=" + startTime +
-                ", completionTime=" + completionTime +
+                ", completionTime=" + finishTime +
                 ", turnaroundTime=" + turnaroundTime +
                 ", waitingTime=" + waitingTime +
                 ", responseTime=" + responseTime +
@@ -116,12 +116,12 @@ public class ScheduledProcess {
         this.startTime = startTime;
     }
 
-    public int getCompletionTime() {
-        return completionTime;
+    public int getFinishTime() {
+        return finishTime;
     }
 
-    public void setCompletionTime(int completionTime) {
-        this.completionTime = completionTime;
+    public void setFinishTime(int finishTime) {
+        this.finishTime = finishTime;
     }
 
     public int getTurnaroundTime() {
