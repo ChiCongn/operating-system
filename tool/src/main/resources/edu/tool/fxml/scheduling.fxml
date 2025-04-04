@@ -151,9 +151,9 @@
                                 <Insets left="25.0" />
                             </VBox.margin>
                         </Label>
-                        <TableView fx:id="infoTable" prefHeight="300.0" prefWidth="780.0">
+                        <TableView fx:id="infoTable" prefHeight="300.0" prefWidth="795.0">
                             <columns>
-                                <TableColumn fx:id="processName" prefWidth="100.0" text="Name" />
+                                <TableColumn fx:id="processName" prefWidth="105.0" text="Name" />
                                 <TableColumn fx:id="arrivalTime" prefWidth="100.0" text="Arrival Time" />
                                 <TableColumn fx:id="burstTime" prefWidth="100.0" text="Burst Time" />
                                 <TableColumn fx:id="finishTime" prefWidth="100.0" text="Finish Time" />

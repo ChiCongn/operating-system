@@ -5,23 +5,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="150.0" prefWidth="300.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.tool.controllers.AlertController">
-    <children>
-        <Button fx:id="cancelButton" layoutX="170.0" layoutY="105.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" style="-fx-font-weight: bold;" styleClass="button-cancel" text="Cancel">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
-        <Button fx:id="confirmButton" layoutX="20.0" layoutY="105.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" styleClass="button-confirm" text="Ok">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
-        <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutY="35.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="66.0" prefWidth="300.0" styleClass="label-message" text="Message" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-      <Label fx:id="title" layoutX="25.0" layoutY="5.0" prefHeight="30.0" prefWidth="250.0" styleClass="label-title" text="Label" />
-    </children>
+<AnchorPane prefHeight="150.0" prefWidth="300.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.tool.controllers.AlertController">
+    <Button fx:id="cancelButton" layoutX="170.0" layoutY="105.0" mnemonicParsing="false" prefHeight="35.0"
+            prefWidth="100.0" style="-fx-font-weight: bold;" styleClass="button-cancel" text="Cancel">
+        <font>
+            <Font name="System Bold" size="16.0"/>
+        </font>
+    </Button>
+    <Button fx:id="confirmButton" layoutX="20.0" layoutY="105.0" mnemonicParsing="false" prefHeight="35.0"
+            prefWidth="100.0" styleClass="button-confirm" text="Ok">
+        <font>
+            <Font name="System Bold" size="16.0"/>
+        </font>
+    </Button>
+    <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" layoutY="35.0" nodeOrientation="LEFT_TO_RIGHT"
+           prefHeight="66.0" prefWidth="300.0" styleClass="label-message" text="Message" textAlignment="CENTER"
+           textOverrun="CLIP" wrapText="true">
+        <font>
+            <Font name="System Bold" size="14.0"/>
+        </font>
+    </Label>
+    <Label fx:id="title" layoutX="25.0" layoutY="5.0" prefHeight="30.0" prefWidth="250.0" styleClass="label-title"
+           text="Label"/>
 </AnchorPane>

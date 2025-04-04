@@ -223,54 +223,52 @@
 }
 
 .table-view {
-    -fx-background-color: #f9f9f9;
-    -fx-border-color: #d1d1d1;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px;
-}
-
-.table-view .column-header-background {
-    -fx-background-color: #007ACC;
-}
-
-.table-view .column-header, .table-view .filler {
-    -fx-background-color: transparent;
-    -fx-border-color: #005A9E;
-    -fx-border-width: 0 0 0 1px;
-}
-
-.table-view .column-header .label {
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-}
-
-.table-row-cell {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #e0e0e0;
-    -fx-border-width: 0 0 1px 0;
-}
-
-.table-row-cell:odd {
     -fx-background-color: #f4f4f4;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 10px;
+    -fx-font-size: 14px;
 }
 
+/* Style the column headers */
+.table-view .column-header {
+    -fx-background-color: linear-gradient(to bottom, #2196F3, #1976D2);
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+    -fx-border-color: white;
+}
+
+/* Style alternating row colors */
+.table-row-cell:odd {
+    -fx-background-color: #e3f2fd;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #ffffff;
+}
+
+/* Hover effect on rows */
 .table-row-cell:hover {
-    -fx-background-color: #d0e8ff;
+    -fx-background-color: #bbdefb;
+    -fx-text-fill: black;
 }
 
+/* Style the selected row */
 .table-row-cell:selected {
-    -fx-background-color: #007ACC;
+    -fx-background-color: #64b5f6;
     -fx-text-fill: white;
 }
 
+/* Style table cells */
 .table-cell {
-    -fx-padding: 8px;
-    -fx-font-size: 13px;
+    -fx-font-size: 16px;
+    -fx-alignment: CENTER;
 }
 
-.table-column {
-    -fx-alignment: CENTER-LEFT;
+/* Add a border to the table */
+.table-view .virtual-flow {
+    -fx-background-radius: 10px;
 }
 
 /* Tùy chỉnh toàn bộ TabPane */
@@ -281,7 +279,7 @@
 }
 
 /* General styling for all cells */
-.cell {
+.cell-page-replacement {
     -fx-border-width: 0.5px;
     -fx-border-color: black;
     -fx-alignment: center;
