@@ -60,6 +60,84 @@ public class SJF {
         return currentTime;
     }
 
+    public static void simulatePreemptive(List<ScheduledProcess> processes, Canvas ganttChart, int currentTime) {
+        System.out.println("Simulating Preemptive Shortest Job First (SJF)");
+        double startX = GanttChartDrawer.START_X;
+        int totalProcesses = processes.size(), completed = 0, index = 0;
+
+        // Sort initially by arrival time, then priority
+        processes.sort(Comparator.comparingInt(ScheduledProcess::getArrivalTime)
+                .thenComparingInt(ScheduledProcess::getPriority));
+
+        currentTime = Math.max(currentTime, processes.getFirst().getArrivalTime());
+        int lastStartTime = currentTime;
+
+        PriorityQueue<ScheduledProcess> readyQueue = new PriorityQueue<>(
+                Comparator.comparingInt(ScheduledProcess::getRemainingTime));
+        readyQueue.add(processes.get(index++));
+        ScheduledProcess lastProcess = readyQueue.peek();
+
+        while (completed < totalProcesses) {
+            if (readyQueue.isEmpty()) {
+                ScheduledProcess nextProcess = processes.get(index++);
+                readyQueue.add(nextProcess);
+
+                currentTime = handleIdleAndUpdateTime(ganttChart, currentTime, nextProcess, startX);
+                startX += GanttChartDrawer.UNIT_WIDTH;
+                lastProcess = null;
+                lastStartTime = currentTime;
+                continue;
+            }
+
+            ScheduledProcess current = readyQueue.poll();
+            handleResponseTime(currentTime, current);
+
+            if (current != lastProcess && lastProcess != null) {
+                GanttChartDrawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), lastProcess.getName(), startX, lastStartTime);
+                startX += GanttChartDrawer.UNIT_WIDTH;
+                lastProcess = current;
+                lastStartTime = currentTime;
+            }
+            currentTime++; // run the process for one unit of time
+            completed = completeProcessIfCan(currentTime, current, completed, readyQueue);
+
+            // add newly arrived processes
+            while (index < totalProcesses && processes.get(index).getArrivalTime() <= currentTime) {
+                readyQueue.add(processes.get(index++));
+            }
+        }
+
+        drawLastProcessAndFinalTime(ganttChart, currentTime, lastProcess, startX, lastStartTime);
+    }
+
+    public static void simulateNonPreemptive(List<ScheduledProcess> processes, Canvas ganttChart, int currentTime) {
+        System.out.println("Simulating Non Preemptive Shortest Job First (SJF)");
+        double startX = GanttChartDrawer.START_X;
+        int totalProcesses = processes.size(), completed = 0, index = 0;
+
+        // Sort the processes first by arrival time, then by remaining time, and finally by priority
+        processes.sort(Comparator.comparingInt(ScheduledProcess::getArrivalTime)
+                .thenComparingInt(ScheduledProcess::getRemainingTime).thenComparingInt(ScheduledProcess::getPriority));
+
+        currentTime = Math.max(currentTime, processes.getFirst().getArrivalTime());
+
+        for (ScheduledProcess process : processes) {
+            // If there's idle time (gap) between the current time and the process arrival time, handle idle time
+            if (currentTime < process.getArrivalTime()) {
+                currentTime = handleIdleAndUpdateTime(ganttChart, currentTime, process, startX);
+                startX += GanttChartDrawer.UNIT_WIDTH;
+            }
+
+            // Execute the process and update the time accordingly
+            currentTime = executeProcessAndUpdateTime(ganttChart, currentTime, process, startX);
+            startX += GanttChartDrawer.UNIT_WIDTH;
+        }
+
+        // Display the final time after all processes are executed
+        ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime),
+                startX, GanttChartDrawer.POSITION_Y + 50);
+    }
+
     public static int simulateNonPreemptiveAndUpdateTime(List<ScheduledProcess> processes, Canvas ganttChart, int currentTime) {
         System.out.println("Simulating Non Preemptive Shortest Job First (SJF)");
         double startX = GanttChartDrawer.START_X;
