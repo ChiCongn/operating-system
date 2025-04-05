@@ -1,5 +1,7 @@
 package edu.tool.controllers;
 
+import edu.tool.algorithms.scheduling.Priority;
+import edu.tool.algorithms.scheduling.RoundRobin;
 import edu.tool.algorithms.scheduling.SJF;
 import edu.tool.enums.SchedulingAlgorithm;
 import edu.tool.algorithms.scheduling.FCFS;
@@ -75,6 +77,7 @@ public class SchedulingController {
         schedulingAlgorithmChoiceBox.getItems().addAll(SchedulingAlgorithm.values());
         schedulingAlgorithmChoiceBox.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> {
+                    updateAlgorithmLabel(newValue);
             // Set visibility based on the selected algorithm
             isRoundRobin.setVisible(newValue == SchedulingAlgorithm.ROUND_ROBIN);
         });
@@ -108,6 +111,37 @@ public class SchedulingController {
         GanttChartDrawer.clearGanttChart(ganttChart);
         runSelectedAlgorithm(schedulingAlgorithmChoiceBox.getValue());
         updateAverageTimes();
+    }
+
+    void updateAlgorithmLabel(SchedulingAlgorithm selectedAlgorithm) {
+        switch (selectedAlgorithm) {
+            case FCFS:
+                schedulingAlgorithm.setText("First Come First Serve");
+                break;
+            case PREEMPTIVE_SJF:
+                schedulingAlgorithm.setText("Preemptive Shortest Job First");
+                break;
+            case NON_PREEMPTIVE_SJF:
+                schedulingAlgorithm.setText("Non-Preemptive Shortest Job First");
+                break;
+            case ROUND_ROBIN:
+                schedulingAlgorithm.setText("Round Robin");
+                break;
+            case PREEMPTIVE_PRIORITY:
+                schedulingAlgorithm.setText("Preemptive Priority");
+                break;
+            case NON_PREEMPTIVE_PRIORITY:
+                schedulingAlgorithm.setText("Non-Preemptive Priority");
+                break;
+            case MULTI_LEVEL_QUEUE:
+                schedulingAlgorithm.setText("Multi-Level Queue");
+                break;
+            case MULTI_LEVEL_FEEDBACK_QUEUE:
+                schedulingAlgorithm.setText("Multi-Level Feedback Queue");
+                break;
+            default:
+                schedulingAlgorithm.setText("Unknown Algorithm");
+        }
     }
 
 
@@ -154,37 +188,45 @@ public class SchedulingController {
 
     private void runSJFPreemptive() {
         System.out.println("Running Shortest Job First (Preemptive)");
-        int time = SJF.simulatePreemptiveAndUpdateTime(new ArrayList<>(processes), ganttChart, 0);
+        SJF.simulatePreemptive(new ArrayList<>(processes), ganttChart, 0);
     }
 
     private void runSJFNonPreemptive() {
         System.out.println("Running Shortest Job First (Non-Preemptive)");
-        SJF.simulateNonPreemptiveAndUpdateTime(new ArrayList<>(processes), ganttChart, 0);
+        SJF.simulateNonPreemptive(new ArrayList<>(processes), ganttChart, 0);
     }
 
     private void runRoundRobin() {
         System.out.println("Running Round Robin");
-        //RoundRobin.simulate(processes, ganttChart, getTimeQuantum());
+        RoundRobin.simulate(new ArrayList<>(processes), ganttChart, getTimeQuantum(), 0);
     }
 
     private void runPriorityPreemptive() {
         System.out.println("Running Priority Scheduling (Preemptive)");
-        //Priority.simulatePreemptive(processes, ganttChart);
+        Priority.simulatePreemptive(new ArrayList<>(processes), ganttChart, 0);
     }
 
     private void runPriorityNonPreemptive() {
         System.out.println("Running Priority Scheduling (Non-Preemptive)");
-        //Priority.simulateNonPreemptive(processes, ganttChart);
+        Priority.simulateNonPreemptive(new ArrayList<>(processes), ganttChart, 0);
     }
 
     private void runMultiLevelQueue() {
         System.out.println("Running Multi-Level Queue Scheduling");
+        Alert.showNotification("Feature Under Development",
+                "This feature is currently under development. Stay tuned!");
         //MultiLevelQueue.simulate(processes, ganttChart);
     }
 
     private void runMultiLevelFeedbackQueue() {
         System.out.println("Running Multi-Level Feedback Queue");
+        Alert.showNotification("Feature Under Development",
+                "This feature is currently under development. Stay tuned!");
         //MultiLevelFeedbackQueue.simulate(processes, ganttChart);
+    }
+
+    private int getTimeQuantum() {
+        return InputHandler.convertStringToInteger(timeQuantumField.getText());
     }
 
     private void updateAverageTimes() {
