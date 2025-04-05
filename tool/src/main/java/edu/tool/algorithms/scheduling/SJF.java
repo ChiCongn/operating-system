@@ -1,7 +1,7 @@
 package edu.tool.algorithms.scheduling;
 
 import edu.tool.models.ScheduledProcess;
-import edu.tool.utils.GanttChartDrawer;
+import edu.tool.utils.Drawer;
 import javafx.scene.canvas.Canvas;
 
 import java.util.Comparator;
@@ -11,7 +11,7 @@ import java.util.PriorityQueue;
 public class SJF {
     public static int simulatePreemptiveAndUpdateTime(List<ScheduledProcess> processes, Canvas ganttChart, int currentTime) {
         System.out.println("Simulating Preemptive Shortest Job First (SJF)");
-        double startX = GanttChartDrawer.START_X;
+        double startX = Drawer.START_X;
         int totalProcesses = processes.size(), completed = 0, index = 0;
 
         // Sort initially by arrival time, then priority
@@ -32,7 +32,7 @@ public class SJF {
                 readyQueue.add(nextProcess);
 
                 currentTime = handleIdleAndUpdateTime(ganttChart, currentTime, nextProcess, startX);
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                startX += Drawer.UNIT_WIDTH;
                 lastProcess = null;
                 lastStartTime = currentTime;
                 continue;
@@ -42,8 +42,8 @@ public class SJF {
             handleResponseTime(currentTime, current);
 
             if (current != lastProcess && lastProcess != null) {
-                GanttChartDrawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), lastProcess.getName(), startX, lastStartTime);
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                Drawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), lastProcess.getName(), startX, lastStartTime);
+                startX += Drawer.UNIT_WIDTH;
                 lastProcess = current;
                 lastStartTime = currentTime;
             }
@@ -62,7 +62,7 @@ public class SJF {
 
     public static void simulatePreemptive(List<ScheduledProcess> processes, Canvas ganttChart, int currentTime) {
         System.out.println("Simulating Preemptive Shortest Job First (SJF)");
-        double startX = GanttChartDrawer.START_X;
+        double startX = Drawer.START_X;
         int totalProcesses = processes.size(), completed = 0, index = 0;
 
         // Sort initially by arrival time, then priority
@@ -83,7 +83,7 @@ public class SJF {
                 readyQueue.add(nextProcess);
 
                 currentTime = handleIdleAndUpdateTime(ganttChart, currentTime, nextProcess, startX);
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                startX += Drawer.UNIT_WIDTH;
                 lastProcess = null;
                 lastStartTime = currentTime;
                 continue;
@@ -93,8 +93,8 @@ public class SJF {
             handleResponseTime(currentTime, current);
 
             if (current != lastProcess && lastProcess != null) {
-                GanttChartDrawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), lastProcess.getName(), startX, lastStartTime);
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                Drawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), lastProcess.getName(), startX, lastStartTime);
+                startX += Drawer.UNIT_WIDTH;
                 lastProcess = current;
                 lastStartTime = currentTime;
             }
@@ -112,7 +112,7 @@ public class SJF {
 
     public static void simulateNonPreemptive(List<ScheduledProcess> processes, Canvas ganttChart, int currentTime) {
         System.out.println("Simulating Non Preemptive Shortest Job First (SJF)");
-        double startX = GanttChartDrawer.START_X;
+        double startX = Drawer.START_X;
         int totalProcesses = processes.size(), completed = 0, index = 0;
 
         // Sort the processes first by arrival time, then by remaining time, and finally by priority
@@ -125,22 +125,22 @@ public class SJF {
             // If there's idle time (gap) between the current time and the process arrival time, handle idle time
             if (currentTime < process.getArrivalTime()) {
                 currentTime = handleIdleAndUpdateTime(ganttChart, currentTime, process, startX);
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                startX += Drawer.UNIT_WIDTH;
             }
 
             // Execute the process and update the time accordingly
             currentTime = executeProcessAndUpdateTime(ganttChart, currentTime, process, startX);
-            startX += GanttChartDrawer.UNIT_WIDTH;
+            startX += Drawer.UNIT_WIDTH;
         }
 
         // Display the final time after all processes are executed
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime),
-                startX, GanttChartDrawer.POSITION_Y + 50);
+                startX, Drawer.POSITION_Y + 50);
     }
 
     public static int simulateNonPreemptiveAndUpdateTime(List<ScheduledProcess> processes, Canvas ganttChart, int currentTime) {
         System.out.println("Simulating Non Preemptive Shortest Job First (SJF)");
-        double startX = GanttChartDrawer.START_X;
+        double startX = Drawer.START_X;
         int totalProcesses = processes.size(), completed = 0, index = 0;
 
         // Sort the processes first by arrival time, then by remaining time, and finally by priority
@@ -153,17 +153,17 @@ public class SJF {
             // If there's idle time (gap) between the current time and the process arrival time, handle idle time
             if (currentTime < process.getArrivalTime()) {
                 currentTime = handleIdleAndUpdateTime(ganttChart, currentTime, process, startX);
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                startX += Drawer.UNIT_WIDTH;
             }
 
             // Execute the process and update the time accordingly
             currentTime = executeProcessAndUpdateTime(ganttChart, currentTime, process, startX);
-            startX += GanttChartDrawer.UNIT_WIDTH;
+            startX += Drawer.UNIT_WIDTH;
         }
 
         // Display the final time after all processes are executed
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime),
-                startX, GanttChartDrawer.POSITION_Y + 50);
+                startX, Drawer.POSITION_Y + 50);
         return currentTime;
     }
 
@@ -190,13 +190,13 @@ public class SJF {
     static void drawLastProcessAndFinalTime(Canvas ganttChart, int currentTime, ScheduledProcess lastProcess, double startX, int lastStartTime) {
         // Draw last process
         if (lastProcess != null) {
-            GanttChartDrawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), lastProcess.getName(), startX, lastStartTime);
-            startX += GanttChartDrawer.UNIT_WIDTH;
+            Drawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), lastProcess.getName(), startX, lastStartTime);
+            startX += Drawer.UNIT_WIDTH;
         }
 
         // Display the final time after all processes are executed
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime),
-                startX, GanttChartDrawer.POSITION_Y + 50);
+                startX, Drawer.POSITION_Y + 50);
     }
 
     static int executeProcessAndUpdateTime(Canvas ganttChart, int currentTime, ScheduledProcess process, double startX) {
@@ -206,7 +206,7 @@ public class SJF {
         int waitingTime = turnaroundTime - process.getBurstTime();
 
         // Draw the process block on the Gantt chart
-        GanttChartDrawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), process.getName(), startX, currentTime);
+        Drawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), process.getName(), startX, currentTime);
 
         // Update process details with calculated times
         process.setFinishTime(finishTime);
@@ -220,7 +220,7 @@ public class SJF {
 
     static int handleIdleAndUpdateTime(Canvas ganttChart, int currentTime, ScheduledProcess process, double startX) {
         // Draw idle block to indicate CPU is idle
-        GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime);
+        Drawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime);
 
         // return current time to the arrival time of the next process
         return process.getArrivalTime();

@@ -8,7 +8,7 @@ import edu.tool.algorithms.scheduling.FCFS;
 
 import edu.tool.models.ScheduledProcess;
 import edu.tool.utils.Alert;
-import edu.tool.utils.GanttChartDrawer;
+import edu.tool.utils.Drawer;
 import edu.tool.utils.InputHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -108,7 +108,7 @@ public class SchedulingController {
         if (!getInputValues()) {
             return; // Stop execution if input validation fails
         }
-        GanttChartDrawer.clearGanttChart(ganttChart);
+        Drawer.clearGanttChart(ganttChart);
         runSelectedAlgorithm(schedulingAlgorithmChoiceBox.getValue());
         updateAverageTimes();
     }

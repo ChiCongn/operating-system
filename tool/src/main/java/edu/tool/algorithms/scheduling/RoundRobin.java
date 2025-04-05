@@ -1,7 +1,7 @@
 package edu.tool.algorithms.scheduling;
 
 import edu.tool.models.ScheduledProcess;
-import edu.tool.utils.GanttChartDrawer;
+import edu.tool.utils.Drawer;
 import javafx.scene.canvas.Canvas;
 
 import java.util.*;
@@ -10,7 +10,7 @@ public class RoundRobin {
     public static void simulate(List<ScheduledProcess> processes, Canvas ganttChart, int timeQuantum, int currentTime) {
         System.out.println("Simulating Round Robin Scheduling");
         int totalProcesses = processes.size(), index = 0, completed = 0;
-        double startX = GanttChartDrawer.START_X;
+        double startX = Drawer.START_X;
 
         processes.sort(Comparator.comparingInt(ScheduledProcess::getArrivalTime));
 
@@ -23,10 +23,10 @@ public class RoundRobin {
             if (readyQueue.isEmpty()) {
                 ScheduledProcess nextProcess = processes.get(index++);
                 readyQueue.add(nextProcess);
-                GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime);
+                Drawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime);
 
                 currentTime = nextProcess.getArrivalTime();
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                startX += Drawer.UNIT_WIDTH;
                 continue;
             }
 
@@ -37,8 +37,8 @@ public class RoundRobin {
             int executionTime = Math.min(timeQuantum, currentProcess.getRemainingTime());
             currentProcess.decrementRemainingTime(executionTime);
 
-            GanttChartDrawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), currentProcess.getName(), startX, currentTime);
-            startX += GanttChartDrawer.UNIT_WIDTH;
+            Drawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), currentProcess.getName(), startX, currentTime);
+            startX += Drawer.UNIT_WIDTH;
             currentTime += executionTime;
 
             // add newly arrived processes
@@ -51,13 +51,13 @@ public class RoundRobin {
 
         // Display the final time after all processes are executed
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime),
-                startX, GanttChartDrawer.POSITION_Y + 50);
+                startX, Drawer.POSITION_Y + 50);
     }
 
     public static int simulateAndUpdateTime(List<ScheduledProcess> processes, Canvas ganttChart, int timeQuantum, int currentTime) {
         System.out.println("Simulating Round Robin Scheduling");
         int totalProcesses = processes.size(), index = 0, completed = 0;
-        double startX = GanttChartDrawer.START_X;
+        double startX = Drawer.START_X;
 
         processes.sort(Comparator.comparingInt(ScheduledProcess::getArrivalTime));
 
@@ -70,10 +70,10 @@ public class RoundRobin {
             if (readyQueue.isEmpty()) {
                 ScheduledProcess nextProcess = processes.get(index++);
                 readyQueue.add(nextProcess);
-                GanttChartDrawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime);
+                Drawer.drawIdleBlock(ganttChart.getGraphicsContext2D(), startX, currentTime);
 
                 currentTime = nextProcess.getArrivalTime();
-                startX += GanttChartDrawer.UNIT_WIDTH;
+                startX += Drawer.UNIT_WIDTH;
                 continue;
             }
 
@@ -84,8 +84,8 @@ public class RoundRobin {
             int executionTime = Math.min(timeQuantum, currentProcess.getRemainingTime());
             currentProcess.decrementRemainingTime(executionTime);
 
-            GanttChartDrawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), currentProcess.getName(), startX, currentTime);
-            startX += GanttChartDrawer.UNIT_WIDTH;
+            Drawer.drawProcessBlock(ganttChart.getGraphicsContext2D(), currentProcess.getName(), startX, currentTime);
+            startX += Drawer.UNIT_WIDTH;
             currentTime += executionTime;
 
             // add newly arrived processes
@@ -98,7 +98,7 @@ public class RoundRobin {
 
         // Display the final time after all processes are executed
         ganttChart.getGraphicsContext2D().fillText(String.valueOf(currentTime),
-                startX, GanttChartDrawer.POSITION_Y + 50);
+                startX, Drawer.POSITION_Y + 50);
         return currentTime;
     }
 

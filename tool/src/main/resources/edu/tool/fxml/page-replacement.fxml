@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.memorymanagement.controller.PageReplacementController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.memorymanagement.controller.PageReplacementController">
     <children>
         <HBox prefHeight="600.0" prefWidth="1200.0">
             <children>
@@ -28,6 +28,12 @@
                                 <Label alignment="CENTER" prefHeight="41.0" prefWidth="94.0" styleClass="nav-label" text="Scheduler" />
                             </children>
                         </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="80.0" prefWidth="80.0" styleClass="nav-vbox">
+                     <children>
+                        <ImageView fitHeight="46.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label alignment="CENTER" prefHeight="41.0" prefWidth="94.0" styleClass="nav-label" text="Memory" />
+                     </children>
+                  </VBox>
                     </children>
                 </VBox>
                 <Separator orientation="VERTICAL" prefHeight="600.0" prefWidth="10.0" />
@@ -56,6 +62,11 @@
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="tab-label" text="Page Replacement">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                             </children>
                         </HBox>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="950.0" styleClass="title-label" text="Page Replacement" textFill="#1b1b1b">

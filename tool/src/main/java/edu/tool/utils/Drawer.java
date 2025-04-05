@@ -2,13 +2,15 @@ package edu.tool.utils;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class GanttChartDrawer {
+public class Drawer {
     public static final int UNIT_WIDTH = 30;
     public static final int BLOCK_HEIGHT = 30;
     public static final int POSITION_Y = 10;
@@ -85,6 +87,32 @@ public class GanttChartDrawer {
     public static void clearGanttChart(Canvas ganttChart) {
         GraphicsContext gc = ganttChart.getGraphicsContext2D();
         gc.clearRect(0, 0, ganttChart.getWidth(), ganttChart.getHeight());
+    }
+
+    public static void drawTheFirstRowGrid(String[] references, GridPane grid) {
+        for (int i = 0; i < references.length; i++) {
+            Label label = new Label(references[i]);
+            label.getStyleClass().add("cell");
+            label.getStyleClass().add("empty-cell");
+            grid.add(label, i, 0);
+        }
+    }
+
+    public static void drawColumnGrid(String[] reference, int index, int pageFaultIndex, GridPane grid) {
+        for (int i = 0; i < reference.length; i++) {
+            Label label = new Label(reference[i]);
+            label.getStyleClass().add("cell");
+
+            if (i == pageFaultIndex) {
+                label.getStyleClass().add("page-fault");
+            } else if (reference[i] != null && !reference[i].isEmpty()) {
+                label.getStyleClass().add("page-in-frame");
+            } else {
+                label.getStyleClass().add("empty-cell");
+            }
+
+            grid.add(label, index, i + 1); // ignore first row
+        }
     }
 
     static Color getColorForProcess(String processName) {
