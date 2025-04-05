@@ -1,5 +1,6 @@
 package edu.tool.controllers;
 
+import edu.tool.algorithms.scheduling.SJF;
 import edu.tool.enums.SchedulingAlgorithm;
 import edu.tool.algorithms.scheduling.FCFS;
 
@@ -153,12 +154,12 @@ public class SchedulingController {
 
     private void runSJFPreemptive() {
         System.out.println("Running Shortest Job First (Preemptive)");
-        //SJF.simulatePreemptive(processes, ganttChart);
+        int time = SJF.simulatePreemptiveAndUpdateTime(new ArrayList<>(processes), ganttChart, 0);
     }
 
     private void runSJFNonPreemptive() {
         System.out.println("Running Shortest Job First (Non-Preemptive)");
-        //SJF.simulateNonPreemptive(processes, ganttChart);
+        SJF.simulateNonPreemptiveAndUpdateTime(new ArrayList<>(processes), ganttChart, 0);
     }
 
     private void runRoundRobin() {

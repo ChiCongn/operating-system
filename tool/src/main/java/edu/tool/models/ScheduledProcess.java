@@ -59,6 +59,13 @@ public class ScheduledProcess {
                 '}';
     }
 
+    public void decrementRemainingTime(int amount) {
+        if (remainingTime > 0) {
+            remainingTime -= amount;
+        }
+    }
+
+
     // Getters and Setters
     public String getName() {
         return name;
