@@ -2,7 +2,9 @@ package edu.tool.controllers;
 
 import edu.tool.algorithms.memory.*;
 import edu.tool.enums.PageReplacementAlgorithm;
+import edu.tool.utils.Alert;
 import edu.tool.utils.InputHandler;
+import edu.tool.utils.SceneSwitcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -39,6 +41,7 @@ public class PageReplacementController {
     @FXML
     void initialize() {
         pageReplacementAlgorithms.getItems().addAll(PageReplacementAlgorithm.values());
+        pageReplacementAlgorithms.setValue(PageReplacementAlgorithm.FIFO);
         run.setOnAction(event -> run());
     }
 
@@ -46,6 +49,9 @@ public class PageReplacementController {
         String input = referenceField.getText();
         references = InputHandler.convertStringToStringArray(input);
         frameSize = InputHandler.convertStringToInteger(frameSizeField.getText());
+        if (frameSize <= 0) {
+            Alert.showNotification("Invalid Frame Size", "Frame size must be greater than 0.");
+        }
         System.out.println("input: " + input);
         System.out.println("frame size: " + frameSize);
         numberOfReferences.setText(Integer.toString(frameSize));
@@ -55,6 +61,8 @@ public class PageReplacementController {
         // 7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1 7 0 1
         getInputValue();
         PageReplacementAlgorithm selectedAlgorithm = pageReplacementAlgorithms.getValue();
+        grid.getChildren().clear();
+        grid.setPrefHeight(50 * (frameSize + 1)); // sets preferred height to 400 pixels
         runPageReplacementAlgorithm(selectedAlgorithm);
     }
 
@@ -82,7 +90,12 @@ public class PageReplacementController {
                 SecondChance.run(references, frameSize, pageFaults, grid);
                 break;
             default:
+                Alert.showNotification("Error", "Unknown algorithm");
                 throw new UnsupportedOperationException("Unknown algorithm: " + algorithm);
         }
+    }
+
+    void switchToSchedulingView() {
+        SchedulingController schedulingController = SceneSwitcher.switchScene(SceneSwitcher.SCHEDULING_VIEW_PATH);
     }
 }
