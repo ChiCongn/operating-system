@@ -122,10 +122,22 @@
                                 <Label fx:id="numberOfReferences" prefHeight="35.0" prefWidth="60.0" styleClass="centered-label" />
                                 <Label prefHeight="35.0" prefWidth="125.0" styleClass="info-label" text="Total page faults:">
                                     <HBox.margin>
-                                        <Insets left="20.0" />
+                                        <Insets left="10.0" />
                                     </HBox.margin>
                                 </Label>
-                                <Label fx:id="pageFaults" prefHeight="35.0" prefWidth="75.0" styleClass="centered-label" />
+                                <Label fx:id="pageFaults" prefHeight="35.0" prefWidth="60.0" styleClass="centered-label" />
+                        <Label prefHeight="35.0" prefWidth="110.0" styleClass="info-label" text="Number of hits:">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="numberOfHits" prefHeight="35.0" prefWidth="60.0" styleClass="centered-label" />
+                        <Label prefHeight="35.0" prefWidth="65.0" styleClass="info-label" text="Hit rate:">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="hitRate" prefHeight="35.0" prefWidth="60.0" styleClass="centered-label" />
                                 <Button fx:id="run" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" styleClass="execute-button" text=":v">
                                     <HBox.margin>
                                         <Insets left="50.0" />

@@ -30,6 +30,12 @@ public class PageReplacementController {
     Label pageFaults;
 
     @FXML
+    Label numberOfHits;
+
+    @FXML
+    Label hitRate;
+
+    @FXML
     ChoiceBox<PageReplacementAlgorithm> pageReplacementAlgorithms;
 
     @FXML
@@ -54,7 +60,7 @@ public class PageReplacementController {
         }
         System.out.println("input: " + input);
         System.out.println("frame size: " + frameSize);
-        numberOfReferences.setText(Integer.toString(frameSize));
+
     }
 
     void run() {
@@ -64,6 +70,14 @@ public class PageReplacementController {
         grid.getChildren().clear();
         grid.setPrefHeight(50 * (frameSize + 1)); // sets preferred height to 400 pixels
         runPageReplacementAlgorithm(selectedAlgorithm);
+
+        int pageFault = InputHandler.convertStringToInteger(pageFaults.getText());
+        int numberOfReference = references.length;
+        int numOfHits = numberOfReference - pageFault;
+        numberOfHits.setText(Integer.toString(numOfHits));
+        double hitRateValue = (double) numOfHits / numberOfReference * 100;
+        hitRate.setText(String.format("%.2f", hitRateValue));
+        numberOfReferences.setText(Integer.toString(numberOfReference));
     }
 
     void runPageReplacementAlgorithm(PageReplacementAlgorithm algorithm) {
