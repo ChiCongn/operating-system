@@ -9,12 +9,12 @@ import java.util.*;
 
 public class Optimal {
 
-    public static void run(String[] references, int frameCapacity, Label pageFaults, GridPane grid) {
+    public static void run(String[] references, int frameSize, Label pageFaults, GridPane grid) {
         System.out.println("Running Optimal...");
 
-        int currentRow = 0, pageFaultCount = 0;
+        int updateRow = -1, pageFaultCount = 0;
         int referenceCount = references.length;
-        String[] referencesInFrame = new String[frameCapacity];
+        String[] referencesInFrame = new String[frameSize];
         Set<String> frameSet = new HashSet<>();
 
         Drawer.drawTheFirstRowGrid(references, grid);
@@ -27,21 +27,34 @@ public class Optimal {
                 continue;
             }
 
-            if (frameSet.size() >= frameCapacity) {
+
+            if (frameSet.size() >= frameSize) {
                 // Find the page to replace based on future use
                 String pageToReplace = findOptimalReplacement(referencesInFrame, references, i + 1);
+                updateRow = findReplaceRow(pageToReplace, referencesInFrame);
                 frameSet.remove(pageToReplace);
+            } else {
+                updateRow++;
             }
 
             frameSet.add(currentPage);
-            referencesInFrame[currentRow] = currentPage;
-            Drawer.drawColumnGrid(referencesInFrame, i, currentRow, grid);
+
+            referencesInFrame[updateRow] = currentPage;
+            Drawer.drawColumnGrid(referencesInFrame, i, updateRow, grid);
 
             pageFaultCount++;
-            currentRow = (currentRow + 1) % frameCapacity;
         }
 
         pageFaults.setText(Integer.toString(pageFaultCount));
+    }
+
+    static int findReplaceRow(String replaceReference, String[] referencesInFrame) {
+        for (int i = 0; i < referencesInFrame.length; i++) {
+            if (replaceReference.equals(referencesInFrame[i])) {
+                return i;
+            }
+        }
+        return 0;
     }
 
 

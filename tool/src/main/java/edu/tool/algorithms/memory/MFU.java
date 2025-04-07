@@ -10,7 +10,7 @@ public class MFU {
 
     public static void run(String[] references, int frameSize, Label pageFaults, GridPane grid) {
         System.out.println("Running MFU...");
-        int totalPageFaults = 0, currentRow = 0;
+        int totalPageFaults = 0, updateRow = -1;
         int numberOfReferences = references.length;
         String[] referencesInFrame = new String[frameSize];
         Set<String> isInFrame = new HashSet<>();
@@ -29,18 +29,19 @@ public class MFU {
                 // Find the most frequently used page
                 String mostFrequentlyUsed = Collections.max(frequencyMap.entrySet(), Map.Entry.comparingByValue()).getKey();
                 isInFrame.remove(mostFrequentlyUsed);
+                updateRow = Optimal.findReplaceRow(mostFrequentlyUsed, referencesInFrame);
                 frequencyMap.remove(mostFrequentlyUsed);
+            } else {
+                updateRow++;
             }
 
             isInFrame.add(references[i]);
             frequencyMap.put(references[i], 1);
 
-            referencesInFrame[currentRow] = references[i];
-            Drawer.drawColumnGrid(referencesInFrame, i, currentRow, grid);
+            referencesInFrame[updateRow] = references[i];
+            Drawer.drawColumnGrid(referencesInFrame, i, updateRow, grid);
 
             totalPageFaults++;
-            currentRow++;
-            currentRow %= frameSize;
         }
 
         // display total page faults

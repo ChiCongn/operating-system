@@ -10,8 +10,7 @@ public class LFU {
 
     public static void run(String[] referenceSequence, int frameSize, Label pageFaultsLabel, GridPane gridPane) {
         System.out.println("Running LFU...");
-        int currentFrameRow = 0;
-        int totalPageFaults = 0;
+        int updateRow = -1, totalPageFaults = 0;
         int totalReferences = referenceSequence.length;
 
         String[] frameSlots = new String[frameSize];
@@ -37,17 +36,19 @@ public class LFU {
                         .getKey();
 
                 referencesInFrame.remove(leastFrequentPage);
+                updateRow = Optimal.findReplaceRow(leastFrequentPage, frameSlots);
                 pageFrequency.remove(leastFrequentPage);
+            } else {
+                updateRow++;
             }
 
             referencesInFrame.add(currentPage);
             pageFrequency.put(currentPage, 1);
 
-            frameSlots[currentFrameRow] = currentPage;
-            Drawer.drawColumnGrid(frameSlots, i, currentFrameRow, gridPane);
+            frameSlots[updateRow] = currentPage;
+            Drawer.drawColumnGrid(frameSlots, i, updateRow, gridPane);
 
             totalPageFaults++;
-            currentFrameRow = (currentFrameRow + 1) % frameSize;
         }
 
         // Display total number of page faults at the bottom

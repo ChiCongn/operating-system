@@ -12,7 +12,7 @@ public class LRU {
 
     public static void run(String[] references, int frameSize, Label pageFaults, GridPane grid) {
         System.out.println("Running LRU...");
-        int currentRow = 0, totalPageFaults = 0;
+        int updateRow = -1, totalPageFaults = 0;
         int numberOfReferences = references.length;
 
         String[] referencesInFrame = new String[frameSize];
@@ -33,19 +33,20 @@ public class LRU {
             if (isInFrame.size() >= frameSize) {
                 // remove the least recently used page from the frame
                 String leastRecentlyUsed = accessOrder.removeLast();
+                updateRow = Optimal.findReplaceRow(leastRecentlyUsed, referencesInFrame);
                 isInFrame.remove(leastRecentlyUsed);
+            } else {
+                updateRow++;
             }
 
             // add the new reference to the frame and update the access order
             isInFrame.add(references[i]);
             accessOrder.addFirst(references[i]);
 
-            referencesInFrame[currentRow] = references[i];
-            Drawer.drawColumnGrid(referencesInFrame, i, currentRow, grid);
+            referencesInFrame[updateRow] = references[i];
+            Drawer.drawColumnGrid(referencesInFrame, i, updateRow, grid);
 
             totalPageFaults++;
-            currentRow++;
-            currentRow %= frameSize;
         }
 
         // display total page faults

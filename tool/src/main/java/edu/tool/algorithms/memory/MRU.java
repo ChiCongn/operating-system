@@ -12,7 +12,7 @@ public class MRU {
 
     public static void run(String[] references, int frameSize, Label pageFaults, GridPane grid) {
         System.out.println("Running MRU...");
-        int totalPageFaults = 0, currentRow = 0;
+        int totalPageFaults = 0, updateRow = -1;
         int numberOfReferences = references.length;
         String[] referencesInFrame = new String[frameSize];
         Set<String> isInFrame = new HashSet<>();
@@ -31,18 +31,19 @@ public class MRU {
             if (isInFrame.size() >= frameSize) {
                 // Remove the most recently used page (i.e., first in accessOrder)
                 String mostRecentlyUsed = accessOrder.removeFirst();
+                updateRow = Optimal.findReplaceRow(mostRecentlyUsed, referencesInFrame);
                 isInFrame.remove(mostRecentlyUsed);
+            } else {
+                updateRow++;
             }
 
             isInFrame.add(references[i]);
             accessOrder.addFirst(references[i]); // Add to the front as most recent
 
-            referencesInFrame[currentRow] = references[i];
-            Drawer.drawColumnGrid(referencesInFrame, i, currentRow, grid);
+            referencesInFrame[updateRow] = references[i];
+            Drawer.drawColumnGrid(referencesInFrame, i, updateRow, grid);
 
             totalPageFaults++;
-            currentRow++;
-            currentRow %= frameSize;
         }
 
         // display total page faults
