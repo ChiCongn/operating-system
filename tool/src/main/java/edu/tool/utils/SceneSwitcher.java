@@ -11,6 +11,9 @@ import java.io.IOException;
 
 public class SceneSwitcher {
 
+    public static final String SCHEDULING_VIEW_PATH = "/edu/tool/fxml/scheduling.fxml";
+    public static final String PAGE_REPLACEMENT_VIEW_PATH = "/edu/tool/fxml/page-replacement.fxml";
+
     public static Stage primaryStage;
 
     public static void setPrimaryStage(Stage primaryStage) {

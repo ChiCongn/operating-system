@@ -92,7 +92,7 @@ public class Drawer {
     public static void drawTheFirstRowGrid(String[] references, GridPane grid) {
         for (int i = 0; i < references.length; i++) {
             Label label = new Label(references[i]);
-            label.getStyleClass().add("cell");
+            label.getStyleClass().add("cell-page-replacement");
             label.getStyleClass().add("empty-cell");
             grid.add(label, i, 0);
         }
@@ -101,7 +101,7 @@ public class Drawer {
     public static void drawColumnGrid(String[] reference, int index, int pageFaultIndex, GridPane grid) {
         for (int i = 0; i < reference.length; i++) {
             Label label = new Label(reference[i]);
-            label.getStyleClass().add("cell");
+            label.getStyleClass().add("cell-page-replacement");
 
             if (i == pageFaultIndex) {
                 label.getStyleClass().add("page-fault");

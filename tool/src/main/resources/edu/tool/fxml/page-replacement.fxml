@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.memorymanagement.controller.PageReplacementController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.tool.controllers.PageReplacementController">
     <children>
         <HBox prefHeight="600.0" prefWidth="1200.0">
             <children>
@@ -44,23 +44,13 @@
                                 <Insets top="10.0" />
                             </VBox.margin>
                             <children>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" styleClass="tab-label" text="Bài tập cache">
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="120.0" styleClass="tab-label" text="Calculate">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                     <HBox.margin>
                                         <Insets left="10.0" />
                                     </HBox.margin>
-                                </Label>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="220.0" styleClass="tab-label" text="Chuyển đổi đ/c ảo -&gt; vật lý">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="tab-label" text="Bảng phân trang">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
                                 </Label>
                         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="150.0" styleClass="tab-label" text="Page Replacement">
                            <font>

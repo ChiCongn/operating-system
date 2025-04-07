@@ -18,7 +18,7 @@ public class App extends Application {
         SceneSwitcher.setPrimaryStage(primaryStage);
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/edu/tool/fxml/scheduling.fxml"));
+            loader.setLocation(App.class.getResource("/edu/tool/fxml/page-replacement.fxml"));
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
